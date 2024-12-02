@@ -37,6 +37,7 @@ ListView{
             width: 70
             onClicked: {
                 status.chosenEventId = index;
+                status.chosenCarId = user.getChosenCarId();
                 if (event_type == 0){
                     status.isEditService = true;
                     stackView.push("qrc:/test10/ServiceWindow.qml");

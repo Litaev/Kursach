@@ -181,7 +181,7 @@ void User::saveUserData() const{
             }
             else if (event->getEventType() == CONSUMPTION_NAME::REFUELING){
                 eventMap["fuel_type"] = static_cast<int>(event->getFuelType());
-                eventMap["amount_per_litre"] = event->getAmountOfLitres();
+                eventMap["litre_amount"] = event->getAmountOfLitres();
                 eventMap["price_per_litre"] = event->getPricePerLitre();
             }
             eventMap["event_id"] = event->getEventId();
@@ -234,7 +234,7 @@ void User::loadUserData() {
             else if (eventType == CONSUMPTION_NAME::REFUELING){
                 event = std::make_shared<Refueling>();
                 event->setFuelType(static_cast<FUEL_TYPE>(map3["fuel_type"].toInt()));
-                event->setAmountOfLitres(map3["amount_of_litres"].toFloat());
+                event->setAmountOfLitres(map3["litre_amount"].toFloat());
                 event->setPricePerLitre(map3["price_per_litre"].toFloat());
             }
             else event = std::make_shared<Event>();

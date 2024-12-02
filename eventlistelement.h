@@ -10,12 +10,12 @@ class EventListElement
 public:
     EventListElement(int event_type, QString name, float price, int mileage, QString date, int service_type){
 
-        m_event_type = std::move(event_type);
+        m_event_type = event_type;
         m_name = std::move(name);
-        m_price = std::move(price);
-        m_mileage = std::move(mileage);
+        m_price = price;
+        m_mileage = mileage;
         m_date = std::move(date);
-        m_service_type = std::move(service_type);
+        m_service_type = service_type;
     };
 
     int getEventType() const{

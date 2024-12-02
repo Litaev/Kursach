@@ -31,7 +31,7 @@ public:
 
     Q_INVOKABLE QString getInfoAboutEvent(int car_index, int event_index, QString info_type) const;
 
-    Q_INVOKABLE void deleteChosenCar(int chosen_car_id);
+    Q_INVOKABLE void deleteChosenCar(int chosen_delete_car_id);
 
     Q_INVOKABLE void deleteChosenEvent(int chosen_event_id);
 

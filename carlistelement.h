@@ -8,8 +8,8 @@ class CarListElement
 public:
     CarListElement(QString name, int year, int mileage){
         m_name = std::move(name);
-        m_year = std::move(year);
-        m_mileage = std::move(mileage);
+        m_year = year;
+        m_mileage = mileage;
     };
     QString getName() const{
         return m_name;
