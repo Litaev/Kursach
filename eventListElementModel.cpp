@@ -4,7 +4,7 @@ EventListElementModel::EventListElementModel(QObject *parent)
     : QAbstractListModel(parent) {}
 
 
-void EventListElementModel::addEventListElement(const EventListElement EventListElement){
+void EventListElementModel::addEventListElement(EventListElement EventListElement){
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     eventList << std::move(EventListElement);
     endInsertRows();

@@ -154,7 +154,7 @@ vector<std::shared_ptr<Car>>& User::getCarList(){
     return car_list;
 }
 
-void User::saveUserData() {
+void User::saveUserData() const{
 
     QSettings settings("MyCompany", "CarApp");
 

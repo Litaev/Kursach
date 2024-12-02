@@ -201,6 +201,7 @@ ApplicationWindow{
                 onClicked: {
                     status.fromWindow = "main";
                     status.isEditCar = true;
+                    status.chosenCarId = user.getChosenCarId();
                     stackView.push("qrc:/test10/CarWindow.qml");
 
                 }

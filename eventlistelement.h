@@ -8,7 +8,7 @@
 class EventListElement
 {
 public:
-    EventListElement(const int event_type, const QString name, const float price, const int mileage, const QString date, const int service_type){
+    EventListElement(int event_type, QString name, float price, int mileage, QString date, int service_type){
 
         m_event_type = std::move(event_type);
         m_name = std::move(name);

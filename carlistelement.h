@@ -6,7 +6,7 @@
 class CarListElement
 {
 public:
-    CarListElement(const QString name, const int year, const int mileage){
+    CarListElement(QString name, int year, int mileage){
         m_name = std::move(name);
         m_year = std::move(year);
         m_mileage = std::move(mileage);

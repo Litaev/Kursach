@@ -41,7 +41,7 @@ public:
     Q_INVOKABLE std::vector<std::shared_ptr<Car>> &getCarList();
     Q_INVOKABLE int getCarListSize() const;
 
-    Q_INVOKABLE void saveUserData();
+    Q_INVOKABLE void saveUserData() const;
     Q_INVOKABLE void loadUserData();
 
     Q_INVOKABLE QString getNowDate() const;

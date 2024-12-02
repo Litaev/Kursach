@@ -3,7 +3,7 @@
 CarListElementModel::CarListElementModel(QObject *parent)
     : QAbstractListModel(parent){ }
 
-void CarListElementModel::addCarListElement(const CarListElement CarListElement){
+void CarListElementModel::addCarListElement(CarListElement CarListElement){
 
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     carList << std::move(CarListElement);

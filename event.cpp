@@ -63,7 +63,7 @@ void Event::setEventType(CONSUMPTION_NAME consumption) {
 CONSUMPTION_NAME Event::getEventType() const {
     return event_type;
 }
-void Event::setEventComment(string comment) {
+void Event::setEventComment(const string comment) {
     event_comment = comment;
 }
 string Event::getEventComment() const {

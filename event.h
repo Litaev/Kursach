@@ -28,7 +28,7 @@ public:
     void setCarMileage(unsigned int carMileage);
     void setEventType(CONSUMPTION_NAME consumption);
     CONSUMPTION_NAME getEventType() const;
-    void setEventComment(std::string comment);
+    void setEventComment(const std::string comment);
     std::string getEventComment() const;
     void saveEventinDatabase();
     void loadEventFromDatabase();
