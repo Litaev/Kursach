@@ -7,7 +7,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_SYSTEM_NAME Android)
 set(CMAKE_SYSTEM_VERSION 29)
-find_package(Qt6 6.2 REQUIRED COMPONENTS Quick Core)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Quick Core Widgets)
 
 
 qt_add_executable(apptest10
@@ -43,6 +43,7 @@ qt_add_qml_module(apptest10
         QML_FILES EventsList.qml
         RESOURCES icons/add_refueling_white_icon.png icons/add_service_white_icon.png
         QML_FILES RefuelingWindow.qml
+        SOURCES
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -59,6 +60,7 @@ set_target_properties(apptest10 PROPERTIES
 target_link_libraries(apptest10
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Core
+    PRIVATE Qt6::Widgets
 )
 
 include(GNUInstallDirs)

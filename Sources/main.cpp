@@ -9,6 +9,7 @@
 #include "user.h"
 #include "enhancedqmlapplicationengine.h"
 #include <QDebug>
+#include <QFileDialog>
 #include <QtCore/private/qandroidextras_p.h>
 
 // bool checkPermission()
@@ -38,7 +39,6 @@
 int main(int argc, char *argv[])
 {
 
-
     QGuiApplication app(argc, argv);
 
     EnhancedQmlApplicationEngine engine;
@@ -57,7 +57,6 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("eventsWindow", &serviceWindow);
     engine.rootContext()->setContextProperty("carListElementModel", QVariant::fromValue(&carListModel));
     engine.rootContext()->setContextProperty("eventListElementModel", QVariant::fromValue(&eventListModel));
-
 
 
 

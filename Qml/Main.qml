@@ -16,7 +16,7 @@ ApplicationWindow {
                                     {isEditEvent: true},
                                     {isEditService: true},
                                     {isEditRefueling: true},
-                                    {chosenCarId: user.getChosenCarId()},
+                                    {chosenCarId: 0},
                                     {chosenEventId: 0},
                                     {fromWindow: "main"});
 

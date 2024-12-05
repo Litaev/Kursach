@@ -1,6 +1,5 @@
 build/ 
 Generated/
-icons/
 *.png
 *.jpeg
 CMakeLists.txt.user
