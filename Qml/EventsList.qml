@@ -23,7 +23,7 @@ ListView{
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: event_type == 0 ? "icons/service_white_icon.png" : "icons/fuel_white_icon.png"
+            source: event_type == 0 ? "qrc:/test10/icons/service_white_icon.png" : "qrc:/test10/icons/fuel_white_icon.png"
         }
 
         Button{

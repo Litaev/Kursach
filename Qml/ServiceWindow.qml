@@ -83,7 +83,7 @@ Item{
                 id: backIcon
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectFit
-                source: "icons/back_white_icon.png"
+                source: "qrc:/test10/icons/back_white_icon.png"
             }
         }
         Button{
@@ -100,7 +100,7 @@ Item{
                 id: confirmIcon
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectFit
-                source: "icons/confirm_white_icon.png"
+                source: "qrc:/test10/icons/confirm_white_icon.png"
             }
         }
 
@@ -127,7 +127,7 @@ Item{
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/eventType_white_icon.png"
+            source: "qrc:/test10/icons/eventType_white_icon.png"
         }
         Rectangle{
             id: serviceTypeTextRect
@@ -172,7 +172,7 @@ Item{
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/text_white_icon.png"
+            source: "qrc:/test10/icons/text_white_icon.png"
         }
         Rectangle{
             id: serviceNameTextRect
@@ -217,7 +217,7 @@ Item{
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/price_white_icon.png"
+            source: "qrc:/test10/icons/price_white_icon.png"
         }
         Rectangle{
             id: servicePriceTextRect
@@ -265,7 +265,7 @@ Item{
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/mileage_white_icon.png"
+            source: "qrc:/test10/icons/mileage_white_icon.png"
         }
         Rectangle{
             id: serviceMileageTextRect
@@ -312,7 +312,7 @@ Item{
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/comment_white_icon.png"
+            source: "qrc:/test10/icons/comment_white_icon.png"
         }
         Rectangle{
             id: serviceCommentTextRect
@@ -359,7 +359,7 @@ Item{
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/date_white_icon.png"
+            source: "qrc:/test10/icons/date_white_icon.png"
         }
         Rectangle{
             id: serviceDateTextRect

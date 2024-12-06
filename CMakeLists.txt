@@ -22,7 +22,6 @@ qt_add_qml_module(apptest10
     VERSION 1.0
     QML_FILES Qml/Main.qml Qml/ServiceWindow.qml Qml/ChooseCarWindow.qml Qml/CarWindow.qml
     SOURCES Headers/eventsWindow.h Sources/eventsWindow.cpp
-        RESOURCES addNewEvent.png passatB5.jpeg 123.png
 
         SOURCES Headers/user.h Sources/user.cpp
         SOURCES Headers/car.h Sources/car.cpp

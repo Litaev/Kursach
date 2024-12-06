@@ -87,7 +87,7 @@ Item {
                 id: backIcon
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectFit
-                source: "icons/back_white_icon.png"
+                source: "qrc:/test10/icons/back_white_icon.png"
             }
         }
         Button{
@@ -104,7 +104,7 @@ Item {
                 id: confirmIcon
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectFit
-                source: "icons/confirm_white_icon.png"
+                source: "qrc:/test10/icons/confirm_white_icon.png"
             }
         }
     }
@@ -129,7 +129,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/car_white_icon.png"
+            source: "qrc:/test10/icons/car_white_icon.png"
         }
         Rectangle{
             id: carNameTextRect
@@ -175,7 +175,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/year_white_icon.png"
+            source: "qrc:/test10/icons/year_white_icon.png"
         }
         Rectangle{
             id: carYearTextRect
@@ -221,7 +221,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/mileage_white_icon.png"
+            source: "qrc:/test10/icons/mileage_white_icon.png"
         }
         Rectangle{
             id: carMileageTextRect
@@ -269,7 +269,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/fuel_white_icon.png"
+            source: "qrc:/test10/icons/fuel_white_icon.png"
         }
         Rectangle{
             id: carFuelTextRect
@@ -313,7 +313,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/fuelTank_white_icon.png"
+            source: "qrc:/test10/icons/fuelTank_white_icon.png"
         }
         Rectangle{
             id: carTankTextRect

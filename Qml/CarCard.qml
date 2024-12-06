@@ -54,7 +54,7 @@ ApplicationWindow{
                 height: width
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectCrop
-                source: "icons/car_white_icon.png"
+                source: "qrc:/test10/icons/car_white_icon.png"
             }
 
 
@@ -296,7 +296,7 @@ ApplicationWindow{
                     anchors.fill: parent
                     sourceSize: Qt.size(width, width)
                     fillMode: Image.PreserveAspectFit
-                    source: "icons/add_service_white_icon.png"
+                    source: "qrc:/test10/icons/add_service_white_icon.png"
                 }
             }
             Button{
@@ -318,7 +318,7 @@ ApplicationWindow{
                     anchors.fill: parent
                     sourceSize: Qt.size(width, width)
                     fillMode: Image.PreserveAspectFit
-                    source: "icons/add_refueling_white_icon.png"
+                    source: "qrc:/test10/icons/add_refueling_white_icon.png"
                 }
             }
 

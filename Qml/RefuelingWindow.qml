@@ -101,7 +101,7 @@ Item {
                 id: backIcon
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectFit
-                source: "icons/back_white_icon.png"
+                source: "qrc:/test10/icons/back_white_icon.png"
             }
         }
         Button{
@@ -118,7 +118,7 @@ Item {
                 id: confirmIcon
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectFit
-                source: "icons/confirm_white_icon.png"
+                source: "qrc:/test10/icons/confirm_white_icon.png"
             }
         }
 
@@ -144,7 +144,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/fuelTank_white_icon.png"
+            source: "qrc:/test10/icons/fuelTank_white_icon.png"
         }
         Rectangle{
             id: refuelingLitreAmountTextRect
@@ -210,7 +210,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/fuelPistol_white_icon.png"
+            source: "qrc:/test10/icons/fuelPistol_white_icon.png"
         }
         Rectangle{
             id: pricePerLitreTextRect
@@ -272,7 +272,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/mileage_white_icon.png"
+            source: "qrc:/test10/icons/mileage_white_icon.png"
         }
         Rectangle{
             id: refuelingMileageTextRect
@@ -320,7 +320,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/price_white_icon.png"
+            source: "qrc:/test10/icons/price_white_icon.png"
         }
         Rectangle{
             id: refuelingPriceTextRect
@@ -381,7 +381,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/comment_white_icon.png"
+            source: "qrc:/test10/icons/comment_white_icon.png"
         }
         Rectangle{
             id: refuelingCommentTextRect
@@ -428,7 +428,7 @@ Item {
             height: width
             sourceSize: Qt.size(width, width)
             fillMode: Image.PreserveAspectFit
-            source: "icons/date_white_icon.png"
+            source: "qrc:/test10/icons/date_white_icon.png"
         }
         Rectangle{
             id: refuelingDateTextRect

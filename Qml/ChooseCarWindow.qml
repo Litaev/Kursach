@@ -60,7 +60,7 @@ Item {
                 id: backIcon
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectFit
-                source: "icons/back_white_icon.png"
+                source: "qrc:/test10/icons/back_white_icon.png"
             }
         }
     }
@@ -122,7 +122,7 @@ Item {
                 id: carImageInList
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectFit
-                source: "icons/car_white_icon.png"
+                source: "qrc:/test10/icons/car_white_icon.png"
 
             }
 
