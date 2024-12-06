@@ -11,38 +11,38 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Quick Core Widgets)
 
 
 qt_add_executable(apptest10
-    main.cpp
-    carListElementModel.cpp carListElementModel.h
-    eventListElementModel.cpp eventListElementModel.h
+    Sources/main.cpp
+    Sources/carListElementModel.cpp Headers/carListElementModel.h
+    Sources/eventListElementModel.cpp Headers/eventListElementModel.h
 
 )
 
 qt_add_qml_module(apptest10
     URI test10
     VERSION 1.0
-    QML_FILES Main.qml ServiceWindow.qml ChooseCarWindow.qml CarWindow.qml
-    SOURCES eventsWindow.h eventsWindow.cpp
+    QML_FILES Qml/Main.qml Qml/ServiceWindow.qml Qml/ChooseCarWindow.qml Qml/CarWindow.qml
+    SOURCES Headers/eventsWindow.h Sources/eventsWindow.cpp
         RESOURCES addNewEvent.png passatB5.jpeg 123.png
 
-        SOURCES user.h user.cpp
-        SOURCES car.h car.cpp
-        SOURCES event.h event.cpp
-        SOURCES date.h date.cpp
-        SOURCES enums.h
-        SOURCES refueling.h refueling.cpp
-        SOURCES service.h service.cpp
-        SOURCES chooseCarWindow.h chooseCarWindow.cpp
-        SOURCES carListElement.h
-        SOURCES main.cpp
+        SOURCES Headers/user.h Sources/user.cpp
+        SOURCES Headers/car.h Sources/car.cpp
+        SOURCES Headers/event.h Sources/event.cpp
+        SOURCES Headers/date.h Sources/date.cpp
+        SOURCES Headers/enums.h
+        SOURCES Headers/refueling.h Sources/refueling.cpp
+        SOURCES Headers/service.h Sources/service.cpp
+        SOURCES Headers/chooseCarWindow.h Sources/chooseCarWindow.cpp
+        SOURCES Headers/carListElement.h
+        SOURCES Sources/main.cpp
         RESOURCES icons/back_black_icon.png icons/back_white_icon.png icons/car_black_icon.png icons/car_white_icon.png icons/comment_black_icon.png icons/comment_white_icon.png icons/confirm_black_icon.png icons/confirm_white_icon.png icons/date_black_icon.png icons/date_white_icon.png icons/eventType_black_icon.png icons/eventType_white_icon.png icons/fuel_black_icon.png icons/fuel_white_icon.png icons/fuelPistol_black_icon.png icons/fuelPistol_white_icon.png icons/fuelTank_black_icon.png icons/fuelTank_white_icon.png icons/mileage_black_icon.png icons/mileage_white_icon.png icons/price_black_icon.png icons/price_white_icon.png icons/text_black_icon.png icons/text_white_icon.png icons/year_black_icon.png icons/year_white_icon.png
-        SOURCES enhancedqmlapplicationengine.h enhancedqmlapplicationengine.cpp
-        QML_FILES CarCard.qml
-        SOURCES eventlistelement.h
+        SOURCES Headers/enhancedqmlapplicationengine.h Sources/enhancedqmlapplicationengine.cpp
+        QML_FILES Qml/CarCard.qml
+        SOURCES Headers/eventlistelement.h
         RESOURCES icons/service_black_icon.png icons/service_white_icon.png
         RESOURCES icons/add_black_icon.png icons/add_white_icon.png
-        QML_FILES EventsList.qml
+        QML_FILES Qml/EventsList.qml
         RESOURCES icons/add_refueling_white_icon.png icons/add_service_white_icon.png
-        QML_FILES RefuelingWindow.qml
+        QML_FILES Qml/RefuelingWindow.qml
         SOURCES
 )
 

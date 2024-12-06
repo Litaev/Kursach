@@ -34,7 +34,8 @@ public:
     float getCarMoneySpent() const;
     void setCarMoneySpent(float carMoneySpent);
 
-    void updateCarMoneySpent();
+    void operator == (int); //Update money spent
+    //void updateCarMoneySpent();
     void updateCarMileage();
 
     auto operator <=> (const Car & car1) const = default;

@@ -75,7 +75,7 @@ Item {
         hoverEnabled: false
         onClicked: {
             status.isEditCar = false;
-            stackView.push("qrc:/test10/CarWindow.qml");
+            stackView.push("qrc:/test10/Qml/CarWindow.qml");
 
         }
         background: Rectangle{
@@ -197,7 +197,7 @@ Item {
                 onClicked: {
                     status.isEditCar = true;
                     status.chosenCarId = index;
-                    stackView.push("qrc:/test10/CarWindow.qml");
+                    stackView.push("qrc:/test10/Qml/CarWindow.qml");
                 }
 
                 background: Rectangle{

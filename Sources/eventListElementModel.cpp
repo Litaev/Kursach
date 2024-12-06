@@ -1,4 +1,4 @@
-#include "eventListElementModel.h"
+#include "Headers/eventListElementModel.h"
 
 EventListElementModel::EventListElementModel(QObject *parent)
     : QAbstractListModel(parent) {}

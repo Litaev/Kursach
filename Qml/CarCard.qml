@@ -13,7 +13,7 @@ ApplicationWindow{
     }
     function init(){
         if (user.getCarListSize() == 0){
-            stackView.push("qrc:/test10/ChooseCarWindow.qml")
+            stackView.push("qrc:/test10/Qml/ChooseCarWindow.qml")
         }
         else{
             status.chosenCarID = user.getChosenCarId();
@@ -202,7 +202,7 @@ ApplicationWindow{
                     status.fromWindow = "main";
                     status.isEditCar = true;
                     status.chosenCarId = user.getChosenCarId();
-                    stackView.push("qrc:/test10/CarWindow.qml");
+                    stackView.push("qrc:/test10/Qml/CarWindow.qml");
 
                 }
                 background: Rectangle{
@@ -231,7 +231,7 @@ ApplicationWindow{
                 height: 50
                 onClicked: {
                     status.fromWindow = "main";
-                    stackView.push("qrc:/test10/ChooseCarWindow.qml");
+                    stackView.push("qrc:/test10/Qml/ChooseCarWindow.qml");
                 }
                 background: Rectangle{
                     anchors.fill: parent
@@ -289,7 +289,7 @@ ApplicationWindow{
                 height: width
                 onClicked: {
                     status.isEditService = false;
-                    stackView.push("qrc:/test10/ServiceWindow.qml");
+                    stackView.push("qrc:/test10/Qml/ServiceWindow.qml");
                 }
                 background: Image {
                     id: addServiceIcon
@@ -311,7 +311,7 @@ ApplicationWindow{
                 height: width
                 onClicked: {
                     status.isEditRefueling = false;
-                    stackView.push("qrc:/test10/RefuelingWindow.qml");
+                    stackView.push("qrc:/test10/Qml/RefuelingWindow.qml");
                 }
                 background: Image {
                     id: addRefuelingIcon

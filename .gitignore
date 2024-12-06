@@ -1,5 +1,3 @@
 build/ 
 Generated/
-*.png
-*.jpeg
 CMakeLists.txt.user

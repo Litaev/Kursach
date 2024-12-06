@@ -40,11 +40,11 @@ ListView{
                 status.chosenCarId = user.getChosenCarId();
                 if (event_type == 0){
                     status.isEditService = true;
-                    stackView.push("qrc:/test10/ServiceWindow.qml");
+                    stackView.push("qrc:/test10/Qml/ServiceWindow.qml");
                 }
                 else if (event_type == 1){
                     status.isEditRefueling = true;
-                    stackView.push("qrc:/test10/RefuelingWindow.qml");
+                    stackView.push("qrc:/test10/Qml/RefuelingWindow.qml");
                 }
             }
             background: Rectangle{

@@ -1,4 +1,4 @@
-#include "user.h"
+#include "Headers/user.h"
 
 
 using namespace std;
@@ -247,7 +247,7 @@ void User::loadUserData() {
             event->setEventComment(map3["event_comment"].toString().toStdString());
             car->getEventList().push_back(event);
         }
-        car->updateCarMoneySpent();
+        (*car) == 1;
         car->updateCarMileage();
         car_list.push_back(car);
     }

@@ -1,5 +1,5 @@
 
-#include "car.h"
+#include "Headers/car.h"
 
 using namespace std;
 
@@ -8,6 +8,12 @@ void Car::operator-- (int){
     event_list.clear();
 }
 
+void Car::operator== (int){
+    car_money_spent = 0;
+    for (auto& event: event_list){
+        car_money_spent += event->getMoneyValue();
+    }
+}
 QString Car::getCarName() const{
     return car_name;
 }
@@ -49,12 +55,12 @@ void Car::setCarYear(int newCar_year)
     car_year = newCar_year;
 }
 
-void Car::updateCarMoneySpent(){
-    car_money_spent = 0;
-    for (auto& event: event_list){
-        car_money_spent += event->getMoneyValue();
-    }
-}
+// void Car::updateCarMoneySpent(){
+//     car_money_spent = 0;
+//     for (auto& event: event_list){
+//         car_money_spent += event->getMoneyValue();
+//     }
+// }
 
 void Car::updateCarMileage(){
     for (auto& event: event_list){
@@ -152,7 +158,7 @@ void Car::deleteEventListElement(){
     // database_work.exec0("DELETE FROM events WHERE event_id = " + database_work.quote(event_list[chosen_id]->getEventId()));
     // database_work.commit();
     // event_list.erase(event_list.begin()+chosen_id);
-    updateCarMoneySpent();
+    (*this) == 1;
 }
 
 

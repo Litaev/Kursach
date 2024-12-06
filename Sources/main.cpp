@@ -2,12 +2,12 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QtQuickWidgets/QtQuickWidgets>
-#include "carListElementModel.h"
-#include "eventListElementModel.h"
-#include "chooseCarWindow.h"
-#include "eventsWindow.h"
-#include "user.h"
-#include "enhancedqmlapplicationengine.h"
+#include "Headers/carListElementModel.h"
+#include "Headers/eventListElementModel.h"
+#include "Headers/chooseCarWindow.h"
+#include "Headers/eventsWindow.h"
+#include "Headers/user.h"
+#include "Headers/enhancedqmlapplicationengine.h"
 #include <QDebug>
 #include <QFileDialog>
 #include <QtCore/private/qandroidextras_p.h>
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     //QObject* listView = parent->findChild<QObject*>("listView");
     //lisView->setProperty("model", QVariant::fromValue(&modell));
     // engine.rootContext()->setContextProperty("carList", QVariant::fromValue(&carList));
-    engine.load(QStringLiteral("qrc:/test10/Main.qml"));
+    engine.load(QStringLiteral("qrc:/test10/Qml/Main.qml"));
     return app.exec();
 
 }
