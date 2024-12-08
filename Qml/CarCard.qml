@@ -299,6 +299,35 @@ ApplicationWindow{
                     source: "qrc:/test10/icons/add_service_white_icon.png"
                 }
             }
+            Rectangle{
+                id: statsRect
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                width: 50
+                height: width
+                radius: 25
+                color: "#ffffff"
+                Button{
+                    id: statsButton
+                    visible: true
+                    anchors.fill: parent
+                    width: parent.width
+                    height: width
+                    onClicked: {
+                        stackView.push("qrc:/test10/Qml/StatisticsWindow.qml");
+                    }
+                    background: Image {
+                        id: statsIcon
+                        anchors.fill: parent
+                        anchors.margins: 13
+                        sourceSize: Qt.size(width, width)
+                        fillMode: Image.PreserveAspectFit
+                        source: "qrc:/test10/icons/stats_black_icon.png"
+                    }
+                }
+            }
+
+
             Button{
                 id: addRefuelingButton
                 visible: true

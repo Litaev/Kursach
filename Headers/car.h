@@ -8,9 +8,10 @@
 #include "date.h"
 #include "service.h"
 #include "refueling.h"
+#include "statistics.h"
 class User;
 
-class Car : public QObject{
+class Car : public Statistics{
     friend User;
     Q_OBJECT
     QString car_name;
