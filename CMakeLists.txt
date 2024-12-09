@@ -66,7 +66,6 @@ target_link_libraries(apptest11
     PRIVATE Qt6::Widgets
     PRIVATE Qt6::Charts
 
-
 )
 
 include(GNUInstallDirs)

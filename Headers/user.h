@@ -5,6 +5,7 @@
 #include <QSettings>
 #include <QObject>
 #include <vector>
+#include <QFileDialog>
 #include "car.h"
 
 class User : public QObject{
@@ -42,6 +43,8 @@ public:
 
     Q_INVOKABLE std::vector<std::shared_ptr<Car>> &getCarList();
     Q_INVOKABLE int getCarListSize() const;
+
+    Q_INVOKABLE void setChosenCarImage(int chosenCarId);
 
     Q_INVOKABLE void saveUserData() const;
     Q_INVOKABLE void loadUserData();

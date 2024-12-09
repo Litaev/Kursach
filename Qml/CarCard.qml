@@ -43,16 +43,25 @@ ApplicationWindow{
             color: "#212529"
             radius: 10
 
-            Image{
-                id: carImage
+            Button{
+                id: carImageButton
+                visible: true
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.margins: 10
                 width: parent.height - 20
                 height: width
-                sourceSize: Qt.size(width, width)
-                fillMode: Image.PreserveAspectCrop
-                source: "qrc:/test11/icons/car_white_icon.png"
+                onClicked: {
+                    user.setChosenCarImage(status.chosenCarId);
+                    user.saveUserData();
+                    _loader.reload();
+                }
+                background: Image {
+                    id: carImageIcon
+                    sourceSize: Qt.size(width, width)
+                    fillMode: Image.PreserveAspectCrop
+                    source: user.getInfoAboutCar(status.chosenCarId, "imagePath");
+                }
             }
 
 
@@ -60,7 +69,7 @@ ApplicationWindow{
             Rectangle{
                 id: carInfoRectangle
                 anchors.top: parent.top
-                anchors.left: carImage.right
+                anchors.left: carImageButton.right
                 anchors.margins: 5
                 width: parent.width - parent.height - 80
                 height: 65
@@ -101,7 +110,7 @@ ApplicationWindow{
                 id: carMileageRectangle
                 anchors.top: carInfoRectangle.bottom
                 anchors.bottom: parent.bottom
-                anchors.left: carImage.right
+                anchors.left: carImageButton.right
                 anchors.leftMargin: 5
                 anchors.topMargin: 5
                 anchors.bottomMargin: 10

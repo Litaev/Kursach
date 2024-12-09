@@ -79,6 +79,16 @@ void Car::setCarTankVolume(int newCar_tank_volume)
     car_tank_volume = newCar_tank_volume;
 }
 
+QString Car::getCarImageFilePath() const
+{
+    return carImageFilePath;
+}
+
+void Car::setCarImageFilePath(const QString &newCarImageFilePath)
+{
+    carImageFilePath = newCarImageFilePath;
+}
+
 void Car::setCar(QString new_car_name, QString new_car_year, QString new_car_mileage, QString new_car_fuel_type, QString new_car_tank_volume) {
     car_name = new_car_name;
     car_year = new_car_year.toInt();

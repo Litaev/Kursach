@@ -68,7 +68,6 @@ Item {
     ChartView {
         id: serviceStatisticsChart
         anchors.top: statisticsChart.bottom
-        anchors.topMargin: 10
         anchors.left: parent.left
         anchors.right: parent.right
         title: "Service Money Spent"

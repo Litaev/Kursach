@@ -121,8 +121,8 @@ Item {
                 height: width
                 id: carImageInList
                 sourceSize: Qt.size(width, width)
-                fillMode: Image.PreserveAspectFit
-                source: "qrc:/test11/icons/car_white_icon.png"
+                fillMode: Image.PreserveAspectCrop
+                source: user.getInfoAboutCar(index, "imagePath");
 
             }
 

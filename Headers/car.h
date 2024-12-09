@@ -14,6 +14,7 @@ class User;
 class Car {
     friend User;
     QString car_name;
+    QString carImageFilePath = "";
     std::string car_gov_number;
     int car_year;
     int car_mileage = 0;
@@ -60,6 +61,8 @@ public:
     int getCarTankVolume() const;
     void setCarTankVolume(int newCar_tank_volume);
 
+    QString getCarImageFilePath() const;
+    void setCarImageFilePath(const QString &newCarImageFilePath);
 };
 
 #endif // CAR_H

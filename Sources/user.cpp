@@ -45,6 +45,7 @@ QString User::getInfoAboutCar(int car_index, QString info_type) const{
     else if (info_type == "year") { return QString::number(car_list[car_index]->getCarYear()); }
     else if (info_type == "fuel") { return QString::number(static_cast<int>(car_list[car_index]->getCarFuelType())); }
     else if (info_type == "tank") { return QString::number(car_list[car_index]->getCarTankVolume()); }
+    else if (info_type == "imagePath") {return car_list[car_index]->getCarImageFilePath(); }
 
     return "";
 }
@@ -122,6 +123,11 @@ void User::addEvent(QString new_event_type, QString new_event_name, QString new_
 
 }
 
+void User::setChosenCarImage(int chosenCarId){
+    QString newFilePath = QFileDialog::getOpenFileName(nullptr, "Open File", "", "Images (*.png *.jpeg *.jpg);;All files (*)");
+    car_list[chosenCarId]->setCarImageFilePath(newFilePath);
+}
+
 void User::deleteChosenEvent(int chosen_event_id){
     car_list[chosen_car_id]->getEventList().erase(car_list[chosen_car_id]->getEventList().begin() + chosen_event_id);
 }
@@ -175,6 +181,7 @@ void User::saveUserData() const{
         QVariantMap carMap;
         carMap["car_name"] = car->getCarName();
         carMap["car_gov_number"] = QString::fromStdString(car->getCarGovNumber());
+        carMap["car_image_path"] = car->getCarImageFilePath();
         carMap["car_year"] = car->getCarYear();
         carMap["car_mileage"] = car->getCarMileage();
         carMap["car_tank_volume"] = car->getCarTankVolume();
@@ -223,6 +230,7 @@ void User::loadUserData() {
         std::shared_ptr<Car> car {std::make_shared<Car>()};
         car->setCarName(map2["car_name"].toString());
         car->setCarGovNumber(map2["car_gov_number"].toString().toStdString());
+        car->setCarImageFilePath(map2["car_image_path"].toString());
         car->setCarYear(map2["car_year"].toInt());
         car->setCarMileage(map2["car_mileage"].toInt());
         car->setCarTankVolume(map2["car_tank_volume"].toInt());
