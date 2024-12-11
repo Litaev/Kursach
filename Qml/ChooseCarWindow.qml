@@ -11,21 +11,15 @@ Item {
     width: parent.width
     height: parent.height
 
-    function init(){
+
+    Component.onCompleted: {
         if (user.getCarListSize() == 0){
-            backIcon.visible = false;
             backButton.visible = false;
             status.isEditCar = false;
         }
         else{
             backButton.visible = true;
         }
-
-    }
-
-    Component.onCompleted: {
-        init();
-
     }
 
     Rectangle{
@@ -105,6 +99,7 @@ Item {
         anchors.bottom: newCarButton.top
         spacing: 5
         model: carListElementModel
+        clip: true
 
         delegate: Rectangle {
             anchors.left: parent.left
@@ -122,7 +117,7 @@ Item {
                 id: carImageInList
                 sourceSize: Qt.size(width, width)
                 fillMode: Image.PreserveAspectCrop
-                source: user.getInfoAboutCar(index, "imagePath");
+                source: imagePath == "" ? "qrc:/test11/icons/car_white_icon.png": imagePath;
 
             }
 
@@ -164,9 +159,8 @@ Item {
                 width: 150
                 height: 50
                 onClicked: {
-                    status.chosenCarId = index;
                     user.setChosenCarId(index);
-                    user.saveUserData();
+
                     _loader.reload();
                     stackView.pop();
 
@@ -196,7 +190,7 @@ Item {
                 hoverEnabled: false
                 onClicked: {
                     status.isEditCar = true;
-                    status.chosenCarId = index;
+                    user.setChosenCarId(index)
                     stackView.push("qrc:/test11/Qml/CarWindow.qml");
                 }
 
@@ -255,12 +249,9 @@ Item {
                 }
                 onAccepted: {
                     user.deleteChosenCar(index);
-                    user.saveUserData();
-                    status.chosenCarId = 0;
                     eventsWindow.updateModel();
                     chooseCarWindow.updateModel();
                     _loader.reload();
-                    init();
                 }
                 onRejected: confirmationDialog.close()
             }

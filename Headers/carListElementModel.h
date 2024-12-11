@@ -14,6 +14,7 @@ class CarListElementModel : public QAbstractListModel
 public:
     enum CarListElementRoles{
         NameRole = Qt::UserRole + 1,
+        ImagePathRole,
         YearRole,
         MileageRole
     };
@@ -25,7 +26,7 @@ public:
 
     Q_INVOKABLE void removeCarListElement(int index, int count = 1);
 
-    Q_INVOKABLE void pushCarListElement(const QString &name, const int &year, const int &mileage);
+    Q_INVOKABLE void pushCarListElement(const QString &name, const QString &imagePath, const int &year, const int &mileage);
 
     Q_INVOKABLE void resetModel(User *user);
 

@@ -11,11 +11,12 @@ Item {
     width: parent.width
     height: parent.height
 
+
     function confirmAction(){
         if (status.isEditCar == false){
             if (carNameTextField.text != "" && carYearTextField.text != "" && carMileageTextField.text != "" && carTankTextField.text != ""){
                 user.addCar(carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
-                user.saveUserData();
+
                 chooseCarWindow.updateModel();
 
 
@@ -27,12 +28,10 @@ Item {
         }
         else{
             if (carNameTextField.text != "" && carYearTextField.text != "" && carMileageTextField.text != "" && carTankTextField.text != ""){
-                user.editChosenCarInfo(status.chosenCarId, carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
-                user.saveUserData();
+                user.editChosenCarInfo(user.getChosenCarId(), carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
+
                 chooseCarWindow.updateModel();
-                if (status.fromWindow == "main"){
-                    _loader.reload();
-                }
+                _loader.reload();
                 stackView.pop();
             }
             else{
@@ -148,7 +147,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Enter Car Name"
-                text: status.isEditCar ? user.getInfoAboutCar(status.chosenCarId, "name") : ""
+                text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "name") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
             }
@@ -194,7 +193,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Car Year"
-                text: status.isEditCar ? user.getInfoAboutCar(status.chosenCarId, "year") : ""
+                text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "year") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -240,7 +239,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Car Mileage"
-                text: status.isEditCar ? user.getInfoAboutCar(status.chosenCarId, "mileage") : ""
+                text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "mileage") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -287,7 +286,7 @@ Item {
                 id: carFuelTypeComboBox
                 width: parent.width
                 model: ["petrol", "diesel", "propane", "methane", "electrycity"]
-                currentIndex: status.isEditCar ? parseInt(user.getInfoAboutCar(status.chosenCarId, "fuel")) : 0;
+                currentIndex: status.isEditCar ? parseInt(user.getInfoAboutCar(user.getChosenCarId(), "fuel")) : 0;
             }
         }
 
@@ -332,7 +331,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Tank Volume"
-                text: status.isEditCar ? user.getInfoAboutCar(status.chosenCarId, "tank") : ""
+                text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "tank") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly

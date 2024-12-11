@@ -38,6 +38,11 @@ int main(int argc, char *argv[])
 
 
     engine.load(QStringLiteral("qrc:/test11/Qml/Main.qml"));
-    return app.exec();
+
+    app.exec();
+
+    user.saveUserData();
+
+    return 0;
 
 }

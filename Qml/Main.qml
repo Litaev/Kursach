@@ -7,8 +7,8 @@ import QtQuick.Controls 2.15
 
 
 ApplicationWindow {
-    width: 420
-    height: 780
+    width: 1080
+    height: 1920
     visible: true
     color: "#000000"
 
@@ -16,20 +16,18 @@ ApplicationWindow {
                                     {isEditEvent: true},
                                     {isEditService: true},
                                     {isEditRefueling: true},
-                                    {chosenCarId: 0},
-                                    {chosenEventId: 0},
-                                    {fromWindow: "main"});
+                                    {chosenEventId: 0});
 
     Loader {
         id: _loader
         function reload() {
             source = "";
             $QmlEngine.clearCache();
-            source = "CarCard.qml";
+            source = "qrc:/test11/Qml/CarCard.qml";
         }
         anchors.fill: parent
 
-        source: "CarCard.qml"
+        source: "qrc:/test11/Qml/CarCard.qml"
     }
 
 

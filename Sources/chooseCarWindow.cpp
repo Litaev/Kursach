@@ -9,6 +9,7 @@ ChooseCarWindow::ChooseCarWindow(CarListElementModel *car_model, User *user){
 
 void ChooseCarWindow::updateModel(){
     car_model->resetModel(user);
+    qDebug() << "2222222222222222222";
 };
 
 

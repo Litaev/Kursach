@@ -17,7 +17,6 @@ ApplicationWindow{
         }
         else{
             user.updateChosenCarStatistics();
-            status.chosenCarID = user.getChosenCarId();
             chooseCarWindow.updateModel();
             eventsWindow.updateModel();
         }
@@ -48,19 +47,17 @@ ApplicationWindow{
                 visible: true
                 anchors.top: parent.top
                 anchors.left: parent.left
-                anchors.margins: 10
-                width: parent.height - 20
+                width: parent.height
                 height: width
                 onClicked: {
-                    user.setChosenCarImage(status.chosenCarId);
-                    user.saveUserData();
+                    user.setChosenCarImage(user.getChosenCarId());
                     _loader.reload();
                 }
                 background: Image {
                     id: carImageIcon
                     sourceSize: Qt.size(width, width)
                     fillMode: Image.PreserveAspectCrop
-                    source: user.getInfoAboutCar(status.chosenCarId, "imagePath");
+                    source: user.getInfoAboutCar(user.getChosenCarId(), "imagePath") == "" ? "qrc:/test11/icons/car_white_icon.png": user.getInfoAboutCar(user.getChosenCarId(), "imagePath");
                 }
             }
 
@@ -206,9 +203,7 @@ ApplicationWindow{
                 hoverEnabled: false
                 height: 50
                 onClicked: {
-                    status.fromWindow = "main";
                     status.isEditCar = true;
-                    status.chosenCarId = user.getChosenCarId();
                     stackView.push("qrc:/test11/Qml/CarWindow.qml");
 
                 }
@@ -237,7 +232,7 @@ ApplicationWindow{
                 hoverEnabled: false
                 height: 50
                 onClicked: {
-                    status.fromWindow = "main";
+                    chooseCarWindow.updateModel();
                     stackView.push("qrc:/test11/Qml/ChooseCarWindow.qml");
                 }
                 background: Rectangle{
@@ -358,9 +353,6 @@ ApplicationWindow{
                     source: "qrc:/test11/icons/add_refueling_white_icon.png"
                 }
             }
-
-
-
         }
 
         ScrollView{
@@ -378,12 +370,7 @@ ApplicationWindow{
 
             }
         }
-
-
-
     }
-
-
 
 }
 

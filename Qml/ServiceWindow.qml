@@ -14,7 +14,7 @@ Item{
         if (status.isEditService == false){
             if (serviceNameTextField.text != "" && servicePriceTextField.text != "" && serviceMileageTextField.text != "" && serviceDateTextField.text != ""){
                 user.addEvent(0, serviceNameTextField.text, servicePriceTextField.text, serviceDateTextField.text, serviceMileageTextField.text, serviceCommentTextField.text, serviceTypeComboBox.currentIndex, "", "");
-                user.saveUserData();
+
                 eventsWindow.updateModel();
                 _loader.reload();
                 stackView.pop();
@@ -27,7 +27,7 @@ Item{
             if (serviceNameTextField.text != "" && servicePriceTextField.text != "" && serviceMileageTextField.text != "" && serviceDateTextField.text != ""){
 
                 user.editChosenEventInfo(status.chosenEventId, 0, serviceNameTextField.text, servicePriceTextField.text, serviceDateTextField.text, serviceMileageTextField.text, serviceCommentTextField.text, "", "", "", serviceTypeComboBox.currentIndex);
-                user.saveUserData();
+
                 eventsWindow.updateModel();
                 _loader.reload();
                 stackView.pop();
@@ -145,7 +145,7 @@ Item{
                 id: serviceTypeComboBox
                 width: parent.width
                 model: ["maintenance", "repair", "tuning", "detail", "diagnostics", "tire fitting", "other service"]
-                currentIndex: status.isEditService ? parseInt(user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "serviceType")) : 0;
+                currentIndex: status.isEditService ? parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "serviceType")) : 0;
             }
         }
 
@@ -191,7 +191,7 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Event name"
-                text: status.isEditService ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "name") : ""
+                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "name") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
             }
@@ -236,7 +236,7 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Price"
-                text: status.isEditService ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "money") : ""
+                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "money") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -284,7 +284,7 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Mileage"
-                text: status.isEditService ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "mileage") : ""
+                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "mileage") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -331,7 +331,7 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Event comment"
-                text: status.isEditService ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "comment") : ""
+                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "comment") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
             }
@@ -378,7 +378,7 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Date"
-                text: status.isEditService ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "date") : user.getNowDate();
+                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "date") : user.getNowDate();
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
             }

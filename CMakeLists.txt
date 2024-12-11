@@ -47,6 +47,7 @@ qt_add_qml_module(apptest11
         SOURCES Sources/statistics.cpp
         SOURCES Headers/statistics.h
         RESOURCES icons/stats_black_icon.png icons/stats_white_icon.png
+        SOURCES
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

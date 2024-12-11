@@ -125,15 +125,18 @@ void User::addEvent(QString new_event_type, QString new_event_name, QString new_
 
 void User::setChosenCarImage(int chosenCarId){
     QString newFilePath = QFileDialog::getOpenFileName(nullptr, "Open File", "", "Images (*.png *.jpeg *.jpg);;All files (*)");
-    car_list[chosenCarId]->setCarImageFilePath(newFilePath);
+    if (newFilePath != "") car_list[chosenCarId]->setCarImageFilePath(newFilePath);
 }
 
 void User::deleteChosenEvent(int chosen_event_id){
     car_list[chosen_car_id]->getEventList().erase(car_list[chosen_car_id]->getEventList().begin() + chosen_event_id);
 }
-void User::deleteChosenCar(int chosen_car_id){
-    (*car_list[chosen_car_id])--;
-    car_list.erase(car_list.begin() + chosen_car_id);
+void User::deleteChosenCar(int car_id){
+    (*car_list[car_id])--;
+    car_list.erase(car_list.begin() + car_id);
+    if (car_id == this->chosen_car_id) chosen_car_id = 0;
+
+
 }
 
 // void User::deleteCar() {

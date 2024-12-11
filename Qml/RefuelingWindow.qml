@@ -16,7 +16,7 @@ Item {
 
                 user.addEvent(1, "Refueling", refuelingPriceTextField.text, refuelingDateTextField.text, refuelingMileageTextField.text, refuelingCommentTextField.text, 0, refuelingLitreAmountTextField.text, pricePerLitreTextField.text);
 
-                user.saveUserData();
+
                 eventsWindow.updateModel();
                 _loader.reload();
                 stackView.pop();
@@ -29,7 +29,7 @@ Item {
             if (refuelingLitreAmountTextField.text != "" && pricePerLitreTextField.text != "" && refuelingMileageTextField.text != ""|| pricePerLitreTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != "" || refuelingLitreAmountTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != ""){
 
                 user.editChosenEventInfo(status.chosenEventId, 1, "Refueling", refuelingPriceTextField.text, refuelingDateTextField.text, refuelingMileageTextField.text, refuelingCommentTextField.text, refuelingLitreAmountTextField.text, pricePerLitreTextField.text, 0);
-                user.saveUserData();
+
                 eventsWindow.updateModel();
                 _loader.reload();
                 stackView.pop();
@@ -147,7 +147,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Litre amount"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "litres") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "litres") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -213,7 +213,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Price per litre"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "pricePerLitre") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "pricePerLitre") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -275,7 +275,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Mileage"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "mileage") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "mileage") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -323,7 +323,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Price"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "money") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "money") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -384,7 +384,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Refueling comment"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "comment") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "comment") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
             }
@@ -431,7 +431,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Date"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(status.chosenCarId, status.chosenEventId, "date") : user.getNowDate();
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "date") : user.getNowDate();
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
             }

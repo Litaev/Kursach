@@ -12,4 +12,5 @@ void EventsWindow::updateModel(){
         (*user->getCarList()[user->getChosenCarId()]) == 1;
         user->getCarList()[user->getChosenCarId()]->updateCarMileage();
     }
+    qDebug() << "111111111111111111111111111111";
 };

@@ -38,7 +38,6 @@ ListView{
             width: 70
             onClicked: {
                 status.chosenEventId = index;
-                status.chosenCarId = user.getChosenCarId();
                 if (event_type == 0){
                     status.isEditService = true;
                     stackView.push("qrc:/test11/Qml/ServiceWindow.qml");
@@ -103,7 +102,7 @@ ListView{
             }
             onAccepted: {
                 user.deleteChosenEvent(index);
-                user.saveUserData();
+
                 eventsWindow.updateModel();
                 _loader.reload();
             }
