@@ -36,7 +36,7 @@ QVariant Date::DateToVariant(const Date& date) {
     QString sMonth = QString::fromStdString(std::to_string(date.month));
     QString sYear = QString::fromStdString(std::to_string(date.year));
     QString sHour = QString::fromStdString(std::to_string(date.hour));
-    QString sMinute = QString::fromStdString(std::to_string(date.minute));;
+    QString sMinute = QString::fromStdString(std::to_string(date.minute));
     if (date.day < 10) sDay = "0" + sDay;
     if (date.month < 10) sMonth = "0" + sMonth;
     if (date.hour < 10) sHour = "0" + sHour;

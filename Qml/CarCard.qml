@@ -47,7 +47,8 @@ ApplicationWindow{
                 visible: true
                 anchors.top: parent.top
                 anchors.left: parent.left
-                width: parent.height
+                anchors.margins: 10
+                width: 130
                 height: width
                 onClicked: {
                     user.setChosenCarImage(user.getChosenCarId());
@@ -55,6 +56,7 @@ ApplicationWindow{
                 }
                 background: Image {
                     id: carImageIcon
+                    anchors.fill: parent
                     sourceSize: Qt.size(width, width)
                     fillMode: Image.PreserveAspectCrop
                     source: user.getInfoAboutCar(user.getChosenCarId(), "imagePath") == "" ? "qrc:/test11/icons/car_white_icon.png": user.getInfoAboutCar(user.getChosenCarId(), "imagePath");
