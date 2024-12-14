@@ -18,7 +18,7 @@ Dialog {
     readonly property int pickYear: 2
 
     property color backgroundColor: "white"
-    property color topBarBackgroundColor: "blue"
+    property color topBarBackgroundColor: "#343a40"
     property color topBarTextColor: "white"
     property color calendarNumberColor: "black"
     property color calendarUnselectableNumberColor: "gray"

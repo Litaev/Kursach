@@ -17,10 +17,10 @@ Dialog {
 
     property color backgroundColor: "white"
     property color circleColor: "#E5E4E2"
-    property color handleColor: "blue"
+    property color handleColor: "#343a40"
     property color timeNumberColor: "black"
     property color timeNumberOverlayColor: "white"
-    property color timeSelectedColor: "#CCCCFF"
+    property color timeSelectedColor: "#adb5bd"
     property color timeUnselectedColor: "#E5E4E2"
     property int timeFontPointSize: 24
     property int timeHandleSize: 40

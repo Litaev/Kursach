@@ -15,6 +15,7 @@ Item {
             if (refuelingLitreAmountTextField.text != "" && pricePerLitreTextField.text != "" && refuelingMileageTextField.text != ""|| pricePerLitreTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != "" || refuelingLitreAmountTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != ""){
 
                 user.addEvent(1, "Refueling", refuelingPriceTextField.text, refuelingDateButton.text + "-" + refuelingTimeButton.text, refuelingMileageTextField.text, refuelingCommentTextField.text, 0, refuelingLitreAmountTextField.text, pricePerLitreTextField.text);
+
                 user.saveUserData();
 
                 eventsWindow.updateModel();
@@ -29,6 +30,7 @@ Item {
             if (refuelingLitreAmountTextField.text != "" && pricePerLitreTextField.text != "" && refuelingMileageTextField.text != ""|| pricePerLitreTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != "" || refuelingLitreAmountTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != ""){
 
                 user.editChosenEventInfo(status.chosenEventId, 1, "Refueling", refuelingPriceTextField.text, refuelingDateButton.text + "-" + refuelingTimeButton.text, refuelingMileageTextField.text, refuelingCommentTextField.text, refuelingLitreAmountTextField.text, pricePerLitreTextField.text, 0);
+
                 user.saveUserData();
                 eventsWindow.updateModel();
                 _loader.reload();

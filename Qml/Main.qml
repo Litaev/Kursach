@@ -16,7 +16,8 @@ ApplicationWindow {
                                     {isEditEvent: true},
                                     {isEditService: true},
                                     {isEditRefueling: true},
-                                    {chosenEventId: 0});
+                                    {chosenEventId: 0},
+                                    {isSortFromNewest: true});
 
     Loader {
         id: _loader

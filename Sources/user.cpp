@@ -261,10 +261,54 @@ void User::loadUserData() {
             car->getEventList().push_back(event);
         }
 
+
         (*car) == 1;
         car->updateCarMileage();
 
         car_list.push_back(car);
+    }
+
+}
+
+bool User::compEventListMinByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2){
+
+    return event1->getEventDate().getDateForSort() < event2->getEventDate().getDateForSort();
+
+}
+bool User::compEventListMaxByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2){
+
+    return event1->getEventDate().getDateForSort() > event2->getEventDate().getDateForSort();
+
+}
+
+bool User::compEventListMinByPrice(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2){
+
+    return event1->getMoneyValue() < event2->getMoneyValue();
+
+}
+bool User::compEventListMaxByPrice(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2){
+
+    return event1->getMoneyValue() > event2->getMoneyValue();
+
+}
+
+
+
+void User::sortChosenCarEventListMin(QString sortType){
+    if (sortType == "date"){
+        std::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMinByDate);
+    }
+    else if (sortType == "price"){
+        std::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMinByPrice);
+    }
+
+}
+void User::sortChosenCarEventListMax(QString sortType){
+    if (sortType == "date"){
+        std::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMaxByDate);
+    }
+    else if (sortType == "price"){
+        std::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMaxByPrice);
     }
 
 }

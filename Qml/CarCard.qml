@@ -244,6 +244,7 @@ ApplicationWindow{
                 height: 50
                 onClicked: {
                     chooseCarWindow.updateModel();
+
                     stackView.push("qrc:/test11/Qml/ChooseCarWindow.qml");
                 }
                 background: Rectangle{
@@ -271,10 +272,80 @@ ApplicationWindow{
             anchors.leftMargin: 5
             anchors.right: parent.right
             anchors.rightMargin: 5
-            height: 40
+            height: 50
             color: "#495057"
+
+            Rectangle{
+                id: eventsSortComboboxRect
+                anchors.right: parent.right
+                anchors.rightMargin: 5
+                anchors.top: parent.top
+                anchors.topMargin: 5
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 5
+                width: 110
+                radius: 5
+                ComboBox {
+                    id: eventsSortCombobox
+                    anchors.fill: parent
+                    model: ["date","money"]
+                    //currentIndex: status.isEditCar ? parseInt(user.getInfoAboutCar(user.getChosenCarId(), "fuel")) : 0;
+                }
+
+            }
+
+            Button{
+                id: eventsSortButton
+                visible: true
+                anchors.top: parent.top
+                anchors.right: eventsSortComboboxRect.left
+                anchors.margins: 5
+                width: 40
+
+                height: width
+                onClicked: {
+                    if (status.isSortFromNewest == true){
+                        status.isSortFromNewest = false;
+                        if (eventsSortCombobox.currentIndex == 0){
+                            user.sortChosenCarEventListMax("date");
+                        }
+                        else if (eventsSortCombobox.currentIndex == 1){
+                            user.sortChosenCarEventListMax("price");
+                        }
+                        eventsWindow.updateModel();
+                        eventsSortImageIcon.source = "qrc:/test11/icons/sortBigger_white_icon.png";
+
+                    }
+                    else{
+                        status.isSortFromNewest = true;
+                        if (eventsSortCombobox.currentIndex == 0){
+                            user.sortChosenCarEventListMin("date");
+                        }
+                        else if (eventsSortCombobox.currentIndex == 1){
+                            user.sortChosenCarEventListMin("price");
+                        }
+
+                        eventsWindow.updateModel();
+                        eventsSortImageIcon.source = "qrc:/test11/icons/sortSmaller_white_icon.png";
+
+                    }
+
+
+                }
+                background: Image {
+                    id: eventsSortImageIcon
+                    anchors.fill: parent
+                    sourceSize: Qt.size(width, width)
+                    fillMode: Image.PreserveAspectCrop
+                    source: status.isSortFromNewest ? "qrc:/test11/icons/sortSmaller_white_icon.png": "qrc:/test11/icons/sortBigger_white_icon.png";
+                }
+            }
+
             Text{
-                anchors.fill: parent
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: eventsSortButton.left
                 text: "Last Events"
                 color: "#ffffff"
                 font.pointSize: 20

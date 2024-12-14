@@ -52,6 +52,13 @@ public:
     Q_INVOKABLE int getNowDate(QString type) const;
 
     float getUserMoneySpent() const;
+
+    static bool compEventListMinByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
+    static bool compEventListMaxByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
+    static bool compEventListMinByPrice(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
+    static bool compEventListMaxByPrice(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
+    Q_INVOKABLE void sortChosenCarEventListMin(QString sortType);
+    Q_INVOKABLE void sortChosenCarEventListMax(QString sortType);
 };
 
 #endif // USER_H

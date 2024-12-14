@@ -75,3 +75,15 @@ Date Date::VariantToDate(const QVariant& var) {
     parts.clear();
     return date;
 }
+
+long int Date::getDateForSort() const{
+    std::tm tm = {0};
+    tm.tm_year = year - 1900;
+    tm.tm_mon = month - 1;
+    tm.tm_mday = day;
+    tm.tm_hour = hour;
+    tm.tm_min = minute;
+    std::time_t time = std::mktime(&tm) / 60;
+    return static_cast<long int>(time);
+
+}

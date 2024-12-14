@@ -21,6 +21,8 @@ public:
     void setDay(int new_day);
     void setNowDate();
 
+    long int getDateForSort() const;
+
     QVariant getDate() const;
     static QVariant DateToVariant(const Date& date);
     static Date VariantToDate(const QVariant& var);
