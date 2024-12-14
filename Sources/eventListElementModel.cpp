@@ -76,18 +76,7 @@ void EventListElementModel::resetEventsModel(User *user){
     }
     endResetModel();
 }
-// void CarListElementModel::resetModel(User *user){
-//     beginResetModel();
-//     carList.clear();
-//     std::vector<std::shared_ptr<Car>> this_car_list = user->getCarList();
-//     for(int i  = 0; i < user->getCarListSize(); i++){
-//         QString this_car_name = this_car_list[i]->getCarName();
-//         int this_car_year = this_car_list[i]->getCarYear();
-//         int this_car_mileage = this_car_list[i]->getCarMileage();
-//         addCarListElement(CarListElement(this_car_name, this_car_year, this_car_mileage));
-//     }
-//     endResetModel();
-// }
+
 
 QHash<int, QByteArray> EventListElementModel::roleNames() const{
 

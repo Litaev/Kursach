@@ -12,9 +12,9 @@ Item{
 
     function confirmAction(){
         if (status.isEditService == false){
-            if (serviceNameTextField.text != "" && servicePriceTextField.text != "" && serviceMileageTextField.text != "" && serviceDateTextField.text != ""){
-                user.addEvent(0, serviceNameTextField.text, servicePriceTextField.text, serviceDateTextField.text, serviceMileageTextField.text, serviceCommentTextField.text, serviceTypeComboBox.currentIndex, "", "");
-
+            if (serviceNameTextField.text != "" && servicePriceTextField.text != "" && serviceMileageTextField.text != ""){
+                user.addEvent(0, serviceNameTextField.text, servicePriceTextField.text, serviceDateButton.text + "-" + serviceTimeButton.text, serviceMileageTextField.text, serviceCommentTextField.text, serviceTypeComboBox.currentIndex, "", "");
+                user.saveUserData();
                 eventsWindow.updateModel();
                 _loader.reload();
                 stackView.pop();
@@ -24,10 +24,10 @@ Item{
             }
         }
         else{
-            if (serviceNameTextField.text != "" && servicePriceTextField.text != "" && serviceMileageTextField.text != "" && serviceDateTextField.text != ""){
+            if (serviceNameTextField.text != "" && servicePriceTextField.text != "" && serviceMileageTextField.text != ""){
 
-                user.editChosenEventInfo(status.chosenEventId, 0, serviceNameTextField.text, servicePriceTextField.text, serviceDateTextField.text, serviceMileageTextField.text, serviceCommentTextField.text, "", "", "", serviceTypeComboBox.currentIndex);
-
+                user.editChosenEventInfo(status.chosenEventId, 0, serviceNameTextField.text, servicePriceTextField.text, serviceDateButton.text + "-" + serviceTimeButton.text, serviceMileageTextField.text, serviceCommentTextField.text, "", "", "", serviceTypeComboBox.currentIndex);
+                user.saveUserData();
                 eventsWindow.updateModel();
                 _loader.reload();
                 stackView.pop();
@@ -361,28 +361,93 @@ Item{
             fillMode: Image.PreserveAspectFit
             source: "qrc:/test11/icons/date_white_icon.png"
         }
-        Rectangle{
-            id: serviceDateTextRect
+        Button{
+            id: serviceDateButton
             anchors.top: parent.top
-            anchors.topMargin: 10
+            anchors.topMargin: 5
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 5
             anchors.left: serviceDateImage.right
             anchors.leftMargin: 5
             anchors.right: parent.right
             anchors.rightMargin: 5
-            color: "#DEE2E6"
-            radius: 10
-            TextField{
-                id: serviceDateTextField
-                anchors.fill: parent
-                color: "#000000"
-                placeholderText: "Date"
-                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "date") : user.getNowDate();
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 16
+            text: mainWindow.day + "-" + (mainWindow.month + 1) + "-" + mainWindow.year
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 16
+            onClicked:{
+                datePicker.open();
             }
         }
+        DatePicker{
+            id: datePicker
+        }
+
+    }
+
+    Rectangle{
+        id: serviceTimeRect
+        anchors.top: serviceDateRect.bottom
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        height: 70
+        color: "#6C757D"
+        radius: 10
+        Image {
+            id: serviceTimeImage
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            width: 60
+            height: width
+            sourceSize: Qt.size(width, width)
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/test11/icons/time_white_icon.png"
+        }
+        Button{
+            id: serviceTimeButton
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 5
+            anchors.left: serviceTimeImage.right
+            anchors.leftMargin: 5
+            anchors.right: parent.right
+            anchors.rightMargin: 5
+            text: {
+                if (mainWindow.hour < 10){
+
+                    if(mainWindow.minute < 10){
+                        "0" + mainWindow.hour + ":" + "0" + mainWindow.minute
+                    }
+                    else {
+                        "0" + mainWindow.hour + ":" + mainWindow.minute
+                    }
+                }
+                else{
+                    if(mainWindow.minute < 10){
+                        mainWindow.hour + ":" + "0" + mainWindow.minute
+                    }
+                    else {
+                        mainWindow.hour + ":" + mainWindow.minute
+                    }
+                }
+
+            }
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 16
+            onClicked:{
+                timePicker.open();
+            }
+        }
+
+        TimePicker{
+            id: timePicker
+        }
+
     }
 
 

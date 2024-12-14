@@ -52,12 +52,7 @@ void Car::setCarYear(int newCar_year)
     car_year = newCar_year;
 }
 
-// void Car::updateCarMoneySpent(){
-//     car_money_spent = 0;
-//     for (auto& event: event_list){
-//         car_money_spent += event->getMoneyValue();
-//     }
-// }
+
 
 void Car::updateCarMileage(){
     for (auto& event: event_list){
@@ -119,71 +114,14 @@ vector<std::shared_ptr<Event>>& Car::getEventList(){
     return event_list;
 }
 void Car::deleteEventList(){
-    // pqxx::connection database_connect("dbname=postgres user=postgres password=Sosi_jopy host=localhost port=5432");
-    // if (!database_connect.is_open()) {
-    //     std::cerr << "Database connection error" << std::endl;
-    //     exit(111);
-    // }
-    // pqxx::work database_work(database_connect);
-    // for (int i = 0; i < event_list.size(); i++) {
-    //     if (event_list[i]->getEventType() == CONSUMPTION_NAME::SERVICE) {
-    //         database_work.exec0("DELETE FROM service WHERE fk_event_id = " + database_work.quote(event_list[i]->getEventId()));
 
-    //     }
-    //     else if (event_list[i]->getEventType() == CONSUMPTION_NAME::REFUELING) {
-    //         database_work.exec0("DELETE FROM refueling WHERE fk_event_id = " + database_work.quote(event_list[i]->getEventId()));
-
-    //     }
-    // }
-    // database_work.exec0("DELETE FROM events WHERE fk_car_id = " + database_work.quote(car_id));
-    // database_work.commit();
     event_list.clear();
 };
 void Car::deleteEventListElement(){
-    // pqxx::connection database_connect("dbname=postgres user=postgres password=Sosi_jopy host=localhost port=5432");
-    // if (!database_connect.is_open()) {
-    //     std::cerr << "Database connection error" << std::endl;
-    //     exit(111);
-    // }
-    // pqxx::work database_work(database_connect);
-    // unsigned int chosen_id;
-    // cout << "Choose id of event to delete:" << endl;
-    // for (unsigned int element_id = 0; element_id < event_list.size(); element_id++){
-    //     cout << "ID: " << element_id << " Event name: " <<
-    //         Event::consumptionNameToStringFun(event_list[element_id]->getEventType()) << endl;
-    // }
-    // cout << "Your choice: ";
-    // cin >> chosen_id;
-    // if (event_list[chosen_id]->getEventType() == CONSUMPTION_NAME::SERVICE) {
-    //     database_work.exec0("DELETE FROM service WHERE fk_event_id = " + database_work.quote(event_list[chosen_id]->getEventId()));
 
-    // }
-    // else if (event_list[chosen_id]->getEventType() == CONSUMPTION_NAME::REFUELING) {
-    //     database_work.exec0("DELETE FROM refueling WHERE fk_event_id = " + database_work.quote(event_list[chosen_id]->getEventId()));
-
-    // }
-    // database_work.exec0("DELETE FROM events WHERE event_id = " + database_work.quote(event_list[chosen_id]->getEventId()));
-    // database_work.commit();
-    // event_list.erase(event_list.begin()+chosen_id);
     (*this) == 1;
 }
 
-
-// void Car::updateCarMoneySpent(){
-//     // pqxx::connection database_connect("dbname=postgres user=postgres password=Sosi_jopy host=localhost port=5432");
-//     // if (!database_connect.is_open()) {
-//     //     std::cerr << "Database connection error" << std::endl;
-//     //     exit(111);
-//     // }
-//     // pqxx::work database_work(database_connect);
-//     // car_money_spent = 0;
-//     // for (const auto & event : event_list){
-//     //     car_money_spent += event->getMoneyValue();
-//     // }
-//     // cout << "----------------------------";
-//     // database_work.exec0("UPDATE cars SET money_spent = " + database_work.quote(car_money_spent) + " WHERE car_id = " + database_work.quote(car_id));
-//     // database_work.commit();
-// }
 
 void Car::clearCarData() {
     event_list.clear();

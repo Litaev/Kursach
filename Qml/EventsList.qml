@@ -38,6 +38,11 @@ ListView{
             width: 70
             onClicked: {
                 status.chosenEventId = index;
+                mainWindow.hour = parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventHour"));
+                mainWindow.minute = parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventMinute"));
+                mainWindow.year = parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventYear"));
+                mainWindow.month = parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventMonth"));
+                mainWindow.day = parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventDay"));
                 if (event_type == 0){
                     status.isEditService = true;
                     stackView.push("qrc:/test11/Qml/ServiceWindow.qml");
@@ -102,7 +107,7 @@ ListView{
             }
             onAccepted: {
                 user.deleteChosenEvent(index);
-
+                user.saveUserData();
                 eventsWindow.updateModel();
                 _loader.reload();
             }

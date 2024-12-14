@@ -4,10 +4,18 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 ApplicationWindow{
+    id: mainWindow
     color: "#000000"
     width: 420
     height: 780
     visible: true
+
+    property int hour: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventHour"));
+    property int minute: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventMinute"));
+    property int year: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventYear"));
+    property int month: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventMonth"));
+    property int day: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventDay"));
+
     onClosing:{
         close.accepted = false;
     }
@@ -52,6 +60,7 @@ ApplicationWindow{
                 height: width
                 onClicked: {
                     user.setChosenCarImage(user.getChosenCarId());
+                    user.saveUserData();
                     _loader.reload();
                 }
                 background: Image {
@@ -293,6 +302,11 @@ ApplicationWindow{
                 height: width
                 onClicked: {
                     status.isEditService = false;
+                    mainWindow.hour = parseInt(user.getNowDate("hour"));
+                    mainWindow.minute = parseInt(user.getNowDate("minute"));
+                    mainWindow.year = parseInt(user.getNowDate("year"));
+                    mainWindow.month = parseInt(user.getNowDate("month"));
+                    mainWindow.day = parseInt(user.getNowDate("day"));
                     stackView.push("qrc:/test11/Qml/ServiceWindow.qml");
                 }
                 background: Image {
@@ -345,6 +359,13 @@ ApplicationWindow{
                 height: width
                 onClicked: {
                     status.isEditRefueling = false;
+
+                    mainWindow.hour = parseInt(user.getNowDate("hour"));
+                    mainWindow.minute = parseInt(user.getNowDate("minute"));
+                    mainWindow.year = parseInt(user.getNowDate("year"));
+                    mainWindow.month = parseInt(user.getNowDate("month"));
+                    mainWindow.day = parseInt(user.getNowDate("day"));
+
                     stackView.push("qrc:/test11/Qml/RefuelingWindow.qml");
                 }
                 background: Image {

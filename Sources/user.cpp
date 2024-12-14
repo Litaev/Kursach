@@ -17,10 +17,15 @@ void User::setChosenCarId(int newChosen_car_id)
     chosen_car_id = newChosen_car_id;
 }
 
-QString User::getNowDate() const{
+int User::getNowDate(QString type) const{
     Date now_date;
     now_date.setNowDate();
-    return now_date.DateToVariant(now_date).toString();
+    if (type == "day") return now_date.getDay();
+    else if(type == "month") return now_date.getMonth();
+    else if(type == "year") return now_date.getYear();
+    else if(type == "hour") return now_date.getHour();
+    else if(type == "minute") return now_date.getMinute();
+    return 0;
 }
 
 void User::updateChosenCarStatistics(){
@@ -64,7 +69,18 @@ QString User::getInfoAboutEvent(int car_index, int event_index, QString info_typ
     if (info_type == "type") {return QString::number(static_cast<int>(car_list[car_index]->getEventList()[event_index]->getEventType())); }
     else if (info_type == "name") {return QString::fromStdString(car_list[car_index]->getEventList()[event_index]->getEventName());}
     else if (info_type == "money") {return QString::number(car_list[car_index]->getEventList()[event_index]->getMoneyValue());}
-    else if (info_type == "date") {return Date::DateToVariant(car_list[car_index]->getEventList()[event_index]->getEventDate()).toString();}
+
+
+    else if (info_type == "eventYear") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getYear());}
+    else if (info_type == "eventMonth") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getMonth());}
+    else if (info_type == "eventDay") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getDay());}
+    else if (info_type == "eventHour") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getHour());}
+    else if (info_type == "eventMinute") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getMinute());}
+    else if (info_type == "eventDateAndTimeNow") {
+        car_list[car_index]->getEventList()[event_index]->getEventDate().setNowDate();
+        return "";
+    }
+
     else if (info_type == "mileage") {return QString::number(car_list[car_index]->getEventList()[event_index]->getCarMileage());}
     else if (info_type == "comment") {return QString::fromStdString(car_list[car_index]->getEventList()[event_index]->getEventComment());}
     else if (info_type == "fuelType") {return QString::number(static_cast<float>(car_list[car_index]->getEventList()[event_index]->getFuelType()));}
@@ -123,6 +139,8 @@ void User::addEvent(QString new_event_type, QString new_event_name, QString new_
 
 }
 
+
+
 void User::setChosenCarImage(int chosenCarId){
     QString newFilePath = QFileDialog::getOpenFileName(nullptr, "Open File", "", "Images (*.png *.jpeg *.jpg);;All files (*)");
     if (newFilePath != "") car_list[chosenCarId]->setCarImageFilePath(newFilePath);
@@ -139,28 +157,6 @@ void User::deleteChosenCar(int car_id){
 
 }
 
-// void User::deleteCar() {
-//     // pqxx::connection database_connect("dbname=postgres user=postgres password=Sosi_jopy host=localhost port=5432");
-//     // if (!database_connect.is_open()) {
-//     //     std::cerr << "Database connection error" << std::endl;
-//     //     exit(111);
-//     // }
-//     // pqxx::work database_work(database_connect);
-//     // system("cls");
-//     // unsigned int chosen_id;
-//     // cout << "Choose id of car to delete:" << endl;
-//     // for (unsigned int element_id = 0; element_id < car_list.size(); element_id++) {
-//     //     cout << "ID: " << element_id << " Car name: " << car_list[element_id]->getCarName() << endl;
-//     // }
-//     // cout << "Your choice: ";
-//     // cin >> chosen_id;
-//     // car_list[chosen_id]->deleteEventList();
-
-//     // database_work.exec0("DELETE FROM cars WHERE car_id = " + database_work.quote(car_list[chosen_id]->getCarId()));
-//     // database_work.commit();
-//     // car_list.erase(car_list.begin() + chosen_id);
-// }
-
 
 float User::getUserMoneySpent() const{
     return user_money_spent;
@@ -173,7 +169,7 @@ vector<std::shared_ptr<Car>>& User::getCarList(){
 
 void User::saveUserData() const{
 
-    QSettings settings("MyCompany", "CarApp");
+    QSettings settings("LitAEvCompany", "CarExpenses");
 
     QVariantMap userMap;
     userMap["chosen_car_id"] = chosen_car_id;
@@ -220,7 +216,7 @@ void User::saveUserData() const{
 
 void User::loadUserData() {
 
-    QSettings settings("MyCompany", "CarApp");
+    QSettings settings("LitAEvCompany", "CarExpenses");
     QVariant var = settings.value("user_data");
     if (var.isNull()) return;
 

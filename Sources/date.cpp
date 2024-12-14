@@ -2,22 +2,30 @@
 #include "Headers/date.h"
 
 
-unsigned int Date::getYear() const{
+int Date::getYear() const{
     return year;
 }
-unsigned int Date::getMonth() const{
+int Date::getMonth() const{
     return month;
 }
-unsigned int Date::getDay() const{
+int Date::getDay() const{
     return day;
 }
-void Date::setYear(unsigned int new_year){
+
+int Date::getHour() const{
+    return hour;
+}
+
+int Date::getMinute() const{
+    return minute;
+}
+void Date::setYear(int new_year){
     year = new_year;
 }
-void Date::setMonth(unsigned int new_month){
+void Date::setMonth(int new_month){
     month = new_month;
 }
-void Date::setDay(unsigned int new_day){
+void Date::setDay(int new_day){
     day = new_day;
 }
 void Date::setNowDate(){
@@ -27,10 +35,18 @@ void Date::setNowDate(){
     minute = local_time.tm_min;
     hour = local_time.tm_hour;
     day = local_time.tm_mday;
-    month = local_time.tm_mon + 1;
+    month = local_time.tm_mon;
     year = local_time.tm_year + 1900;
 }
 
+QVariant Date::getDate() const{
+    QString sDay = QString::fromStdString(std::to_string(day));
+    QString sMonth = QString::fromStdString(std::to_string(month));
+    QString sYear = QString::fromStdString(std::to_string(year));
+    if (day < 10) sDay = "0" + sDay;
+    if (month < 10) sMonth = "0" + sMonth;
+    return QVariant::fromValue(sDay + "-" + sMonth + "-" + sYear);
+}
 QVariant Date::DateToVariant(const Date& date) {
     QString sDay = QString::fromStdString(std::to_string(date.day));
     QString sMonth = QString::fromStdString(std::to_string(date.month));

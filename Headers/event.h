@@ -45,10 +45,7 @@ public:
     virtual void setServiceType(SERVICE_NAME serviceType) {/*VIRTUAL*/ };
     virtual SERVICE_NAME getServiceType() const { return SERVICE_NAME::OTHER_SERVICE; };
     virtual void setServiceTypeAsString(std::string& serviceName) {/*VIRTUAL*/ };
-    virtual void saveCarServiceInDatabase() {/*VIRTUAL*/ };
-    virtual void loadCarServiceFromDatabase() {/*VIRTUAL*/ };
-    virtual void saveRefuelingInDatabase() {/*VIRTUAL*/ };
-    virtual void loadRefuelingFromDatabase() {/*VIRTUAL*/ };
+
     std::string getEventName() const;
     void setEventName(const std::string &newEvent_name);
 };

@@ -160,7 +160,7 @@ Item {
                 height: 50
                 onClicked: {
                     user.setChosenCarId(index);
-
+                    user.saveUserData();
                     _loader.reload();
                     stackView.pop();
 
@@ -249,6 +249,7 @@ Item {
                 }
                 onAccepted: {
                     user.deleteChosenCar(index);
+                    user.saveUserData();
                     eventsWindow.updateModel();
                     chooseCarWindow.updateModel();
                     _loader.reload();

@@ -48,6 +48,10 @@ qt_add_qml_module(apptest11
         SOURCES Headers/statistics.h
         RESOURCES icons/stats_black_icon.png icons/stats_white_icon.png
         SOURCES
+        SOURCES
+        QML_FILES Qml/TimePicker.qml
+        QML_FILES Qml/DatePicker.qml
+        RESOURCES icons/time_black_icon.png icons/time_white_icon.png
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

@@ -14,8 +14,8 @@ Item {
         if (status.isEditRefueling == false){
             if (refuelingLitreAmountTextField.text != "" && pricePerLitreTextField.text != "" && refuelingMileageTextField.text != ""|| pricePerLitreTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != "" || refuelingLitreAmountTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != ""){
 
-                user.addEvent(1, "Refueling", refuelingPriceTextField.text, refuelingDateTextField.text, refuelingMileageTextField.text, refuelingCommentTextField.text, 0, refuelingLitreAmountTextField.text, pricePerLitreTextField.text);
-
+                user.addEvent(1, "Refueling", refuelingPriceTextField.text, refuelingDateButton.text + "-" + refuelingTimeButton.text, refuelingMileageTextField.text, refuelingCommentTextField.text, 0, refuelingLitreAmountTextField.text, pricePerLitreTextField.text);
+                user.saveUserData();
 
                 eventsWindow.updateModel();
                 _loader.reload();
@@ -28,8 +28,8 @@ Item {
         else{
             if (refuelingLitreAmountTextField.text != "" && pricePerLitreTextField.text != "" && refuelingMileageTextField.text != ""|| pricePerLitreTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != "" || refuelingLitreAmountTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != ""){
 
-                user.editChosenEventInfo(status.chosenEventId, 1, "Refueling", refuelingPriceTextField.text, refuelingDateTextField.text, refuelingMileageTextField.text, refuelingCommentTextField.text, refuelingLitreAmountTextField.text, pricePerLitreTextField.text, 0);
-
+                user.editChosenEventInfo(status.chosenEventId, 1, "Refueling", refuelingPriceTextField.text, refuelingDateButton.text + "-" + refuelingTimeButton.text, refuelingMileageTextField.text, refuelingCommentTextField.text, refuelingLitreAmountTextField.text, pricePerLitreTextField.text, 0);
+                user.saveUserData();
                 eventsWindow.updateModel();
                 _loader.reload();
                 stackView.pop();
@@ -40,6 +40,7 @@ Item {
         }
 
     }
+
 
     Dialog {
         id: errorDialog
@@ -414,30 +415,93 @@ Item {
             fillMode: Image.PreserveAspectFit
             source: "qrc:/test11/icons/date_white_icon.png"
         }
-        Rectangle{
-            id: refuelingDateTextRect
+        Button{
+            id: refuelingDateButton
             anchors.top: parent.top
-            anchors.topMargin: 10
+            anchors.topMargin: 5
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 5
             anchors.left: refuelingDateImage.right
             anchors.leftMargin: 5
             anchors.right: parent.right
             anchors.rightMargin: 5
-            color: "#DEE2E6"
-            radius: 10
-            TextField{
-                id: refuelingDateTextField
-                anchors.fill: parent
-                color: "#000000"
-                placeholderText: "Date"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "date") : user.getNowDate();
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pointSize: 16
+            text: mainWindow.day + "-" + (mainWindow.month + 1) + "-" + mainWindow.year
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 16
+            onClicked:{
+                datePicker.open();
             }
         }
+        DatePicker{
+            id: datePicker
+        }
+
     }
 
+    Rectangle{
+        id: refuelingTimeRect
+        anchors.top: refuelingDateRect.bottom
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        height: 70
+        color: "#6C757D"
+        radius: 10
+        Image {
+            id: refuelingTimeImage
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            width: 60
+            height: width
+            sourceSize: Qt.size(width, width)
+            fillMode: Image.PreserveAspectFit
+            source: "qrc:/test11/icons/time_white_icon.png"
+        }
+        Button{
+            id: refuelingTimeButton
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 5
+            anchors.left: refuelingTimeImage.right
+            anchors.leftMargin: 5
+            anchors.right: parent.right
+            anchors.rightMargin: 5
+            text: {
+                if (mainWindow.hour < 10){
 
+                    if(mainWindow.minute < 10){
+                        "0" + mainWindow.hour + ":" + "0" + mainWindow.minute
+                    }
+                    else {
+                        "0" + mainWindow.hour + ":" + mainWindow.minute
+                    }
+                }
+                else{
+                    if(mainWindow.minute < 10){
+                        mainWindow.hour + ":" + "0" + mainWindow.minute
+                    }
+                    else {
+                        mainWindow.hour + ":" + mainWindow.minute
+                    }
+                }
+
+            }
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: 16
+            onClicked:{
+                timePicker.open();
+            }
+        }
+
+        TimePicker{
+            id: timePicker
+        }
+
+    }
 
 }

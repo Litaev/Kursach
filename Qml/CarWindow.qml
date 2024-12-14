@@ -13,8 +13,8 @@ Item {
 
 
     function confirmAction(){
-        if (status.isEditCar == false){
-            if (carNameTextField.text != "" && carYearTextField.text != "" && carMileageTextField.text != "" && carTankTextField.text != ""){
+        if (carNameTextField.text != "" && carYearTextField.text != "" && carMileageTextField.text != "" && carTankTextField.text != ""){
+            if (status.isEditCar == false){
                 user.addCar(carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
 
                 chooseCarWindow.updateModel();
@@ -23,24 +23,17 @@ Item {
                 stackView.pop();
             }
             else{
-                errorDialog.open();
-            }
-        }
-        else{
-            if (carNameTextField.text != "" && carYearTextField.text != "" && carMileageTextField.text != "" && carTankTextField.text != ""){
                 user.editChosenCarInfo(user.getChosenCarId(), carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
 
                 chooseCarWindow.updateModel();
                 _loader.reload();
                 stackView.pop();
             }
-            else{
-                errorDialog.open();
-            }
+            user.saveUserData();
         }
-
-
-
+        else{
+            errorDialog.open();
+        }
     }
     Dialog {
         id: errorDialog

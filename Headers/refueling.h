@@ -19,8 +19,7 @@ public:
     void setAmountOfLitres(float amountOfLitres) override;
     float getPricePerLitre() const override;
     void setPricePerLitre(float pricePerLitre) override;
-    void saveRefuelingInDatabase() override;
-    void loadRefuelingFromDatabase() override;
+
 };
 
 #endif // REFUELING_H

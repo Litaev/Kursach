@@ -13,7 +13,7 @@ class User : public QObject{
     Q_OBJECT
 
     std::vector<std::shared_ptr<Car>> car_list;
-    int chosen_car_id;
+    int chosen_car_id = 0;
     float user_money_spent = 0;
 
 public:
@@ -49,7 +49,7 @@ public:
     Q_INVOKABLE void saveUserData() const;
     Q_INVOKABLE void loadUserData();
 
-    Q_INVOKABLE QString getNowDate() const;
+    Q_INVOKABLE int getNowDate(QString type) const;
 
     float getUserMoneySpent() const;
 };

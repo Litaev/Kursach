@@ -14,8 +14,7 @@ public:
     void setServiceType(SERVICE_NAME serviceType) override;
     std::string getServiceTypeAsString() const;
     void setServiceTypeAsString(std::string &serviceName) override;
-    void saveCarServiceInDatabase() override;
-    void loadCarServiceFromDatabase() override;
+
 };
 
 #endif // CARSERVICE_H
