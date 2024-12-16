@@ -11,11 +11,11 @@ class Event {
     friend User;
     int event_id;
     CONSUMPTION_NAME event_type;
-    std::string event_name;
+    QString event_name;
     float moneyValue;
     Date event_date;
     unsigned int car_mileage;
-    std::string event_comment;
+    QString event_comment;
 public:
     void setEventId(int id);
     int getEventId() const;
@@ -28,8 +28,8 @@ public:
     void setCarMileage(unsigned int carMileage);
     void setEventType(CONSUMPTION_NAME consumption);
     CONSUMPTION_NAME getEventType() const;
-    void setEventComment(const std::string comment);
-    std::string getEventComment() const;
+    void setEventComment(const QString &comment);
+    QString getEventComment() const;
     void saveEventinDatabase();
     void loadEventFromDatabase();
 
@@ -46,8 +46,8 @@ public:
     virtual SERVICE_NAME getServiceType() const { return SERVICE_NAME::OTHER_SERVICE; };
     virtual void setServiceTypeAsString(std::string& serviceName) {/*VIRTUAL*/ };
 
-    std::string getEventName() const;
-    void setEventName(const std::string &newEvent_name);
+    QString getEventName() const;
+    void setEventName(const QString &newEvent_name);
 };
 
 #endif // EVENT_H

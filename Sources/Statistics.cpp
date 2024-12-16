@@ -3,7 +3,7 @@
 
 
 
-void Statistics::updateMoney(std::vector<std::shared_ptr<Event>> eventList){
+void Statistics::updateMoney(std::vector<std::shared_ptr<Event>> &eventList){
     carMoneySpent = 0;
     serviceMoney = 0;
     fuelMoney = 0;

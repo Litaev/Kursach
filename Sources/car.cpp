@@ -28,10 +28,10 @@ Statistics& Car::getCarStatistics(){
 FUEL_TYPE Car::getCarFuelType() const{
     return car_fuel_type;
 }
-string Car::getCarGovNumber() const{
+QString Car::getCarGovNumber() const{
     return car_gov_number;
 }
-void Car::setCarGovNumber(string_view new_car_gov_number) {
+void Car::setCarGovNumber(QString new_car_gov_number) {
     car_gov_number = new_car_gov_number;
 }
 int Car::getCarMileage() const{

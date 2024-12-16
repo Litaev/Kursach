@@ -48,7 +48,7 @@ QString User::getInfoAboutCar(int car_index, QString info_type) const{
     else if (info_type == "CarServiceOtherMoney") { return QString::number(car_list[car_index]->getCarStatistics().getServiceOtherMoney()); }
     else if (info_type == "mileage") { return QString::number(car_list[car_index]->getCarMileage()); }
     else if (info_type == "year") { return QString::number(car_list[car_index]->getCarYear()); }
-    else if (info_type == "fuel") { return QString::number(static_cast<int>(car_list[car_index]->getCarFuelType())); }
+    else if (info_type == "fuel") { return QString::number(std::to_underlying(car_list[car_index]->getCarFuelType())); }
     else if (info_type == "tank") { return QString::number(car_list[car_index]->getCarTankVolume()); }
     else if (info_type == "imagePath") {return car_list[car_index]->getCarImageFilePath(); }
 
@@ -66,8 +66,8 @@ void User::editChosenCarInfo(QString new_car_name, QString new_car_year, QString
 QString User::getInfoAboutEvent(int car_index, int event_index, QString info_type) const{
     if (car_list.size() < 1) return "";
     if (car_list[chosen_car_id]->getEventList().size() < 1) return "";
-    if (info_type == "type") {return QString::number(static_cast<int>(car_list[car_index]->getEventList()[event_index]->getEventType())); }
-    else if (info_type == "name") {return QString::fromStdString(car_list[car_index]->getEventList()[event_index]->getEventName());}
+    if (info_type == "type") {return QString::number(std::to_underlying(car_list[car_index]->getEventList()[event_index]->getEventType())); }
+    else if (info_type == "name") {return car_list[car_index]->getEventList()[event_index]->getEventName();}
     else if (info_type == "money") {return QString::number(car_list[car_index]->getEventList()[event_index]->getMoneyValue());}
 
 
@@ -82,11 +82,11 @@ QString User::getInfoAboutEvent(int car_index, int event_index, QString info_typ
     }
 
     else if (info_type == "mileage") {return QString::number(car_list[car_index]->getEventList()[event_index]->getCarMileage());}
-    else if (info_type == "comment") {return QString::fromStdString(car_list[car_index]->getEventList()[event_index]->getEventComment());}
+    else if (info_type == "comment") {return car_list[car_index]->getEventList()[event_index]->getEventComment();}
     else if (info_type == "fuelType") {return QString::number(static_cast<float>(car_list[car_index]->getEventList()[event_index]->getFuelType()));}
     else if (info_type == "litres") {return QString::number(car_list[car_index]->getEventList()[event_index]->getAmountOfLitres());}
     else if (info_type == "pricePerLitre") {return QString::number(static_cast<float>(car_list[car_index]->getEventList()[event_index]->getPricePerLitre()));}
-    else if (info_type == "serviceType") {return QString::number(static_cast<int>(car_list[car_index]->getEventList()[event_index]->getServiceType()));}
+    else if (info_type == "serviceType") {return QString::number(std::to_underlying(car_list[car_index]->getEventList()[event_index]->getServiceType()));}
     return "";
 }
 
@@ -94,11 +94,11 @@ void User::editChosenEventInfo(int chosen_event_id, int event_type, QString new_
                                QString new_event_litres, QString new_event_price_per_litre, QString new_event_service_type){
 
 
-    car_list[chosen_car_id]->event_list[chosen_event_id]->event_name = new_event_name.toStdString();
+    car_list[chosen_car_id]->event_list[chosen_event_id]->event_name = new_event_name;
     car_list[chosen_car_id]->event_list[chosen_event_id]->moneyValue = new_event_money.toFloat();
     car_list[chosen_car_id]->event_list[chosen_event_id]->event_date = Date::VariantToDate(new_event_date);
     car_list[chosen_car_id]->event_list[chosen_event_id]->car_mileage = new_event_mileage.toInt();
-    car_list[chosen_car_id]->event_list[chosen_event_id]->event_comment = new_event_comment.toStdString();
+    car_list[chosen_car_id]->event_list[chosen_event_id]->event_comment = new_event_comment;
     if (static_cast<CONSUMPTION_NAME>(event_type) == CONSUMPTION_NAME::REFUELING){
         car_list[chosen_car_id]->getEventList()[chosen_event_id]->setAmountOfLitres(new_event_litres.toFloat());
         car_list[chosen_car_id]->getEventList()[chosen_event_id]->setPricePerLitre(new_event_price_per_litre.toFloat());
@@ -179,31 +179,31 @@ void User::saveUserData() const{
     for (const auto& car : car_list) {
         QVariantMap carMap;
         carMap["car_name"] = car->getCarName();
-        carMap["car_gov_number"] = QString::fromStdString(car->getCarGovNumber());
+        carMap["car_gov_number"] = car->getCarGovNumber();
         carMap["car_image_path"] = car->getCarImageFilePath();
         carMap["car_year"] = car->getCarYear();
         carMap["car_mileage"] = car->getCarMileage();
         carMap["car_tank_volume"] = car->getCarTankVolume();
-        carMap["car_fuel_type"] = static_cast<int>(car->getCarFuelType());
+        carMap["car_fuel_type"] = std::to_underlying(car->getCarFuelType());
 
         QVariantList eventList;
         for (const auto& event : car->getEventList()) {
             QVariantMap eventMap;
             if (event->getEventType() == CONSUMPTION_NAME::SERVICE){
-                eventMap["service_name"] = static_cast<int>(event->getServiceType());
+                eventMap["service_name"] = std::to_underlying(event->getServiceType());
             }
             else if (event->getEventType() == CONSUMPTION_NAME::REFUELING){
-                eventMap["fuel_type"] = static_cast<int>(event->getFuelType());
+                eventMap["fuel_type"] = std::to_underlying(event->getFuelType());
                 eventMap["litre_amount"] = event->getAmountOfLitres();
                 eventMap["price_per_litre"] = event->getPricePerLitre();
             }
             eventMap["event_id"] = event->getEventId();
-            eventMap["event_name"] = QString::fromStdString(event->getEventName());
-            eventMap["event_type"] = static_cast<int>(event->getEventType());
+            eventMap["event_name"] = event->getEventName();
+            eventMap["event_type"] = std::to_underlying(event->getEventType());
             eventMap["money_value"] = event->getMoneyValue();
             eventMap["event_date"] = Date::DateToVariant(event->getEventDate());
             eventMap["event_mileage"] = event->getCarMileage();
-            eventMap["event_comment"] = QString::fromStdString(event->getEventComment());
+            eventMap["event_comment"] = event->getEventComment();
             eventList.append(eventMap);
         }
         carMap["event_list"] = eventList;
@@ -228,7 +228,7 @@ void User::loadUserData() {
         QVariantMap map2 = carVar.toMap();
         std::shared_ptr<Car> car {std::make_shared<Car>()};
         car->setCarName(map2["car_name"].toString());
-        car->setCarGovNumber(map2["car_gov_number"].toString().toStdString());
+        car->setCarGovNumber(map2["car_gov_number"].toString());
         car->setCarImageFilePath(map2["car_image_path"].toString());
         car->setCarYear(map2["car_year"].toInt());
         car->setCarMileage(map2["car_mileage"].toInt());
@@ -238,7 +238,7 @@ void User::loadUserData() {
         QVariantList eventList = map2["event_list"].toList();
         for (const QVariant& eventVar : eventList) {
             QVariantMap map3 = eventVar.toMap();
-            CONSUMPTION_NAME eventType = static_cast<CONSUMPTION_NAME>(map3["event_type"].toInt());
+            auto eventType = static_cast<CONSUMPTION_NAME>(map3["event_type"].toInt());
             std::shared_ptr<Event> event;
             if (eventType == CONSUMPTION_NAME::SERVICE){
                 event = std::make_shared<CarService>();
@@ -252,12 +252,12 @@ void User::loadUserData() {
             }
             else event = std::make_shared<Event>();
             event->setEventId(map3["event_id"].toInt());
-            event->setEventName(map3["event_name"].toString().toStdString());
+            event->setEventName(map3["event_name"].toString());
             event->setEventType(eventType);
             event->setMoneyValue(map3["money_value"].toFloat());
             event->setEventDate(map3["event_date"]);
             event->setCarMileage(map3["event_mileage"].toUInt());
-            event->setEventComment(map3["event_comment"].toString().toStdString());
+            event->setEventComment(map3["event_comment"].toString());
             car->getEventList().push_back(event);
         }
 

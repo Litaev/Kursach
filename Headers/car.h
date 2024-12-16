@@ -15,7 +15,7 @@ class Car {
     friend User;
     QString car_name;
     QString carImageFilePath = "";
-    std::string car_gov_number;
+    QString car_gov_number;
     int car_year;
     int car_mileage = 0;
     int car_tank_volume;
@@ -29,8 +29,8 @@ public:
     void setCarFuelType(FUEL_TYPE new_fuel_type);
     FUEL_TYPE getCarFuelType() const;
     Statistics &getCarStatistics();
-    std::string getCarGovNumber() const;
-    void setCarGovNumber(std::string_view new_car_gov_number);
+    QString getCarGovNumber() const;
+    void setCarGovNumber(QString new_car_gov_number);
     int getCarMileage() const;
     void setCarMileage(unsigned int new_car_mileage);
 
@@ -45,7 +45,6 @@ public:
     std::vector<std::shared_ptr<Event>> &getEventList();
     void deleteEventList();
     void deleteEventListElement();
-    std::string FuelTypeToStringFun(FUEL_TYPE name);
 
     void addEvent(int new_event_type, QString new_event_name, QString new_event_money_value, QString new_event_date, QString new_event_mileage,
                   QString new_event_comment, int new_event_service_type, int new_event_fuel_type, QString new_event_amount_of_litres, QString new_event_price_per_litre);

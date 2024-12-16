@@ -9,7 +9,7 @@
 class CustomException : public CarException, public EventException{
 
 public:
-    QString callException(QString exceptionType, QString exceptionFieldError){
+    QString callException(QString exceptionType, QString exceptionFieldError) const{
         if (exceptionType == "carWindowException"){
             if (exceptionFieldError == "carName") {return carNameError();}
             else if (exceptionFieldError == "carYear") {return carYearError();}

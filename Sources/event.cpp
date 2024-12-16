@@ -7,21 +7,21 @@ using namespace std;
 void Event::setEvent(int new_event_type, QString new_event_name, QString new_event_money_value, QString new_event_date, QString new_event_mileage,
                      QString new_event_comment){
     event_type = static_cast<CONSUMPTION_NAME>(new_event_type);
-    event_name = new_event_name.toStdString();
+    event_name = new_event_name;
     moneyValue = new_event_money_value.toFloat();
     event_date = Date::VariantToDate(new_event_date);
     car_mileage = new_event_mileage.toInt();
-    event_comment = new_event_comment.toStdString();
+    event_comment = new_event_comment;
 
 }
 
 
-std::string Event::getEventName() const
+QString Event::getEventName() const
 {
     return event_name;
 }
 
-void Event::setEventName(const std::string &newEvent_name)
+void Event::setEventName(const QString &newEvent_name)
 {
     event_name = newEvent_name;
 }
@@ -63,10 +63,10 @@ void Event::setEventType(CONSUMPTION_NAME consumption) {
 CONSUMPTION_NAME Event::getEventType() const {
     return event_type;
 }
-void Event::setEventComment(const string comment) {
+void Event::setEventComment(const QString &comment) {
     event_comment = comment;
 }
-string Event::getEventComment() const {
+QString Event::getEventComment() const {
     return event_comment;
 }
 
