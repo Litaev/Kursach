@@ -49,7 +49,7 @@ QVariant Date::getDate() const{
 }
 QVariant Date::DateToVariant(const Date& date) {
     QString sDay = QString::fromStdString(std::to_string(date.day));
-    QString sMonth = QString::fromStdString(std::to_string(date.month));
+    QString sMonth = QString::fromStdString(std::to_string(date.month + 1));
     QString sYear = QString::fromStdString(std::to_string(date.year));
     QString sHour = QString::fromStdString(std::to_string(date.hour));
     QString sMinute = QString::fromStdString(std::to_string(date.minute));
@@ -65,7 +65,7 @@ Date Date::VariantToDate(const QVariant& var) {
     Date date;
     if (parts.size() == 4) {
         date.day = parts[0].toInt();
-        date.month = parts[1].toInt();
+        date.month = parts[1].toInt() - 1;
         date.year = parts[2].toInt();
         QStringList time = parts[3].split(":");
         date.hour = time[0].toInt();

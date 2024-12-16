@@ -21,7 +21,7 @@ int User::getNowDate(QString type) const{
     Date now_date;
     now_date.setNowDate();
     if (type == "day") return now_date.getDay();
-    else if(type == "month") return now_date.getMonth();
+    else if(type == "month") return now_date.getMonth() + 1;
     else if(type == "year") return now_date.getYear();
     else if(type == "hour") return now_date.getHour();
     else if(type == "minute") return now_date.getMinute();
@@ -72,7 +72,7 @@ QString User::getInfoAboutEvent(int car_index, int event_index, QString info_typ
 
 
     else if (info_type == "eventYear") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getYear());}
-    else if (info_type == "eventMonth") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getMonth());}
+    else if (info_type == "eventMonth") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getMonth() + 1);}
     else if (info_type == "eventDay") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getDay());}
     else if (info_type == "eventHour") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getHour());}
     else if (info_type == "eventMinute") {return QString::number(car_list[car_index]->getEventList()[event_index]->getEventDate().getMinute());}
@@ -314,5 +314,12 @@ void User::sortChosenCarEventListMax(QString sortType){
 }
 
 
+std::vector<std::shared_ptr<Event>> &User::getChosenCarEventList(){
+    return car_list[chosen_car_id]->getEventList();
+}
+
+int User::getChosenCarTankVolume(){
+    return car_list[chosen_car_id]->getCarTankVolume();
+}
 
 

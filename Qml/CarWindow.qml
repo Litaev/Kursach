@@ -11,24 +11,23 @@ Item {
     width: parent.width
     height: parent.height
 
+    property int isCarNameGood: 0
+    property int isCarYearGood: 0
+    property int isCarMileageGood: 0
+    property int isCarTankVolumeGood: 0
 
     function confirmAction(){
-        if (carNameTextField.text != "" && carYearTextField.text != "" && carMileageTextField.text != "" && carTankTextField.text != ""){
+        if (isCarNameGood + isCarYearGood + isCarMileageGood + isCarTankVolumeGood == 0){
             if (status.isEditCar == false){
                 user.addCar(carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
-
                 chooseCarWindow.updateModel();
-
-
-                stackView.pop();
             }
             else{
                 user.editChosenCarInfo(user.getChosenCarId(), carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
-
                 chooseCarWindow.updateModel();
                 _loader.reload();
-                stackView.pop();
             }
+            stackView.pop();
             user.saveUserData();
         }
         else{
@@ -41,8 +40,13 @@ Item {
         y: (parent.height - height) / 2
         title: qsTr("ERROR")
         Label {
-            text: qsTr("Data is not full")
+            id: errorDialogLabel
+            text: qsTr("Data is INCORRECT")
         }
+    }
+    ToolTip{
+        id: toolTip
+        text: "ERROR"
     }
 
     Rectangle{
@@ -143,6 +147,20 @@ Item {
                 text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "name") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
+                onEditingFinished:{
+                    if (myValidator.validateCarWindow("0", "carName", carNameTextField.text) == "1"){
+                        carWindowItem.isCarNameGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateCarWindow("1", "carName", carNameTextField.text);
+                        toolTip.open();
+                        carNameTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateCarWindow("0", "carName", carNameTextField.text) == "0"){
+                        carWindowItem.isCarNameGood = 0;
+                        carNameTextField.color = "#000000"
+                    }
+                }
             }
         }
 
@@ -190,6 +208,20 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
+                onEditingFinished:{
+                    if (myValidator.validateCarWindow("0", "carYear", carYearTextField.text) == "1"){
+                        carWindowItem.isCarYearGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateCarWindow("1", "carYear", carYearTextField.text);
+                        toolTip.open();
+                        carYearTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateCarWindow("0", "carYear", carYearTextField.text) == "0"){
+                        carWindowItem.isCarYearGood = 0;
+                        carYearTextField.color = "#000000"
+                    }
+                }
             }
         }
     }
@@ -236,6 +268,20 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
+                onEditingFinished:{
+                    if (myValidator.validateCarWindow("0", "carMileage", carMileageTextField.text) == "1"){
+                        carWindowItem.isCarMileageGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateCarWindow("1", "carMileage", carMileageTextField.text);
+                        toolTip.open();
+                        carMileageTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateCarWindow("0", "carMileage", carMileageTextField.text) == "0"){
+                        carWindowItem.isCarMileageGood = 0;
+                        carMileageTextField.color = "#000000"
+                    }
+                }
             }
         }
 
@@ -328,6 +374,21 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
+                onEditingFinished:{
+                    if (myValidator.validateCarWindow("0", "carTankVolume", carTankTextField.text) == "1"){
+                        carWindowItem.isCarTankVolumeGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateCarWindow("1", "carTankVolume", carTankTextField.text);
+                        toolTip.open();
+                        carTankTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateCarWindow("0", "carTankVolume", carTankTextField.text) == "0"){
+                        carWindowItem.isCarTankVolumeGood = 0;
+                        carTankTextField.color = "#000000"
+
+                    }
+                }
             }
         }
 

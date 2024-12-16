@@ -12,7 +12,7 @@
 #include <QFileDialog>
 #include <QtCore/private/qandroidextras_p.h>
 
-
+#include "Headers/validator.h"
 
 
 
@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("$QmlEngine", &engine);
     User user;
+    Validator validator;
     user.loadUserData();
     CarListElementModel carListModel(&app);
     EventListElementModel eventListModel(&app);
@@ -33,6 +34,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("user", &user);
     engine.rootContext()->setContextProperty("chooseCarWindow", &chooseCarWindow);
     engine.rootContext()->setContextProperty("eventsWindow", &serviceWindow);
+    engine.rootContext()->setContextProperty("myValidator", &validator);
     engine.rootContext()->setContextProperty("carListElementModel", QVariant::fromValue(&carListModel));
     engine.rootContext()->setContextProperty("eventListElementModel", QVariant::fromValue(&eventListModel));
 

@@ -14,6 +14,7 @@ qt_add_executable(apptest11
     Sources/main.cpp
     Sources/carListElementModel.cpp Headers/carListElementModel.h
     Sources/eventListElementModel.cpp Headers/eventListElementModel.h
+    Headers/validator.h
 
 )
 
@@ -53,6 +54,10 @@ qt_add_qml_module(apptest11
         QML_FILES Qml/DatePicker.qml
         RESOURCES icons/time_black_icon.png icons/time_white_icon.png
         RESOURCES icons/sortBigger_black_icon.png icons/sortBigger_white_icon.png icons/sortSmaller_black_icon.png icons/sortSmaller_white_icon.png
+
+        SOURCES Headers/exception.h
+        SOURCES Headers/carException.h
+        SOURCES Headers/eventException.h
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

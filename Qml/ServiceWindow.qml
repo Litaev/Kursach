@@ -9,34 +9,29 @@ Item{
     width: parent.width
     height: parent.height
 
+    property int isEventNameGood: 0
+    property int isEventPriceGood: 0
+    property int isEventMileageGood: 0
+    property int isEventDateGood: 0
+    property int isEventTimeGood: 0
+
 
     function confirmAction(){
-        if (status.isEditService == false){
-            if (serviceNameTextField.text != "" && servicePriceTextField.text != "" && serviceMileageTextField.text != ""){
+        if (isEventNameGood + isEventPriceGood + isEventMileageGood + isEventDateGood + isEventTimeGood == 0){
+            if (status.isEditService == false){
                 user.addEvent(0, serviceNameTextField.text, servicePriceTextField.text, serviceDateButton.text + "-" + serviceTimeButton.text, serviceMileageTextField.text, serviceCommentTextField.text, serviceTypeComboBox.currentIndex, "", "");
-                user.saveUserData();
-                eventsWindow.updateModel();
-                _loader.reload();
-                stackView.pop();
             }
             else{
-                errorDialog.open();
+                user.editChosenEventInfo(status.chosenEventId, 0, serviceNameTextField.text, servicePriceTextField.text, serviceDateButton.text + "-" + serviceTimeButton.text, serviceMileageTextField.text, serviceCommentTextField.text, "", "", "", serviceTypeComboBox.currentIndex);
             }
+            user.saveUserData();
+            eventsWindow.updateModel();
+            _loader.reload();
+            stackView.pop();
         }
         else{
-            if (serviceNameTextField.text != "" && servicePriceTextField.text != "" && serviceMileageTextField.text != ""){
-
-                user.editChosenEventInfo(status.chosenEventId, 0, serviceNameTextField.text, servicePriceTextField.text, serviceDateButton.text + "-" + serviceTimeButton.text, serviceMileageTextField.text, serviceCommentTextField.text, "", "", "", serviceTypeComboBox.currentIndex);
-                user.saveUserData();
-                eventsWindow.updateModel();
-                _loader.reload();
-                stackView.pop();
-            }
-            else{
-                errorDialog.open();
-            }
+            errorDialog.open();
         }
-
     }
 
     Dialog {
@@ -47,6 +42,10 @@ Item{
         Label {
             text: qsTr("Data is not full")
         }
+    }
+    ToolTip{
+        id: toolTip
+        text: "ERROR"
     }
 
     Rectangle{
@@ -194,6 +193,20 @@ Item{
                 text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "name") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
+                onEditingFinished:{
+                    if (myValidator.validateEventWindow("0", "eventName", serviceNameTextField.text, user.getChosenCarTankVolume()) == "1"){
+                        serviceWindowItem.isEventNameGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateEventWindow("1", "eventName", serviceNameTextField.text, user.getChosenCarTankVolume());
+                        toolTip.open();
+                        serviceNameTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateEventWindow("0", "eventName", serviceNameTextField.text, user.getChosenCarTankVolume()) == "0"){
+                        serviceWindowItem.isEventNameGood = 0;
+                        serviceNameTextField.color = "#000000"
+                    }
+                }
             }
         }
     }
@@ -240,6 +253,21 @@ Item{
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
+
+                onEditingFinished:{
+                    if (myValidator.validateEventWindow("0", "eventPrice", servicePriceTextField.text, user.getChosenCarTankVolume()) == "1"){
+                        serviceWindowItem.isEventPriceGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateEventWindow("1", "eventPrice", servicePriceTextField.text, user.getChosenCarTankVolume());
+                        toolTip.open();
+                        servicePriceTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateEventWindow("0", "eventPrice", servicePriceTextField.text, user.getChosenCarTankVolume()) == "0"){
+                        serviceWindowItem.isEventPriceGood = 0;
+                        servicePriceTextField.color = "#000000"
+                    }
+                }
             }
         }
 
@@ -288,6 +316,21 @@ Item{
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
+
+                onEditingFinished:{
+                    if (myValidator.validateEventWindow("0", "eventMileage", serviceMileageTextField.text, user.getChosenCarTankVolume()) == "1"){
+                        serviceWindowItem.isEventMileageGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateEventWindow("1", "eventMileage", serviceMileageTextField.text, user.getChosenCarTankVolume());
+                        toolTip.open();
+                        serviceMileageTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateEventWindow("0", "eventMileage", serviceMileageTextField.text, user.getChosenCarTankVolume()) == "0"){
+                        serviceWindowItem.isEventMileageGood = 0;
+                        serviceMileageTextField.color = "#000000"
+                    }
+                }
             }
         }
     }
@@ -371,12 +414,44 @@ Item{
             anchors.leftMargin: 5
             anchors.right: parent.right
             anchors.rightMargin: 5
-            text: mainWindow.day + "-" + (mainWindow.month + 1) + "-" + mainWindow.year
+            text: {
+                if (mainWindow.day < 10){
+                    if(mainWindow.month < 10){
+                        "0" + mainWindow.day + "-" + "0" + mainWindow.month + "-" + mainWindow.year
+                    }
+                    else {
+                        "0" + mainWindow.day + "-" + mainWindow.month + "-" + mainWindow.year
+                    }
+                }
+                else{
+                    if(mainWindow.month < 10){
+                        mainWindow.day + "-" + "0" + mainWindow.month + "-" + mainWindow.year
+                    }
+                    else {
+                        mainWindow.day + "-" + mainWindow.month + "-" + mainWindow.year
+                    }
+                }
+            }
             anchors.horizontalCenter: parent.horizontalCenter
             font.pointSize: 16
             onClicked:{
                 datePicker.open();
             }
+            onTextChanged:{
+                if (myValidator.validateEventWindow("0", "eventDate", serviceDateButton.text + "-" + serviceTimeButton.text, user.getChosenCarTankVolume()) == "1"){
+                    serviceWindowItem.isEventDateGood = 1;
+                    toolTip.timeout = 5000;
+                    toolTip.visible = true;
+                    toolTip.text = myValidator.validateEventWindow("1", "eventDate", serviceDateButton.text + "-" + serviceTimeButton.text, user.getChosenCarTankVolume());
+                    toolTip.open();
+
+                }
+                else if (myValidator.validateEventWindow("0", "eventDate", serviceDateButton.text + "-" + serviceTimeButton.text, user.getChosenCarTankVolume()) == "0"){
+                    serviceWindowItem.isEventDateGood = 0;
+
+                }
+            }
+
         }
         DatePicker{
             id: datePicker
@@ -442,6 +517,7 @@ Item{
             onClicked:{
                 timePicker.open();
             }
+
         }
 
         TimePicker{

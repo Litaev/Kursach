@@ -24,7 +24,7 @@ Dialog {
     property color calendarUnselectableNumberColor: "gray"
     property int topBarFontPointSize: 18
     property int minSelectableYear: 1970
-    property int maxSelectableYear: (new Date().getFullYear() + 50)
+    property int maxSelectableYear: (new Date().getFullYear())
     property int minSelectableMonth: 0
     property int maxSelectableMonth: 11
     property int minSelectableDay: 1
@@ -34,6 +34,7 @@ Dialog {
 
 
     onAboutToShow: {
+        mainWindow.month -= 1;
         if(minSelectableYear < 1970) minSelectableYear = 1970;
         if(maxSelectableYear < 1970) maxSelectableYear = 1970;
         if(mainWindow.year < 1970) mainWindow.year = 1970;
@@ -61,6 +62,7 @@ Dialog {
     }
     onClosed: {
         dateComponentLoader.sourceComponent = null;
+        mainWindow.month += 1;
     }
 
     Timer {

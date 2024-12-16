@@ -10,11 +10,11 @@ ApplicationWindow{
     height: 780
     visible: true
 
-    property int hour: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventHour"));
-    property int minute: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventMinute"));
-    property int year: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventYear"));
-    property int month: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventMonth"));
-    property int day: parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "eventDay"));
+    property int hour: 0;
+    property int minute: 0;
+    property int year: 1970;
+    property int month: 0;
+    property int day: 1;
 
     onClosing:{
         close.accepted = false;

@@ -9,36 +9,27 @@ Item {
     width: parent.width
     height: parent.height
 
+    property int isEventPriceGood: 0
+    property int isEventLitreAmountGood: 0
+    property int isEventDateGood: 0
+    property int isEventTimeGood: 0
+    property int isEventMileageGood: 0
 
     function confirmAction(){
-        if (status.isEditRefueling == false){
-            if (refuelingLitreAmountTextField.text != "" && pricePerLitreTextField.text != "" && refuelingMileageTextField.text != ""|| pricePerLitreTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != "" || refuelingLitreAmountTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != ""){
-
+        if (isEventPriceGood + isEventLitreAmountGood + isEventDateGood + isEventTimeGood + isEventMileageGood == 0){
+            if (status.isEditRefueling == false){
                 user.addEvent(1, "Refueling", refuelingPriceTextField.text, refuelingDateButton.text + "-" + refuelingTimeButton.text, refuelingMileageTextField.text, refuelingCommentTextField.text, 0, refuelingLitreAmountTextField.text, pricePerLitreTextField.text);
-
-                user.saveUserData();
-
-                eventsWindow.updateModel();
-                _loader.reload();
-                stackView.pop();
             }
             else{
-                errorDialog.open();
+                user.editChosenEventInfo(status.chosenEventId, 1, "Refueling", refuelingPriceTextField.text, refuelingDateButton.text + "-" + refuelingTimeButton.text, refuelingMileageTextField.text, refuelingCommentTextField.text, refuelingLitreAmountTextField.text, pricePerLitreTextField.text, 0);
             }
+            user.saveUserData();
+            eventsWindow.updateModel();
+            _loader.reload();
+            stackView.pop();
         }
         else{
-            if (refuelingLitreAmountTextField.text != "" && pricePerLitreTextField.text != "" && refuelingMileageTextField.text != ""|| pricePerLitreTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != "" || refuelingLitreAmountTextField.text != "" && refuelingPriceTextField.text != "" && refuelingMileageTextField.text != ""){
-
-                user.editChosenEventInfo(status.chosenEventId, 1, "Refueling", refuelingPriceTextField.text, refuelingDateButton.text + "-" + refuelingTimeButton.text, refuelingMileageTextField.text, refuelingCommentTextField.text, refuelingLitreAmountTextField.text, pricePerLitreTextField.text, 0);
-
-                user.saveUserData();
-                eventsWindow.updateModel();
-                _loader.reload();
-                stackView.pop();
-            }
-            else{
-                errorDialog.open();
-            }
+            errorDialog.open();
         }
 
     }
@@ -52,6 +43,10 @@ Item {
         Label {
             text: qsTr("Data is not full")
         }
+    }
+    ToolTip{
+        id: toolTip
+        text: "ERROR"
     }
 
     Rectangle{
@@ -167,10 +162,23 @@ Item {
                         if (!isNaN(parseFloat(refuelingPriceTextField.text)/parseFloat(refuelingLitreAmountTextField.text))){
                             pricePerLitreTextField.text = (parseFloat(refuelingPriceTextField.text)/parseFloat(refuelingLitreAmountTextField.text)).toFixed(2)
                         }
-
-
                     }
+
+                    if (myValidator.validateEventWindow("0", "eventLitreAmount", refuelingLitreAmountTextField.text, user.getChosenCarTankVolume()) == "1"){
+                        refuelingWindowItem.isEventLitreAmountGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateEventWindow("1", "eventLitreAmount", refuelingLitreAmountTextField.text, user.getChosenCarTankVolume());
+                        toolTip.open();
+                        refuelingLitreAmountTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateEventWindow("0", "eventLitreAmount", refuelingLitreAmountTextField.text, user.getChosenCarTankVolume()) == "0"){
+                        refuelingWindowItem.isEventLitreAmountGood = 0;
+                        refuelingLitreAmountTextField.color = "#000000"
+                    }
+
                 }
+
 
             }
         }
@@ -282,6 +290,20 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
+                onEditingFinished:{
+                    if (myValidator.validateEventWindow("0", "eventMileage", refuelingMileageTextField.text, user.getChosenCarTankVolume()) == "1"){
+                        refuelingWindowItem.isEventMileageGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateEventWindow("1", "eventMileage", refuelingMileageTextField.text, user.getChosenCarTankVolume());
+                        toolTip.open();
+                        refuelingMileageTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateEventWindow("0", "eventMileage", refuelingMileageTextField.text, user.getChosenCarTankVolume()) == "0"){
+                        refuelingWindowItem.isEventMileageGood = 0;
+                        refuelingMileageTextField.color = "#000000"
+                    }
+                }
             }
         }
 
@@ -340,6 +362,19 @@ Item {
                         if (!isNaN(parseFloat(refuelingPriceTextField.text)/parseFloat(pricePerLitreTextField.text))){
                             refuelingLitreAmountTextField.text = (parseFloat(refuelingPriceTextField.text)/parseFloat(pricePerLitreTextField.text)).toFixed(2)
                         }
+                    }
+
+                    if (myValidator.validateEventWindow("0", "eventPrice", refuelingPriceTextField.text, user.getChosenCarTankVolume()) == "1"){
+                        refuelingWindowItem.isEventPriceGood = 1;
+                        toolTip.timeout = 5000;
+                        toolTip.visible = true;
+                        toolTip.text = myValidator.validateEventWindow("1", "eventPrice", refuelingPriceTextField.text, user.getChosenCarTankVolume());
+                        toolTip.open();
+                        refuelingPriceTextField.color = "#da2c38"
+                    }
+                    else if (myValidator.validateEventWindow("0", "eventPrice", refuelingPriceTextField.text, user.getChosenCarTankVolume()) == "0"){
+                        refuelingWindowItem.isEventPriceGood = 0;
+                        refuelingPriceTextField.color = "#000000"
                     }
                 }
 
@@ -427,11 +462,45 @@ Item {
             anchors.leftMargin: 5
             anchors.right: parent.right
             anchors.rightMargin: 5
-            text: mainWindow.day + "-" + (mainWindow.month + 1) + "-" + mainWindow.year
+
+            text: {
+                if (mainWindow.day < 10){
+                    if(mainWindow.month  < 10){
+                        "0" + mainWindow.day + "-" + "0" + mainWindow.month + "-" + mainWindow.year
+                    }
+                    else {
+                        "0" + mainWindow.day + "-" + mainWindow.month + "-" + mainWindow.year
+                    }
+                }
+                else{
+                    if((mainWindow.month + 1) < 10){
+                        mainWindow.day + "-" + "0" + mainWindow.month + "-" + mainWindow.year
+                    }
+                    else {
+                        mainWindow.day + "-" + mainWindow.month + "-" + mainWindow.year
+                    }
+                }
+            }
+
             anchors.horizontalCenter: parent.horizontalCenter
             font.pointSize: 16
             onClicked:{
                 datePicker.open();
+
+            }
+            onTextChanged:{
+                if (myValidator.validateEventWindow("0", "eventDate", refuelingDateButton.text + "-" + refuelingTimeButton.text, user.getChosenCarTankVolume()) == "1"){
+                    refuelingWindowItem.isEventDateGood = 1;
+                    toolTip.timeout = 5000;
+                    toolTip.visible = true;
+                    toolTip.text = myValidator.validateEventWindow("1", "eventDate", refuelingDateButton.text + "-" + refuelingTimeButton.text, user.getChosenCarTankVolume());
+                    toolTip.open();
+
+                }
+                else if (myValidator.validateEventWindow("0", "eventDate", refuelingDateButton.text + "-" + refuelingTimeButton.text, user.getChosenCarTankVolume()) == "0"){
+                    refuelingWindowItem.isEventDateGood = 0;
+
+                }
             }
         }
         DatePicker{
@@ -498,6 +567,8 @@ Item {
             onClicked:{
                 timePicker.open();
             }
+
+
         }
 
         TimePicker{

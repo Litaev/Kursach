@@ -51,6 +51,10 @@ public:
 
     Q_INVOKABLE int getNowDate(QString type) const;
 
+    Q_INVOKABLE std::vector<std::shared_ptr<Event>> &getChosenCarEventList();
+
+    Q_INVOKABLE int getChosenCarTankVolume();
+
     float getUserMoneySpent() const;
 
     static bool compEventListMinByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
