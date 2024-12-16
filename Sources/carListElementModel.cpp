@@ -61,10 +61,11 @@ void CarListElementModel::resetModel(User *user){
 QHash<int, QByteArray> CarListElementModel::roleNames() const{
 
     QHash<int, QByteArray> roles;
-    roles[std::to_underlying(CarListElementRoles::NameRole)] = "name";
-    roles[std::to_underlying(CarListElementRoles::ImagePathRole)] = "imagePath";
-    roles[std::to_underlying(CarListElementRoles::YearRole)] = "year";
-    roles[std::to_underlying(CarListElementRoles::MileageRole)] = "mileage";
+    using enum CarListElementRoles;
+    roles[std::to_underlying(NameRole)] = "name";
+    roles[std::to_underlying(ImagePathRole)] = "imagePath";
+    roles[std::to_underlying(YearRole)] = "year";
+    roles[std::to_underlying(MileageRole)] = "mileage";
     return roles;
 }
 

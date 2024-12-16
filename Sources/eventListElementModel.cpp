@@ -84,12 +84,13 @@ void EventListElementModel::resetEventsModel(User *user){
 QHash<int, QByteArray> EventListElementModel::roleNames() const{
 
     QHash<int, QByteArray> roles;
-    roles[std::to_underlying(EventListElementRoles::EventTypeRole)] = "event_type";
-    roles[std::to_underlying(EventListElementRoles::EventNameRole)] = "event_name";
-    roles[std::to_underlying(EventListElementRoles::EventPriceRole)] = "event_price";
-    roles[std::to_underlying(EventListElementRoles::EventMileageRole)] = "event_mileage";
-    roles[std::to_underlying(EventListElementRoles::EventDateRole)] = "event_date";
-    roles[std::to_underlying(EventListElementRoles::EventServiceTypeRole)] = "event_service_type";
+    using enum EventListElementRoles;
+    roles[std::to_underlying(EventTypeRole)] = "event_type";
+    roles[std::to_underlying(EventNameRole)] = "event_name";
+    roles[std::to_underlying(EventPriceRole)] = "event_price";
+    roles[std::to_underlying(EventMileageRole)] = "event_mileage";
+    roles[std::to_underlying(EventDateRole)] = "event_date";
+    roles[std::to_underlying(EventServiceTypeRole)] = "event_service_type";
     return roles;
 }
 

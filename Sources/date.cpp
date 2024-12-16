@@ -31,7 +31,8 @@ void Date::setDay(int new_day){
 void Date::setNowDate(){
     auto now = std::chrono::system_clock::now();
     std::time_t now_c = std::chrono::system_clock::to_time_t(now);
-    std::tm local_time = *std::localtime(&now_c);
+    std::tm local_time;
+    localtime_r(&now_c, &local_time);
     minute = local_time.tm_min;
     hour = local_time.tm_hour;
     day = local_time.tm_mday;
