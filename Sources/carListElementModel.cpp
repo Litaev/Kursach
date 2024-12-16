@@ -10,7 +10,8 @@ void CarListElementModel::addCarListElement(CarListElement CarListElement){
 }
 int CarListElementModel::rowCount(const QModelIndex &parent) const{
 
-    Q_UNUSED(parent);
+    Q_UNUSED(parent)
+
     return carList.count();
 }
 QVariant CarListElementModel::data(const QModelIndex &index, int role) const{
@@ -20,13 +21,14 @@ QVariant CarListElementModel::data(const QModelIndex &index, int role) const{
 
     const CarListElement &carListElement = carList[index.row()];
     switch (static_cast<CarListElementRoles>(role)) {
-    case CarListElementRoles::NameRole:
+        using enum CarListElementRoles;
+    case NameRole:
         return carListElement.getName();
-    case CarListElementRoles::ImagePathRole:
+    case ImagePathRole:
         return carListElement.getImagePath();
-    case CarListElementRoles::YearRole:
+    case YearRole:
         return carListElement.getYear();
-    case CarListElementRoles::MileageRole:
+    case MileageRole:
         return carListElement.getMileage();
     default:
         return {};
@@ -45,11 +47,11 @@ void CarListElementModel::resetModel(User *user){
     carList.clear();
     std::vector<std::shared_ptr<Car>> this_car_list = user->getCarList();
 
-    for(int i  = 0; i < user->getCarListSize(); i++){
-        QString this_car_name = this_car_list[i]->getCarName();
-        QString this_image_path = this_car_list[i]->getCarImageFilePath();
-        int this_car_year = this_car_list[i]->getCarYear();
-        int this_car_mileage = this_car_list[i]->getCarMileage();
+    for(const auto &car : this_car_list){
+        QString this_car_name = car->getCarName();
+        QString this_image_path = car->getCarImageFilePath();
+        int this_car_year = car->getCarYear();
+        int this_car_mileage = car->getCarMileage();
         addCarListElement(CarListElement(this_car_name, this_image_path, this_car_year, this_car_mileage));
     }
 
@@ -59,10 +61,10 @@ void CarListElementModel::resetModel(User *user){
 QHash<int, QByteArray> CarListElementModel::roleNames() const{
 
     QHash<int, QByteArray> roles;
-    roles[static_cast<int>(CarListElementRoles::NameRole)] = "name";
-    roles[static_cast<int>(CarListElementRoles::ImagePathRole)] = "imagePath";
-    roles[static_cast<int>(CarListElementRoles::YearRole)] = "year";
-    roles[static_cast<int>(CarListElementRoles::MileageRole)] = "mileage";
+    roles[std::to_underlying(CarListElementRoles::NameRole)] = "name";
+    roles[std::to_underlying(CarListElementRoles::ImagePathRole)] = "imagePath";
+    roles[std::to_underlying(CarListElementRoles::YearRole)] = "year";
+    roles[std::to_underlying(CarListElementRoles::MileageRole)] = "mileage";
     return roles;
 }
 

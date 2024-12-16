@@ -84,6 +84,6 @@ long int Date::getDateForSort() const{
     tm.tm_hour = hour;
     tm.tm_min = minute;
     std::time_t time = std::mktime(&tm) / 60;
-    return static_cast<long int>(time);
+    return time;
 
 }

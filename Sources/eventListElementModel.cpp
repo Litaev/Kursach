@@ -12,7 +12,9 @@ void EventListElementModel::addEventListElement(EventListElement EventListElemen
 
 
 int EventListElementModel::rowCount(const QModelIndex &parent) const{
-    Q_UNUSED(parent);
+
+    Q_UNUSED(parent)
+
     return eventList.count();
 }
 
@@ -25,17 +27,18 @@ QVariant EventListElementModel::data(const QModelIndex &index, int role) const{
 
 
     switch (static_cast<EventListElementRoles>(role)) {
-    case EventListElementRoles::EventTypeRole:
+        using enum EventListElementRoles;
+    case EventTypeRole:
         return eventListElement.getEventType();
-    case EventListElementRoles::EventNameRole:
+    case EventNameRole:
         return eventListElement.getEventName();
-    case EventListElementRoles::EventPriceRole:
+    case EventPriceRole:
         return eventListElement.getPrice();
-    case EventListElementRoles::EventMileageRole:
+    case EventMileageRole:
         return eventListElement.getMileage();
-    case EventListElementRoles::EventDateRole:
+    case EventDateRole:
         return eventListElement.getDate();
-    case EventListElementRoles::EventServiceTypeRole:
+    case EventServiceTypeRole:
         return eventListElement.getServiceType();
     default:
         return {};
@@ -59,16 +62,16 @@ void EventListElementModel::resetEventsModel(User *user){
     eventList.clear();
     if (user->getCarListSize() > 0){
         std::vector<std::shared_ptr<Event>> this_event_list = user->getCarList()[user->getChosenCarId()]->getEventList();
-        for(int i  = 0; i < this_event_list.size(); i++){
+        for(const auto &event : this_event_list){
 
-            int this_event_type = std::to_underlying(this_event_list[i]->getEventType());
-            QString this_name = this_event_list[i]->getEventName();
-            float this_price = this_event_list[i]->getMoneyValue();
-            int this_mileage = this_event_list[i]->getCarMileage();
-            QString this_date = Date::DateToVariant(this_event_list[i]->getEventDate()).toString();
+            int this_event_type = std::to_underlying(event->getEventType());
+            QString this_name = event->getEventName();
+            float this_price = event->getMoneyValue();
+            int this_mileage = event->getCarMileage();
+            QString this_date = Date::DateToVariant(event->getEventDate()).toString();
             int this_service_type = 0;
             if (static_cast<CONSUMPTION_NAME>(this_event_type) == CONSUMPTION_NAME::SERVICE){
-                this_service_type = std::to_underlying(this_event_list[i]->getServiceType());
+                this_service_type = std::to_underlying(event->getServiceType());
             }
 
             addEventListElement(EventListElement(this_event_type, this_name, this_price, this_mileage, this_date, this_service_type));
@@ -81,12 +84,12 @@ void EventListElementModel::resetEventsModel(User *user){
 QHash<int, QByteArray> EventListElementModel::roleNames() const{
 
     QHash<int, QByteArray> roles;
-    roles[static_cast<int>(EventListElementRoles::EventTypeRole)] = "event_type";
-    roles[static_cast<int>(EventListElementRoles::EventNameRole)] = "event_name";
-    roles[static_cast<int>(EventListElementRoles::EventPriceRole)] = "event_price";
-    roles[static_cast<int>(EventListElementRoles::EventMileageRole)] = "event_mileage";
-    roles[static_cast<int>(EventListElementRoles::EventDateRole)] = "event_date";
-    roles[static_cast<int>(EventListElementRoles::EventServiceTypeRole)] = "event_service_type";
+    roles[std::to_underlying(EventListElementRoles::EventTypeRole)] = "event_type";
+    roles[std::to_underlying(EventListElementRoles::EventNameRole)] = "event_name";
+    roles[std::to_underlying(EventListElementRoles::EventPriceRole)] = "event_price";
+    roles[std::to_underlying(EventListElementRoles::EventMileageRole)] = "event_mileage";
+    roles[std::to_underlying(EventListElementRoles::EventDateRole)] = "event_date";
+    roles[std::to_underlying(EventListElementRoles::EventServiceTypeRole)] = "event_service_type";
     return roles;
 }
 

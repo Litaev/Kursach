@@ -296,19 +296,19 @@ bool User::compEventListMaxByPrice(const std::shared_ptr<Event> &event1, const s
 
 void User::sortChosenCarEventListMin(QString sortType){
     if (sortType == "date"){
-        std::ranges::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMinByDate);
+        std::ranges::sort(car_list[chosen_car_id]->getEventList(), compEventListMinByDate);
     }
     else if (sortType == "price"){
-        std::ranges::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMinByPrice);
+        std::ranges::sort(car_list[chosen_car_id]->getEventList(), compEventListMinByPrice);
     }
 
 }
 void User::sortChosenCarEventListMax(QString sortType){
     if (sortType == "date"){
-        std::ranges::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMaxByDate);
+        std::ranges::sort(car_list[chosen_car_id]->getEventList(), compEventListMaxByDate);
     }
     else if (sortType == "price"){
-        std::ranges::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMaxByPrice);
+        std::ranges::sort(car_list[chosen_car_id]->getEventList(), compEventListMaxByPrice);
     }
 
 }
