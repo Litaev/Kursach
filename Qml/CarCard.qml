@@ -17,7 +17,16 @@ ApplicationWindow{
     property int day: 1;
 
     onClosing:{
-        close.accepted = false;
+        if (stackView.depth == 1){
+           initWindow.close()
+        }
+
+        else{
+            stackView.pop()
+            _loader.reload()
+        }
+
+
     }
     Component.onCompleted: {
         if (user.getCarListSize() == 0){

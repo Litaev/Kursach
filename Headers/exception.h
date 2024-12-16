@@ -5,10 +5,11 @@
 #include "Headers/carException.h"
 #include "Headers/eventException.h"
 
-class Exception : public CarException, public EventException{
+
+class CustomException : public CarException, public EventException{
 
 public:
-    static QString callException(QString exceptionType, QString exceptionFieldError){
+    QString callException(QString exceptionType, QString exceptionFieldError){
         if (exceptionType == "carWindowException"){
             if (exceptionFieldError == "carName") {return carNameError();}
             else if (exceptionFieldError == "carYear") {return carYearError();}
@@ -26,6 +27,10 @@ public:
         }
         return "UNKNOWN ERROR";
     }
+    const QString what(QString exceptionType, QString exceptionFieldError) noexcept   {
+        return this->callException(exceptionType, exceptionFieldError);
+    }
+
 };
 
 #endif // EXCEPTION_H

@@ -16,43 +16,63 @@ public:
         Date nowDate;
         nowDate.setNowDate();
         if (fieldType == "carName"){
-            if (fieldData.length() > 15){
-                if (resultType == "0") return "1";
-                else if (resultType == "1"){
-                    return Exception::callException("carWindowException", "carName");
+            try {
+                if (fieldData.length() > 15){
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1"){
+                        throw CustomException();
+                    }
+                }
+                else{
+                    return "0";
                 }
             }
-            else{
-                return "0";
+            catch (CustomException e) {
+                return e.what("carWindowException", "carName");
             }
         }
         else if (fieldType == "carYear"){
-            if (fieldData.toInt() > nowDate.getYear() || fieldData.toInt() < 1950){
-                if (resultType == "0") return "1";
-                else if (resultType == "1") return Exception::callException("carWindowException", "carYear");
+            try {
+                if (fieldData.toInt() > nowDate.getYear() || fieldData.toInt() < 1950){
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1") throw CustomException();
+                }
+                else{
+                    return "0";
+                }
             }
-            else{
-                return "0";
+            catch(CustomException e) {
+                return e.what("carWindowException", "carYear");
             }
         }
         else if (fieldType == "carMileage"){
-            if (fieldData.toInt() < 0 || fieldData.toInt() > 2000000){
-                if (resultType == "0") return "1";
-                else if (resultType == "1") return Exception::callException("carWindowException", "carMileage");
+            try{
+                if (fieldData.toInt() < 0 || fieldData.toInt() > 2000000){
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1") throw CustomException();
+                }
+                else{
+                    return "0";
+                }
             }
-            else{
-                return "0";
+            catch(CustomException e) {
+                return e.what("carWindowException", "carMileage");
             }
 
         }
         else if (fieldType == "carTankVolume"){
-            if (fieldData.toInt() < 1 || fieldData.toInt() > 1000){
-                if (resultType == "0") return "1";
-                else if (resultType == "1") return Exception::callException("carWindowException", "carTankVolume");
+            try{
+                if (fieldData.toInt() < 1 || fieldData.toInt() > 1000){
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1") throw CustomException();
 
+                }
+                else{
+                    return "0";
+                }
             }
-            else{
-                return "0";
+            catch(CustomException e) {
+                return e.what("carWindowException", "carTankVolume");
             }
         }
         return "0";
@@ -62,37 +82,52 @@ public:
         Date nowDate;
         nowDate.setNowDate();
         if (fieldType == "eventName"){
-            if (fieldData.length() > 15){
-                if (resultType == "0") return "1";
-                else if (resultType == "1"){
-                    return Exception::callException("eventWindowException", "eventName");
+            try{
+                if (fieldData.length() > 15){
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1"){
+                        throw CustomException();
+                    }
+                }
+                else{
+                    return "0";
                 }
             }
-            else{
-                return "0";
+            catch(CustomException e) {
+                return e.what("eventWindowException", "eventName");
             }
         }
         else if (fieldType == "eventPrice"){
-            if (fieldData.toInt() < 0 || fieldData.toInt() > 1000000){
-                if (resultType == "0") return "1";
-                else if (resultType == "1"){
-                    return Exception::callException("eventWindowException", "eventPrice");
+            try {
+                if (fieldData.toFloat() < 0.1 || fieldData.toFloat() > 1000000){
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1"){
+                        throw CustomException();
+                    }
+                }
+                else{
+                    return "0";
                 }
             }
-            else{
-                return "0";
+            catch(CustomException e) {
+                return e.what("eventWindowException", "eventPrice");
             }
         }
 
         else if (fieldType == "eventMileage"){
-            if (fieldData.toInt() < 0 || fieldData.toInt() > 3000000){
-                if (resultType == "0") return "1";
-                else if (resultType == "1"){
-                    return Exception::callException("eventWindowException", "eventMileage");
+            try{
+                if (fieldData.toInt() < 0 || fieldData.toInt() > 3000000){
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1"){
+                        throw CustomException();
+                    }
+                }
+                else{
+                    return "0";
                 }
             }
-            else{
-                return "0";
+            catch(CustomException e) {
+                return e.what("eventWindowException", "eventMileage");
             }
         }
         else if (fieldType == "eventDate"){
@@ -100,27 +135,42 @@ public:
             chosenDate = Date::VariantToDate(fieldData);
             chosenDate.setMonth(chosenDate.getMonth());
             if (chosenDate.getYear() > nowDate.getYear()){
-                if (resultType == "0") return "1";
-                else if (resultType == "1"){
-                    return Exception::callException("eventWindowException", "eventDate");
+                try{
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1"){
+                        throw CustomException();
+                    }
+                }
+                catch (CustomException e) {
+                    return e.what("eventWindowException", "eventDate");
                 }
             }
             else if (chosenDate.getYear() == nowDate.getYear()){
                 if (chosenDate.getMonth() > nowDate.getMonth()){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1"){
-                        return Exception::callException("eventWindowException", "eventDate");
-                    }
-                }
-                else if (chosenDate.getMonth() == nowDate.getMonth()){
-                    if (chosenDate.getDay() > nowDate.getDay()){
+                    try{
                         if (resultType == "0") return "1";
                         else if (resultType == "1"){
-                            return Exception::callException("eventWindowException", "eventDate");
+                            throw CustomException();
                         }
                     }
-                    else{
-                        return "0";
+                    catch(CustomException e) {
+                        return e.what("eventWindowException", "eventDate");
+                    }
+                }
+                else if (chosenDate.getMonth() == nowDate.getMonth()) {
+                    try{
+                        if (chosenDate.getDay() > nowDate.getDay()){
+                            if (resultType == "0") return "1";
+                            else if (resultType == "1"){
+                                throw CustomException();
+                            }
+                        }
+                        else{
+                            return "0";
+                        }
+                    }
+                    catch (CustomException e) {
+                        return e.what("eventWindowException", "eventDate");
                     }
                 }
                 else{
@@ -131,22 +181,24 @@ public:
                 return "0";
             }
         }
-
         else if (fieldType == "eventLitreAmount"){
-            if (fieldData.toInt() > chosenCarTankVolume || fieldData.toInt() < 0){
-                if (resultType == "0") return "1";
-                else if (resultType == "1"){
-                    return Exception::callException("eventWindowException", "eventLitreAmount");
+            try{
+                if (fieldData.toInt() > chosenCarTankVolume || fieldData.toInt() < 0){
+                    if (resultType == "0") return "1";
+                    else if (resultType == "1"){
+                        throw CustomException();
+                    }
+                }
+                else{
+                    return "0";
                 }
             }
-            else{
-                return "0";
+            catch(CustomException e) {
+                return e.what("eventWindowException", "eventLitreAmount");
             }
         }
     return "0";
     }
-
-
 };
 
 #endif // VALIDATOR_H

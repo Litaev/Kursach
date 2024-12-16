@@ -7,6 +7,7 @@ import QtQuick.Controls 2.15
 
 
 ApplicationWindow {
+    id: initWindow
     width: 1080
     height: 1920
     visible: true

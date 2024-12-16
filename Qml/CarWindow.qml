@@ -11,6 +11,8 @@ Item {
     width: parent.width
     height: parent.height
 
+
+
     property int isCarNameGood: 0
     property int isCarYearGood: 0
     property int isCarMileageGood: 0
