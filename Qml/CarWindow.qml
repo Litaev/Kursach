@@ -25,7 +25,7 @@ Item {
                 chooseCarWindow.updateModel();
             }
             else{
-                user.editChosenCarInfo(user.getChosenCarId(), carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
+                user.editChosenCarInfo(carNameTextField.text, carYearTextField.text, carMileageTextField.text, carFuelTypeComboBox.currentIndex, carTankTextField.text);
                 chooseCarWindow.updateModel();
                 _loader.reload();
             }

@@ -12,7 +12,7 @@ class Validator : public QObject
 public:
 
 
-    Q_INVOKABLE QString validateCarWindow(QString resultType, QString fieldType, QString fieldData) {
+    Q_INVOKABLE QString validateCarWindow(QString resultType, QString fieldType, QString fieldData) const{
         Date nowDate;
         nowDate.setNowDate();
         if (fieldType == "carName"){
@@ -27,7 +27,7 @@ public:
                     return "0";
                 }
             }
-            catch (CustomException e) {
+            catch (CustomException &e) {
                 return e.what("carWindowException", "carName");
             }
         }
@@ -41,7 +41,7 @@ public:
                     return "0";
                 }
             }
-            catch(CustomException e) {
+            catch(CustomException &e) {
                 return e.what("carWindowException", "carYear");
             }
         }
@@ -55,7 +55,7 @@ public:
                     return "0";
                 }
             }
-            catch(CustomException e) {
+            catch(CustomException &e) {
                 return e.what("carWindowException", "carMileage");
             }
 
@@ -71,14 +71,14 @@ public:
                     return "0";
                 }
             }
-            catch(CustomException e) {
+            catch(CustomException &e) {
                 return e.what("carWindowException", "carTankVolume");
             }
         }
         return "0";
     }
 
-    Q_INVOKABLE QString validateEventWindow(QString resultType, QString fieldType, QString fieldData, int chosenCarTankVolume){
+    Q_INVOKABLE QString validateEventWindow(QString resultType, QString fieldType, QString fieldData, int chosenCarTankVolume) const{
         Date nowDate;
         nowDate.setNowDate();
         if (fieldType == "eventName"){
@@ -93,7 +93,7 @@ public:
                     return "0";
                 }
             }
-            catch(CustomException e) {
+            catch(CustomException &e) {
                 return e.what("eventWindowException", "eventName");
             }
         }
@@ -109,7 +109,7 @@ public:
                     return "0";
                 }
             }
-            catch(CustomException e) {
+            catch(CustomException &e) {
                 return e.what("eventWindowException", "eventPrice");
             }
         }
@@ -126,7 +126,7 @@ public:
                     return "0";
                 }
             }
-            catch(CustomException e) {
+            catch(CustomException &e) {
                 return e.what("eventWindowException", "eventMileage");
             }
         }
@@ -141,7 +141,7 @@ public:
                         throw CustomException();
                     }
                 }
-                catch (CustomException e) {
+                catch (CustomException &e) {
                     return e.what("eventWindowException", "eventDate");
                 }
             }
@@ -153,7 +153,7 @@ public:
                             throw CustomException();
                         }
                     }
-                    catch(CustomException e) {
+                    catch(CustomException &e) {
                         return e.what("eventWindowException", "eventDate");
                     }
                 }
@@ -169,7 +169,7 @@ public:
                             return "0";
                         }
                     }
-                    catch (CustomException e) {
+                    catch (CustomException &e) {
                         return e.what("eventWindowException", "eventDate");
                     }
                 }
@@ -193,7 +193,7 @@ public:
                     return "0";
                 }
             }
-            catch(CustomException e) {
+            catch(CustomException &e) {
                 return e.what("eventWindowException", "eventLitreAmount");
             }
         }

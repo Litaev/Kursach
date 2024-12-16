@@ -36,7 +36,7 @@ public:
     void setEvent(int new_event_type, QString new_event_name, QString new_event_money_value, QString new_event_date, QString new_event_mileage,
                   QString new_event_comment);
 
-    virtual void setFuelType(FUEL_TYPE carFuelType) {/*VIRTUAL*/ };
+    virtual void setFuelType(FUEL_TYPE carFuelType) {/*VIRTUAL*/};
     virtual FUEL_TYPE getFuelType() const { return FUEL_TYPE::DIESEL;};
     virtual void setAmountOfLitres(float amountOfLitres) {/*VIRTUAL*/ };
     virtual float getAmountOfLitres() const {return 0;}

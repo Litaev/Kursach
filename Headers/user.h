@@ -23,7 +23,7 @@ public:
     Q_INVOKABLE void addEvent(QString new_event_type, QString new_event_name, QString new_event_money_value, QString new_event_date, QString new_event_mileage,
                               QString new_event_comment, QString new_event_service_type, QString new_event_amount_of_litres, QString new_event_price_per_litre);
 
-    Q_INVOKABLE void editChosenCarInfo(int chosen_car_id, QString new_car_name, QString new_car_year, QString new_car_mileage, QString new_car_fuel_type, QString new_car_tank_volume);
+    Q_INVOKABLE void editChosenCarInfo(QString new_car_name, QString new_car_year, QString new_car_mileage, QString new_car_fuel_type, QString new_car_tank_volume);
 
     Q_INVOKABLE void editChosenEventInfo(int chosen_event_id, int event_type, QString new_event_name, QString new_event_money, QString new_event_date, QString new_event_mileage,
                                          QString new_event_comment, QString new_event_litres, QString new_event_price_per_litre, QString new_event_service_type);

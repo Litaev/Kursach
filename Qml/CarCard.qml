@@ -298,7 +298,7 @@ ApplicationWindow{
                     id: eventsSortCombobox
                     anchors.fill: parent
                     model: ["date","money"]
-                    //currentIndex: status.isEditCar ? parseInt(user.getInfoAboutCar(user.getChosenCarId(), "fuel")) : 0;
+
                 }
 
             }

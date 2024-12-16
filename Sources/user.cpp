@@ -55,7 +55,7 @@ QString User::getInfoAboutCar(int car_index, QString info_type) const{
     return "";
 }
 
-void User::editChosenCarInfo(int chosen_car_id, QString new_car_name, QString new_car_year, QString new_car_mileage, QString new_car_fuel_type, QString new_car_tank_volume){
+void User::editChosenCarInfo(QString new_car_name, QString new_car_year, QString new_car_mileage, QString new_car_fuel_type, QString new_car_tank_volume){
     car_list[chosen_car_id]->setCarName(new_car_name);
     car_list[chosen_car_id]->setCarYear(new_car_year.toInt());
     car_list[chosen_car_id]->setCarMileage(new_car_mileage.toInt());
