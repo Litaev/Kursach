@@ -85,7 +85,7 @@ QString User::getInfoAboutEvent(int car_index, int event_index, QString info_typ
     else if (info_type == "comment") {return car_list[car_index]->getEventList()[event_index]->getEventComment();}
     else if (info_type == "fuelType") {return QString::number(static_cast<float>(car_list[car_index]->getEventList()[event_index]->getFuelType()));}
     else if (info_type == "litres") {return QString::number(car_list[car_index]->getEventList()[event_index]->getAmountOfLitres());}
-    else if (info_type == "pricePerLitre") {return QString::number(static_cast<float>(car_list[car_index]->getEventList()[event_index]->getPricePerLitre()));}
+    else if (info_type == "pricePerLitre") {return QString::number(car_list[car_index]->getEventList()[event_index]->getPricePerLitre());}
     else if (info_type == "serviceType") {return QString::number(std::to_underlying(car_list[car_index]->getEventList()[event_index]->getServiceType()));}
     return "";
 }
@@ -128,7 +128,7 @@ void User::addEvent(QString new_event_type, QString new_event_name, QString new_
     }
     else if (static_cast<CONSUMPTION_NAME>(new_event_type.toInt()) == CONSUMPTION_NAME::REFUELING){
         newEvent = std::make_shared<Refueling>();
-        newEvent->setFuelType(static_cast<FUEL_TYPE>(car_list[chosen_car_id]->getCarFuelType()));
+        newEvent->setFuelType(car_list[chosen_car_id]->getCarFuelType());
         newEvent->setAmountOfLitres(new_event_amount_of_litres.toFloat());
         newEvent->setPricePerLitre(new_event_price_per_litre.toFloat());
     }
@@ -270,23 +270,23 @@ void User::loadUserData() {
 
 }
 
-bool User::compEventListMinByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2){
+bool User::compEventListMinByDate(const std::shared_ptr<Event> &event1, const std::shared_ptr<Event> &event2){
 
     return event1->getEventDate().getDateForSort() < event2->getEventDate().getDateForSort();
 
 }
-bool User::compEventListMaxByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2){
+bool User::compEventListMaxByDate(const std::shared_ptr<Event> &event1, const std::shared_ptr<Event> &event2){
 
     return event1->getEventDate().getDateForSort() > event2->getEventDate().getDateForSort();
 
 }
 
-bool User::compEventListMinByPrice(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2){
+bool User::compEventListMinByPrice(const std::shared_ptr<Event> &event1, const std::shared_ptr<Event> &event2){
 
     return event1->getMoneyValue() < event2->getMoneyValue();
 
 }
-bool User::compEventListMaxByPrice(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2){
+bool User::compEventListMaxByPrice(const std::shared_ptr<Event> &event1, const std::shared_ptr<Event> &event2){
 
     return event1->getMoneyValue() > event2->getMoneyValue();
 
@@ -296,19 +296,19 @@ bool User::compEventListMaxByPrice(std::shared_ptr<Event> &event1, std::shared_p
 
 void User::sortChosenCarEventListMin(QString sortType){
     if (sortType == "date"){
-        std::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMinByDate);
+        std::ranges::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMinByDate);
     }
     else if (sortType == "price"){
-        std::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMinByPrice);
+        std::ranges::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMinByPrice);
     }
 
 }
 void User::sortChosenCarEventListMax(QString sortType){
     if (sortType == "date"){
-        std::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMaxByDate);
+        std::ranges::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMaxByDate);
     }
     else if (sortType == "price"){
-        std::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMaxByPrice);
+        std::ranges::sort(car_list[chosen_car_id]->getEventList().begin(), (car_list[chosen_car_id])->getEventList().end(), compEventListMaxByPrice);
     }
 
 }

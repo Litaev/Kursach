@@ -19,7 +19,7 @@ class Statistics{
     float serviceOtherMoney;
 
 public:
-    void updateMoney(std::vector<std::shared_ptr<Event>> &eventList);
+    void updateMoney(const std::vector<std::shared_ptr<Event>> &eventList);
 
     float getCarMoneySpent() const;
     void setCarMoneySpent(float newCarMoneySpent);

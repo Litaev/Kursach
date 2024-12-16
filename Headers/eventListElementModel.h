@@ -11,7 +11,7 @@ class EventListElementModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    enum EventListElementRoles{
+    enum class EventListElementRoles{
         EventTypeRole = Qt::UserRole + 1,
         EventNameRole,
         EventPriceRole,

@@ -3,7 +3,7 @@
 
 
 
-void Statistics::updateMoney(std::vector<std::shared_ptr<Event>> &eventList){
+void Statistics::updateMoney(const std::vector<std::shared_ptr<Event>> &eventList){
     carMoneySpent = 0;
     serviceMoney = 0;
     fuelMoney = 0;
@@ -23,25 +23,26 @@ void Statistics::updateMoney(std::vector<std::shared_ptr<Event>> &eventList){
         if (event->getEventType() == CONSUMPTION_NAME::SERVICE){
             serviceMoney += eventMoney;
             switch (event->getServiceType()) {
-            case SERVICE_NAME::MAINTENANCE:
+            using enum SERVICE_NAME;
+            case MAINTENANCE:
                 serviceMaintenanceMoney += eventMoney;
                 break;
-            case SERVICE_NAME::REPAIR:
+            case REPAIR:
                 serviceRepairMoney += eventMoney;
                 break;
-            case SERVICE_NAME::TUNING:
+            case TUNING:
                 serviceTuningMoney += eventMoney;
                 break;
-            case SERVICE_NAME::DETAIL:
+            case DETAIL:
                 serviceDetailMoney += eventMoney;
                 break;
-            case SERVICE_NAME::DIAGNOSTICS:
+            case DIAGNOSTICS:
                 serviceDiagnosticsMoney += eventMoney;
                 break;
-            case SERVICE_NAME::TIRE_FITTING:
+            case TIRE_FITTING:
                 serviceTireFittingMoney += eventMoney;
                 break;
-            case SERVICE_NAME::OTHER_SERVICE:
+            case OTHER_SERVICE:
                 serviceOtherMoney += eventMoney;
                 break;
             default:

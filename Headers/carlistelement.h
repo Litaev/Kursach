@@ -6,12 +6,9 @@
 class CarListElement
 {
 public:
-    CarListElement(QString name, QString imagePath, int year, int mileage){
-        m_name = std::move(name);
-        m_imagePath = std::move(imagePath);
-        m_year = year;
-        m_mileage = mileage;
-    };
+    CarListElement(QString name, QString imagePath, int year, int mileage)
+        : m_name(std::move(name)), m_imagePath(std::move(imagePath)), m_year(year), m_mileage(mileage) {}
+
     QString getName() const{
         return m_name;
     };

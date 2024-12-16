@@ -55,7 +55,7 @@ void Car::setCarYear(int newCar_year)
 
 
 void Car::updateCarMileage(){
-    for (auto& event: event_list){
+    for (const auto& event: event_list){
         if (event->getCarMileage() > car_mileage){
             car_mileage = event->getCarMileage();
         }

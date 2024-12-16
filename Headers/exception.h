@@ -27,7 +27,7 @@ public:
         }
         return "UNKNOWN ERROR";
     }
-    QString what(QString exceptionType, QString exceptionFieldError) noexcept   {
+    QString what(QString exceptionType, QString exceptionFieldError) const noexcept  {
         return this->callException(exceptionType, exceptionFieldError);
     }
 

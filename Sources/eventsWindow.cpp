@@ -1,10 +1,9 @@
 #include "Headers/eventsWindow.h"
 
 
-EventsWindow::EventsWindow(EventListElementModel *event_model, User *user){
-    this->event_model = event_model;
-    this->user = user;
-}
+EventsWindow::EventsWindow(EventListElementModel *event_model, User *user)
+    : event_model(event_model), user(user) {}
+
 
 void EventsWindow::updateModel(){
     event_model->resetEventsModel(user);

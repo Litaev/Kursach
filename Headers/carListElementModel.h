@@ -12,7 +12,7 @@ class CarListElementModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    enum CarListElementRoles{
+    enum class CarListElementRoles{
         NameRole = Qt::UserRole + 1,
         ImagePathRole,
         YearRole,

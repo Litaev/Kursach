@@ -24,18 +24,18 @@ QVariant EventListElementModel::data(const QModelIndex &index, int role) const{
     const EventListElement &eventListElement = eventList[index.row()];
 
 
-    switch (role) {
-    case EventTypeRole:
+    switch (static_cast<EventListElementRoles>(role)) {
+    case EventListElementRoles::EventTypeRole:
         return eventListElement.getEventType();
-    case EventNameRole:
+    case EventListElementRoles::EventNameRole:
         return eventListElement.getEventName();
-    case EventPriceRole:
+    case EventListElementRoles::EventPriceRole:
         return eventListElement.getPrice();
-    case EventMileageRole:
+    case EventListElementRoles::EventMileageRole:
         return eventListElement.getMileage();
-    case EventDateRole:
+    case EventListElementRoles::EventDateRole:
         return eventListElement.getDate();
-    case EventServiceTypeRole:
+    case EventListElementRoles::EventServiceTypeRole:
         return eventListElement.getServiceType();
     default:
         return {};
@@ -81,12 +81,12 @@ void EventListElementModel::resetEventsModel(User *user){
 QHash<int, QByteArray> EventListElementModel::roleNames() const{
 
     QHash<int, QByteArray> roles;
-    roles[EventTypeRole] = "event_type";
-    roles[EventNameRole] = "event_name";
-    roles[EventPriceRole] = "event_price";
-    roles[EventMileageRole] = "event_mileage";
-    roles[EventDateRole] = "event_date";
-    roles[EventServiceTypeRole] = "event_service_type";
+    roles[static_cast<int>(EventListElementRoles::EventTypeRole)] = "event_type";
+    roles[static_cast<int>(EventListElementRoles::EventNameRole)] = "event_name";
+    roles[static_cast<int>(EventListElementRoles::EventPriceRole)] = "event_price";
+    roles[static_cast<int>(EventListElementRoles::EventMileageRole)] = "event_mileage";
+    roles[static_cast<int>(EventListElementRoles::EventDateRole)] = "event_date";
+    roles[static_cast<int>(EventListElementRoles::EventServiceTypeRole)] = "event_service_type";
     return roles;
 }
 

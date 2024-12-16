@@ -19,14 +19,14 @@ QVariant CarListElementModel::data(const QModelIndex &index, int role) const{
         return {};
 
     const CarListElement &carListElement = carList[index.row()];
-    switch (role) {
-    case NameRole:
+    switch (static_cast<CarListElementRoles>(role)) {
+    case CarListElementRoles::NameRole:
         return carListElement.getName();
-    case ImagePathRole:
+    case CarListElementRoles::ImagePathRole:
         return carListElement.getImagePath();
-    case YearRole:
+    case CarListElementRoles::YearRole:
         return carListElement.getYear();
-    case MileageRole:
+    case CarListElementRoles::MileageRole:
         return carListElement.getMileage();
     default:
         return {};
@@ -59,10 +59,10 @@ void CarListElementModel::resetModel(User *user){
 QHash<int, QByteArray> CarListElementModel::roleNames() const{
 
     QHash<int, QByteArray> roles;
-    roles[NameRole] = "name";
-    roles[ImagePathRole] = "imagePath";
-    roles[YearRole] = "year";
-    roles[MileageRole] = "mileage";
+    roles[static_cast<int>(CarListElementRoles::NameRole)] = "name";
+    roles[static_cast<int>(CarListElementRoles::ImagePathRole)] = "imagePath";
+    roles[static_cast<int>(CarListElementRoles::YearRole)] = "year";
+    roles[static_cast<int>(CarListElementRoles::MileageRole)] = "mileage";
     return roles;
 }
 

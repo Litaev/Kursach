@@ -57,10 +57,10 @@ public:
 
     float getUserMoneySpent() const;
 
-    static bool compEventListMinByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
-    static bool compEventListMaxByDate(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
-    static bool compEventListMinByPrice(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
-    static bool compEventListMaxByPrice(std::shared_ptr<Event> &event1, std::shared_ptr<Event> &event2);
+    static bool compEventListMinByDate(const std::shared_ptr<Event> &event1, const std::shared_ptr<Event> &event2);
+    static bool compEventListMaxByDate(const std::shared_ptr<Event> &event1, const std::shared_ptr<Event> &event2);
+    static bool compEventListMinByPrice(const std::shared_ptr<Event> &event1, const std::shared_ptr<Event> &event2);
+    static bool compEventListMaxByPrice(const std::shared_ptr<Event> &event1, const std::shared_ptr<Event> &event2);
     Q_INVOKABLE void sortChosenCarEventListMin(QString sortType);
     Q_INVOKABLE void sortChosenCarEventListMax(QString sortType);
 };
