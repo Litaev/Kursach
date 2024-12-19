@@ -82,17 +82,24 @@ Item {
         }
     }
     Component.onCompleted: {
-        statisticsPieSeries.append("Service<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarServiceMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarServiceMoney")));
-        statisticsPieSeries.append("Fuel<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarFuelMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarFuelMoney")));
-        statisticsPieSeries.append("Other<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarOtherMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarOtherMoney")));
+        statisticsPieSeries.append("Service<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceMoney")));
+        statisticsPieSeries.append("Fuel<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carFuelMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carFuelMoney")));
+        statisticsPieSeries.append("Other<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carOtherMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carOtherMoney")));
 
-        serviceStatisticsPieSeries.append("Maintenance<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarServiceMaintenanceMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarServiceMaintenanceMoney")));
-        serviceStatisticsPieSeries.append("Repair<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarServiceRepairMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarServiceRepairMoney")));
-        serviceStatisticsPieSeries.append("Tuning<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarServiceTuningMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarServiceTuningMoney")));
-        serviceStatisticsPieSeries.append("Details<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarServiceDetailMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarServiceDetailMoney")));
-        serviceStatisticsPieSeries.append("Diagnostics<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarServiceDiagnosticsMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarServiceDiagnosticsMoney")));
-        serviceStatisticsPieSeries.append("Tire Fitting<br>" + user.getInfoAboutCar(user.getChosenCarId(), "CarServiceTireFittingMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarServiceTireFittingMoney")));
-        serviceStatisticsPieSeries.append("Other<br>" + user.getInfoAboutCar(suser.getChosenCarId(), "CarServiceOtherMoney") + " BYN", parseFloat(user.getInfoAboutCar(user.getChosenCarId(), "CarServiceOtherMoney")));
+        serviceStatisticsPieSeries.append("Maintenance<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceMaintenanceMoney") + " BYN",
+                                          parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceMaintenanceMoney")));
+        serviceStatisticsPieSeries.append("Repair<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceRepairMoney") + " BYN",
+                                          parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceRepairMoney")));
+        serviceStatisticsPieSeries.append("Tuning<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceTuningMoney") + " BYN",
+                                          parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceTuningMoney")));
+        serviceStatisticsPieSeries.append("Details<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceDetailMoney") + " BYN",
+                                          parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceDetailMoney")));
+        serviceStatisticsPieSeries.append("Diagnostics<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceDiagnosticsMoney") + " BYN",
+                                          parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceDiagnosticsMoney")));
+        serviceStatisticsPieSeries.append("Tire Fitting<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceTireFittingMoney") + " BYN",
+                                          parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceTireFittingMoney")));
+        serviceStatisticsPieSeries.append("Other<br>" + user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceOtherMoney") + " BYN",
+                                          parseFloat(user.getInfoAboutCar(user.getUserChosenCarId(), "carServiceOtherMoney")));
     }
 
 

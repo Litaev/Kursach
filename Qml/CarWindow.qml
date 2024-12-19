@@ -12,7 +12,7 @@ Item {
     height: parent.height
 
 
-
+    property string errorMessage: ""
     property int isCarNameGood: 0
     property int isCarYearGood: 0
     property int isCarMileageGood: 0
@@ -146,19 +146,20 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Enter Car Name"
-                text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "name") : ""
+                text: status.isEditCar ? user.getInfoAboutCar(user.getUserChosenCarId(), "name") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 onEditingFinished:{
-                    if (myValidator.validateCarWindow("0", "carName", carNameTextField.text) == "1"){
+                    carWindowItem.errorMessage = myValidator.validateCarWindow("carName", carNameTextField.text);
+                    if (carWindowItem.errorMessage != ""){
                         carWindowItem.isCarNameGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateCarWindow("1", "carName", carNameTextField.text);
+                        toolTip.text = carWindowItem.errorMessage;
                         toolTip.open();
                         carNameTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateCarWindow("0", "carName", carNameTextField.text) == "0"){
+                    else{
                         carWindowItem.isCarNameGood = 0;
                         carNameTextField.color = "#000000"
                     }
@@ -206,20 +207,21 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Car Year"
-                text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "year") : ""
+                text: status.isEditCar ? user.getInfoAboutCar(user.getUserChosenCarId(), "year") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
                 onEditingFinished:{
-                    if (myValidator.validateCarWindow("0", "carYear", carYearTextField.text) == "1"){
+                    carWindowItem.errorMessage = myValidator.validateCarWindow("carYear", carYearTextField.text);
+                    if (carWindowItem.errorMessage != ""){
                         carWindowItem.isCarYearGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateCarWindow("1", "carYear", carYearTextField.text);
+                        toolTip.text = carWindowItem.errorMessage;
                         toolTip.open();
                         carYearTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateCarWindow("0", "carYear", carYearTextField.text) == "0"){
+                    else{
                         carWindowItem.isCarYearGood = 0;
                         carYearTextField.color = "#000000"
                     }
@@ -266,20 +268,21 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Car Mileage"
-                text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "mileage") : ""
+                text: status.isEditCar ? user.getInfoAboutCar(user.getUserChosenCarId(), "mileage") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
                 onEditingFinished:{
-                    if (myValidator.validateCarWindow("0", "carMileage", carMileageTextField.text) == "1"){
+                    carWindowItem.errorMessage = myValidator.validateCarWindow("carMileage", carMileageTextField.text);
+                    if (carWindowItem.errorMessage != ""){
                         carWindowItem.isCarMileageGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateCarWindow("1", "carMileage", carMileageTextField.text);
+                        toolTip.text = carWindowItem.errorMessage;
                         toolTip.open();
                         carMileageTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateCarWindow("0", "carMileage", carMileageTextField.text) == "0"){
+                    else{
                         carWindowItem.isCarMileageGood = 0;
                         carMileageTextField.color = "#000000"
                     }
@@ -327,7 +330,7 @@ Item {
                 id: carFuelTypeComboBox
                 width: parent.width
                 model: ["petrol", "diesel", "propane", "methane", "electrycity"]
-                currentIndex: status.isEditCar ? parseInt(user.getInfoAboutCar(user.getChosenCarId(), "fuel")) : 0;
+                currentIndex: status.isEditCar ? parseInt(user.getInfoAboutCar(user.getUserChosenCarId(), "fuel")) : 0;
             }
         }
 
@@ -372,20 +375,21 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Tank Volume"
-                text: status.isEditCar ? user.getInfoAboutCar(user.getChosenCarId(), "tank") : ""
+                text: status.isEditCar ? user.getInfoAboutCar(user.getUserChosenCarId(), "tank") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
                 onEditingFinished:{
-                    if (myValidator.validateCarWindow("0", "carTankVolume", carTankTextField.text) == "1"){
+                    carWindowItem.errorMessage = myValidator.validateCarWindow("carTankVolume", carTankTextField.text);
+                    if (carWindowItem.errorMessage != ""){
                         carWindowItem.isCarTankVolumeGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateCarWindow("1", "carTankVolume", carTankTextField.text);
+                        toolTip.text = carWindowItem.errorMessage;
                         toolTip.open();
                         carTankTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateCarWindow("0", "carTankVolume", carTankTextField.text) == "0"){
+                    else{
                         carWindowItem.isCarTankVolumeGood = 0;
                         carTankTextField.color = "#000000"
 

@@ -18,7 +18,7 @@ void Statistics::updateMoney(const std::vector<std::shared_ptr<Event>> &eventLis
 
     float eventMoney;
     for (auto &event : eventList){
-        eventMoney = event->getMoneyValue();
+        eventMoney = event->getEventPrice();
         carMoneySpent += eventMoney;
         if (event->getEventType() == CONSUMPTION_NAME::SERVICE){
             serviceMoney += eventMoney;

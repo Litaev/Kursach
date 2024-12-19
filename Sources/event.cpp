@@ -4,70 +4,64 @@ using namespace std;
 
 
 
-void Event::setEvent(int new_event_type, QString new_event_name, QString new_event_money_value, QString new_event_date, QString new_event_mileage,
-                     QString new_event_comment){
-    event_type = static_cast<CONSUMPTION_NAME>(new_event_type);
-    event_name = new_event_name;
-    moneyValue = new_event_money_value.toFloat();
-    event_date = Date::VariantToDate(new_event_date);
-    car_mileage = new_event_mileage.toInt();
-    event_comment = new_event_comment;
+void Event::setEvent(int newEventType, QString newEventName, QString newEventPrice, QString newEventDate, QString newEventMileage,
+                     QString newEventComment){
+    eventType = static_cast<CONSUMPTION_NAME>(newEventType);
+    eventName = newEventName;
+    eventPrice = newEventPrice.toFloat();
+    eventDate = Date::VariantToDate(newEventDate);
+    eventMileage = newEventMileage.toInt();
+    eventComment = newEventComment;
 
 }
 
 
 QString Event::getEventName() const
 {
-    return event_name;
+    return eventName;
 }
 
-void Event::setEventName(const QString &newEvent_name)
+void Event::setEventName(const QString &newEventName)
 {
-    event_name = newEvent_name;
+    eventName = newEventName;
 }
 
-void Event::setEventId(int id) {
-    event_id = id;
-}
-int Event::getEventId() const{
-    return event_id;
-}
 
-float Event::getMoneyValue() const {
-    return moneyValue;
+float Event::getEventPrice() const {
+    return eventPrice;
 }
-void Event::setMoneyValue(float newMoneyValue) {
-    moneyValue = newMoneyValue;
+void Event::setEventPrice(float newEventPrice) {
+    eventPrice = newEventPrice;
 }
 Date Event::getEventDate() const {
-    return event_date;
+    return eventDate;
 }
 
 void Event::setEventDate(const QVariant& var){
-    event_date = Date::VariantToDate(var);
+    eventDate = Date::VariantToDate(var);
 }
 
 void Event::setEventDateNow() {
-    event_date.setNowDate();
+    eventDate.setNowDate();
 }
-unsigned int Event::getCarMileage() const {
-    return car_mileage;
+unsigned int Event::getEventMileage() const {
+    return eventMileage;
 }
-void Event::setCarMileage(unsigned int carMileage) {
-    car_mileage = carMileage;
+void Event::setEventMileage(unsigned int newEventMileage) {
+    eventMileage = newEventMileage;
 }
 void Event::setEventType(CONSUMPTION_NAME consumption) {
-    event_type = consumption;
+    eventType = consumption;
 }
 
 CONSUMPTION_NAME Event::getEventType() const {
-    return event_type;
+    return eventType;
 }
 void Event::setEventComment(const QString &comment) {
-    event_comment = comment;
+    eventComment = comment;
 }
 QString Event::getEventComment() const {
-    return event_comment;
+    return eventComment;
 }
 
 

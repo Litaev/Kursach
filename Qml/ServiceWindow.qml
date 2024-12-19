@@ -9,6 +9,7 @@ Item{
     width: parent.width
     height: parent.height
 
+    property string errorMessage: ""
     property int isEventNameGood: 0
     property int isEventPriceGood: 0
     property int isEventMileageGood: 0
@@ -144,7 +145,7 @@ Item{
                 id: serviceTypeComboBox
                 width: parent.width
                 model: ["maintenance", "repair", "tuning", "detail", "diagnostics", "tire fitting", "other service"]
-                currentIndex: status.isEditService ? parseInt(user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "serviceType")) : 0;
+                currentIndex: status.isEditService ? parseInt(user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "serviceType")) : 0;
             }
         }
 
@@ -190,19 +191,20 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Event name"
-                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "name") : ""
+                text: status.isEditService ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "name") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 onEditingFinished:{
-                    if (myValidator.validateEventWindow("0", "eventName", serviceNameTextField.text, user.getChosenCarTankVolume()) == "1"){
+                    serviceWindowItem.errorMessage = myValidator.validateEventWindow("eventName", serviceNameTextField.text);
+                    if (serviceWindowItem.errorMessage != ""){
                         serviceWindowItem.isEventNameGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateEventWindow("1", "eventName", serviceNameTextField.text, user.getChosenCarTankVolume());
+                        toolTip.text = serviceWindowItem.errorMessage;
                         toolTip.open();
                         serviceNameTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateEventWindow("0", "eventName", serviceNameTextField.text, user.getChosenCarTankVolume()) == "0"){
+                    else{
                         serviceWindowItem.isEventNameGood = 0;
                         serviceNameTextField.color = "#000000"
                     }
@@ -249,21 +251,22 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Price"
-                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "money") : ""
+                text: status.isEditService ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "money") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
 
                 onEditingFinished:{
-                    if (myValidator.validateEventWindow("0", "eventPrice", servicePriceTextField.text, user.getChosenCarTankVolume()) == "1"){
+                    serviceWindowItem.errorMessage = myValidator.validateEventWindow("eventPrice", servicePriceTextField.text);
+                    if (serviceWindowItem.errorMessage != ""){
                         serviceWindowItem.isEventPriceGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateEventWindow("1", "eventPrice", servicePriceTextField.text, user.getChosenCarTankVolume());
+                        toolTip.text = serviceWindowItem.errorMessage;
                         toolTip.open();
                         servicePriceTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateEventWindow("0", "eventPrice", servicePriceTextField.text, user.getChosenCarTankVolume()) == "0"){
+                    else{
                         serviceWindowItem.isEventPriceGood = 0;
                         servicePriceTextField.color = "#000000"
                     }
@@ -312,21 +315,22 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Mileage"
-                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "mileage") : ""
+                text: status.isEditService ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "mileage") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
 
                 onEditingFinished:{
-                    if (myValidator.validateEventWindow("0", "eventMileage", serviceMileageTextField.text, user.getChosenCarTankVolume()) == "1"){
+                    serviceWindowItem.errorMessage = myValidator.validateEventWindow("eventMileage", serviceMileageTextField.text);
+                    if (serviceWindowItem.errorMessage != ""){
                         serviceWindowItem.isEventMileageGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateEventWindow("1", "eventMileage", serviceMileageTextField.text, user.getChosenCarTankVolume());
+                        toolTip.text = serviceWindowItem.errorMessage;
                         toolTip.open();
                         serviceMileageTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateEventWindow("0", "eventMileage", serviceMileageTextField.text, user.getChosenCarTankVolume()) == "0"){
+                    else{
                         serviceWindowItem.isEventMileageGood = 0;
                         serviceMileageTextField.color = "#000000"
                     }
@@ -374,7 +378,7 @@ Item{
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Event comment"
-                text: status.isEditService ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "comment") : ""
+                text: status.isEditService ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "comment") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
             }
@@ -438,15 +442,16 @@ Item{
                 datePicker.open();
             }
             onTextChanged:{
-                if (myValidator.validateEventWindow("0", "eventDate", serviceDateButton.text + "-" + serviceTimeButton.text, user.getChosenCarTankVolume()) == "1"){
+                serviceWindowItem.errorMessage = myValidator.validateEventWindow("eventDate", serviceDateButton.text + "-" + serviceTimeButton.text);
+                if (serviceWindowItem.errorMessage != ""){
                     serviceWindowItem.isEventDateGood = 1;
                     toolTip.timeout = 5000;
                     toolTip.visible = true;
-                    toolTip.text = myValidator.validateEventWindow("1", "eventDate", serviceDateButton.text + "-" + serviceTimeButton.text, user.getChosenCarTankVolume());
+                    toolTip.text = serviceWindowItem.errorMessage;
                     toolTip.open();
 
                 }
-                else if (myValidator.validateEventWindow("0", "eventDate", serviceDateButton.text + "-" + serviceTimeButton.text, user.getChosenCarTankVolume()) == "0"){
+                else{
                     serviceWindowItem.isEventDateGood = 0;
 
                 }

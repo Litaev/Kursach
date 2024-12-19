@@ -68,7 +68,7 @@ ApplicationWindow{
                 width: 130
                 height: width
                 onClicked: {
-                    user.setChosenCarImage(user.getChosenCarId());
+                    user.setChosenCarImage(user.getUserChosenCarId());
                     user.saveUserData();
                     _loader.reload();
                 }
@@ -77,7 +77,7 @@ ApplicationWindow{
                     anchors.fill: parent
                     sourceSize: Qt.size(width, width)
                     fillMode: Image.PreserveAspectCrop
-                    source: user.getInfoAboutCar(user.getChosenCarId(), "imagePath") == "" ? "qrc:/test11/icons/car_white_icon.png": user.getInfoAboutCar(user.getChosenCarId(), "imagePath");
+                    source: user.getInfoAboutCar(user.getUserChosenCarId(), "imagePath") == "" ? "qrc:/test11/icons/car_white_icon.png": user.getInfoAboutCar(user.getUserChosenCarId(), "imagePath");
                 }
             }
 
@@ -102,7 +102,7 @@ ApplicationWindow{
                     anchors.topMargin: 5
                     height: 30
                     color: "#ffffff"
-                    text: user.getInfoAboutCar(user.getChosenCarId(), "name")
+                    text: user.getInfoAboutCar(user.getUserChosenCarId(), "name")
                     font.pointSize: 16
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -116,7 +116,7 @@ ApplicationWindow{
                     anchors.topMargin: 5
                     height: 30
                     color: "#ffffff"
-                    text: user.getInfoAboutCar(user.getChosenCarId(), "year") + " year"
+                    text: user.getInfoAboutCar(user.getUserChosenCarId(), "year") + " year"
                     font.pointSize: 14
                     verticalAlignment: Text.AlignVCenter
                 }
@@ -160,7 +160,7 @@ ApplicationWindow{
                     anchors.left: parent.left
                     anchors.right: parent.right
                     color: "#000000"
-                    text: user.getInfoAboutCar(user.getChosenCarId(), "mileage") + " km"
+                    text: user.getInfoAboutCar(user.getUserChosenCarId(), "mileage") + " km"
                     font.pointSize: 14
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
@@ -205,7 +205,7 @@ ApplicationWindow{
                     anchors.left: parent.left
                     anchors.right: parent.right
                     color: "#ffffff"
-                    text: user.getInfoAboutCar(user.getChosenCarId(), "CarMoney") + " BYN"
+                    text: user.getInfoAboutCar(user.getUserChosenCarId(), "carMoney") + " BYN"
                     font.pointSize: 16
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter

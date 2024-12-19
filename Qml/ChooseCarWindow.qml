@@ -159,7 +159,7 @@ Item {
                 width: 150
                 height: 50
                 onClicked: {
-                    user.setChosenCarId(index);
+                    user.setUserChosenCarId(index);
                     user.saveUserData();
                     _loader.reload();
                     stackView.pop();
@@ -190,7 +190,7 @@ Item {
                 hoverEnabled: false
                 onClicked: {
                     status.isEditCar = true;
-                    user.setChosenCarId(index)
+                    user.setUserChosenCarId(index)
                     stackView.push("qrc:/test11/Qml/CarWindow.qml");
                 }
 

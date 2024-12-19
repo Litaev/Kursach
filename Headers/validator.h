@@ -1,201 +1,158 @@
 #ifndef VALIDATOR_H
 #define VALIDATOR_H
 #include <QObject>
-#include "Headers/date.h"
-#include "Headers/exception.h"
+#include "Headers/user.h"
+#include "Headers/customException.h"
 #include "Headers/car.h"
-#include "QDebug"
+#include "Headers/appDebugLogger.h"
 
-class Validator : public QObject
+
+
+class Validator : public QObject, public CustomException, public AppDebugLogger
 {
     Q_OBJECT
-public:
+    const int maxEnterLength = 15;
+    const int maxMileage = 2000000;
+    const int maxCarTankVolume = 100;
+    const float maxEventPrice = 1000000;
+    const float minEventPrice = 0.1;
+    const int minCarYear = 1950;
+    User *valUser;
+    AppDebugLogger *valAppDebugLogger;
 
+    QString validateTextField(QString text) const{
+        try{
+            if (text.length() > maxEnterLength || text.length() == 0){
+                valAppDebugLogger->newError("NAME is INCORRECT");
+                throw CustomException("NAME is INCORRECT");
+            }
+        }
+        catch(CustomException &e){
+            return e.what();
+        }
+        return "";
+    }
 
-    Q_INVOKABLE QString validateCarWindow(QString resultType, QString fieldType, QString fieldData) const{
+    QString validateCarYear(int carYear) const{
         Date nowDate;
         nowDate.setNowDate();
+        try{
+            if (carYear < minCarYear || carYear > nowDate.getYear()){
+                valAppDebugLogger->newError("YEAR is INCORRECT");
+                throw CustomException("YEAR is INCORRECT");
+            }
+        }
+        catch(CustomException &e){
+            return e.what();
+        }
+        return "";
+    }
+
+    QString validateMileage(int mileage) const{
+        try{
+            if (mileage < 0 || mileage > maxMileage){
+                valAppDebugLogger->newError("MILEAGE is INCORRECT");
+                throw CustomException("MILEAGE is INCORRECT");
+            }
+        }
+        catch(CustomException &e){
+            return e.what();
+        }
+        return "";
+    }
+    QString validateTankVolume(int tankVolume) const{
+        try{
+            if (tankVolume < 1 || tankVolume > maxCarTankVolume){
+                valAppDebugLogger->newError("CAR TANK is INCORRECT");
+                throw CustomException("CAR TANK is INCORRECT");
+            }
+        }
+        catch(CustomException &e) {
+            return e.what();
+        }
+        return "";
+    }
+    QString validateEventPrice(float price) const{
+        try {
+            if (price < minEventPrice || price > maxEventPrice){
+                valAppDebugLogger->newError("EVENT PRICE is INCORRECT");
+                throw CustomException("EVENT PRICE is INCORRECT");
+            }
+        }
+        catch(CustomException &e) {
+            return e.what();
+        }
+        return "";
+    }
+    QString validateEventDate(QString date) const{
+        Date nowDate;
+        nowDate.setNowDate();
+        Date chosenDate;
+        chosenDate = Date::VariantToDate(date);
+        try{
+            if (chosenDate > nowDate){
+                valAppDebugLogger->newError("EVENT DATE is INCORRECT");
+                throw CustomException("EVENT DATE is INCORRECT");
+            }
+        }
+        catch (CustomException &e) {
+            return e.what();
+        }
+        return "";
+    }
+
+    QString validateEventLitresAmount(float litresAmount) const{
+        try{
+            if (litresAmount > valUser->getChosenCarTankVolume() || litresAmount < 0){
+                valAppDebugLogger->newError("AMOUNT OF LITRES is INCORRECT");
+                throw CustomException("AMOUNT OF LITRES is INCORRECT");
+            }
+        }
+        catch(CustomException &e) {
+            return e.what();
+        }
+        return "";
+    }
+
+public:
+    Validator(User *user, AppDebugLogger *appDebugLogger){
+        valUser = user;
+        valAppDebugLogger = appDebugLogger;
+    }
+
+    Q_INVOKABLE QString validateCarWindow(QString fieldType, QString fieldData) const{
         if (fieldType == "carName"){
-            try {
-                if (fieldData.length() > 15){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1"){
-                        throw CustomException();
-                    }
-                }
-                else{
-                    return "0";
-                }
-            }
-            catch (CustomException &e) {
-                return e.what("carWindowException", "carName");
-            }
+            return validateTextField(fieldData);
         }
         else if (fieldType == "carYear"){
-            try {
-                if (fieldData.toInt() > nowDate.getYear() || fieldData.toInt() < 1950){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1") throw CustomException();
-                }
-                else{
-                    return "0";
-                }
-            }
-            catch(CustomException &e) {
-                return e.what("carWindowException", "carYear");
-            }
+            return validateCarYear(fieldData.toInt());
         }
         else if (fieldType == "carMileage"){
-            try{
-                if (fieldData.toInt() < 0 || fieldData.toInt() > 2000000){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1") throw CustomException();
-                }
-                else{
-                    return "0";
-                }
-            }
-            catch(CustomException &e) {
-                return e.what("carWindowException", "carMileage");
-            }
+            return validateMileage(fieldData.toInt());
 
         }
         else if (fieldType == "carTankVolume"){
-            try{
-                if (fieldData.toInt() < 1 || fieldData.toInt() > 1000){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1") throw CustomException();
-
-                }
-                else{
-                    return "0";
-                }
-            }
-            catch(CustomException &e) {
-                return e.what("carWindowException", "carTankVolume");
-            }
+            return validateTankVolume(fieldData.toInt());
         }
-        return "0";
+        return "";
     }
 
-    Q_INVOKABLE QString validateEventWindow(QString resultType, QString fieldType, QString fieldData, int chosenCarTankVolume) const{
-        Date nowDate;
-        nowDate.setNowDate();
+    Q_INVOKABLE QString validateEventWindow(QString fieldType, QString fieldData) const{
+
         if (fieldType == "eventName"){
-            try{
-                if (fieldData.length() > 15){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1"){
-                        throw CustomException();
-                    }
-                }
-                else{
-                    return "0";
-                }
-            }
-            catch(CustomException &e) {
-                return e.what("eventWindowException", "eventName");
-            }
+            return validateTextField(fieldData);
         }
         else if (fieldType == "eventPrice"){
-            try {
-                if (fieldData.toFloat() < 0.1 || fieldData.toFloat() > 1000000){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1"){
-                        throw CustomException();
-                    }
-                }
-                else{
-                    return "0";
-                }
-            }
-            catch(CustomException &e) {
-                return e.what("eventWindowException", "eventPrice");
-            }
+            return validateEventPrice(fieldData.toFloat());
         }
-
         else if (fieldType == "eventMileage"){
-            try{
-                if (fieldData.toInt() < 0 || fieldData.toInt() > 3000000){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1"){
-                        throw CustomException();
-                    }
-                }
-                else{
-                    return "0";
-                }
-            }
-            catch(CustomException &e) {
-                return e.what("eventWindowException", "eventMileage");
-            }
+            return validateMileage(fieldData.toInt());
         }
         else if (fieldType == "eventDate"){
-            Date chosenDate;
-            chosenDate = Date::VariantToDate(fieldData);
-            chosenDate.setMonth(chosenDate.getMonth());
-            if (chosenDate.getYear() > nowDate.getYear()){
-                try{
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1"){
-                        throw CustomException();
-                    }
-                }
-                catch (CustomException &e) {
-                    return e.what("eventWindowException", "eventDate");
-                }
-            }
-            else if (chosenDate.getYear() == nowDate.getYear()){
-                if (chosenDate.getMonth() > nowDate.getMonth()){
-                    try{
-                        if (resultType == "0") return "1";
-                        else if (resultType == "1"){
-                            throw CustomException();
-                        }
-                    }
-                    catch(CustomException &e) {
-                        return e.what("eventWindowException", "eventDate");
-                    }
-                }
-                else if (chosenDate.getMonth() == nowDate.getMonth()) {
-                    try{
-                        if (chosenDate.getDay() > nowDate.getDay()){
-                            if (resultType == "0") return "1";
-                            else if (resultType == "1"){
-                                throw CustomException();
-                            }
-                        }
-                        else{
-                            return "0";
-                        }
-                    }
-                    catch (CustomException &e) {
-                        return e.what("eventWindowException", "eventDate");
-                    }
-                }
-                else{
-                    return "0";
-                }
-            }
-            else{
-                return "0";
-            }
+            return validateEventDate(fieldData);
         }
-        else if (fieldType == "eventLitreAmount"){
-            try{
-                if (fieldData.toInt() > chosenCarTankVolume || fieldData.toInt() < 0){
-                    if (resultType == "0") return "1";
-                    else if (resultType == "1"){
-                        throw CustomException();
-                    }
-                }
-                else{
-                    return "0";
-                }
-            }
-            catch(CustomException &e) {
-                return e.what("eventWindowException", "eventLitreAmount");
-            }
+        else if (fieldType == "eventLitresAmount"){
+            return validateEventLitresAmount(fieldData.toFloat());
         }
     return "0";
     }

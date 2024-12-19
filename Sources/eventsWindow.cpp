@@ -8,7 +8,7 @@ EventsWindow::EventsWindow(EventListElementModel *event_model, User *user)
 void EventsWindow::updateModel(){
     event_model->resetEventsModel(user);
     if (user->getCarListSize() > 0){
-        (*user->getCarList()[user->getChosenCarId()]) == 1;
-        user->getCarList()[user->getChosenCarId()]->updateCarMileage();
+        (*user->getCarList()[user->getUserChosenCarId()]) == 1;
+        user->getCarList()[user->getUserChosenCarId()]->updateCarMileage();
     }
 };

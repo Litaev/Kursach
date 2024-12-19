@@ -2,26 +2,55 @@
 #include "Headers/refueling.h"
 using namespace std;
 
-int Refueling::getRefuelingId() const{
-    return refueling_id;
-}
+
 FUEL_TYPE Refueling::getFuelType() const{
-    return fuel_type;
+    return fuelType;
 }
 void Refueling::setFuelType(FUEL_TYPE carFuelType) {
-    fuel_type = carFuelType;
+    fuelType = carFuelType;
 }
 float Refueling::getAmountOfLitres() const{
-    return amount_of_litres;
+    return amountOfLitres;
 }
-void Refueling::setAmountOfLitres(float amountOfLitres) {
-    amount_of_litres = amountOfLitres;
+void Refueling::setAmountOfLitres(float newAmountOfLitres) {
+    amountOfLitres = newAmountOfLitres;
 }
 float Refueling::getPricePerLitre() const{
-    return price_per_litre;
+    return pricePerLitre;
 }
-void Refueling::setPricePerLitre(float pricePerLitre) {
-    price_per_litre = pricePerLitre;
+void Refueling::setPricePerLitre(float newPricePerLitre) {
+    pricePerLitre = newPricePerLitre;
+}
+
+QVariantMap Refueling::preSaveData() const{
+
+    QVariantMap refuelingMap;
+    qDebug() << "------11";
+
+    refuelingMap["fuelType"] = std::to_underlying(fuelType);
+    refuelingMap["litreAmount"] = amountOfLitres;
+    refuelingMap["pricePerLitre"] = pricePerLitre;
+    refuelingMap["eventName"] = getEventName();
+    refuelingMap["eventType"] = std::to_underlying(getEventType());
+    refuelingMap["eventPrice"] = getEventPrice();
+    refuelingMap["eventDate"] = Date::DateToVariant(getEventDate());
+    refuelingMap["eventMileage"] = getEventMileage();
+    refuelingMap["eventComment"] = getEventComment();
+
+    return refuelingMap;
+
+}
+void Refueling::preLoadData(QVariantMap &map){
+    fuelType = static_cast<FUEL_TYPE>(map["fuelType"].toInt());
+    amountOfLitres = map["litreAmount"].toFloat();
+    pricePerLitre = map["pricePerLitre"].toFloat();
+    setEventName(map["eventName"].toString());
+    setEventType(CONSUMPTION_NAME::REFUELING);
+    setEventPrice(map["eventPrice"].toFloat());
+    setEventDate(map["eventDate"]);
+    setEventMileage(map["eventMileage"].toUInt());
+    setEventComment(map["eventComment"].toString());
+    qDebug() << "------12";
 }
 
 

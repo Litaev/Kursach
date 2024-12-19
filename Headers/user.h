@@ -12,34 +12,34 @@ class User : public QObject{
 
     Q_OBJECT
 
-    std::vector<std::shared_ptr<Car>> car_list;
-    int chosen_car_id = 0;
-    float user_money_spent = 0;
+    std::vector<std::shared_ptr<Car>> carList;
+    int userChosenCarId = 0;
 
 public:
 
-    Q_INVOKABLE void addCar(QString new_car_name, QString new_car_year, QString new_car_mileage, QString new_car_fuel_type, QString new_car_tank_volume);
+    Q_INVOKABLE void addCar(QString newCarName, QString newCarYear, QString newCarMileage, QString newCarFuelType, QString newCarTankVolume);
 
-    Q_INVOKABLE void addEvent(QString new_event_type, QString new_event_name, QString new_event_money_value, QString new_event_date, QString new_event_mileage,
-                              QString new_event_comment, QString new_event_service_type, QString new_event_amount_of_litres, QString new_event_price_per_litre);
+    Q_INVOKABLE void addEvent(QString newEventType, QString newEventName, QString newEventMoneyValue, QString newEventDate, QString newEventMileage,
+                              QString newEventComment, QString newEventServiceType, QString newEventAmountOfLitres, QString newEventPricePerLitre);
 
-    Q_INVOKABLE void editChosenCarInfo(QString new_car_name, QString new_car_year, QString new_car_mileage, QString new_car_fuel_type, QString new_car_tank_volume);
+    Q_INVOKABLE void editChosenCarInfo(QString newCarName, QString newCarYear, QString newCarMileage, QString newCarFuelType, QString newCarTankVolume);
 
-    Q_INVOKABLE void editChosenEventInfo(int chosen_event_id, int event_type, QString new_event_name, QString new_event_money, QString new_event_date, QString new_event_mileage,
-                                         QString new_event_comment, QString new_event_litres, QString new_event_price_per_litre, QString new_event_service_type);
+    Q_INVOKABLE void editChosenEventInfo(int chosenEventId, int eventType, QString newEventName, QString newEventMoney, QString newEventDate, QString newEventMileage,
+                                         QString newEventComment, QString newEventLitres, QString newEventPricePerLitre, QString newEventServiceType);
 
     Q_INVOKABLE void updateChosenCarStatistics();
 
-    Q_INVOKABLE QString getInfoAboutCar(int car_index, QString info_type) const;
+    Q_INVOKABLE QString getInfoAboutCar(int carIndex, QString infoType) const;
 
-    Q_INVOKABLE QString getInfoAboutEvent(int car_index, int event_index, QString info_type) const;
+    Q_INVOKABLE QString getInfoAboutEvent(int carIndex, int eventIndex, QString infoType) const;
 
-    Q_INVOKABLE void deleteChosenCar(int chosen_delete_car_id);
+    Q_INVOKABLE void deleteChosenCar(int chosenDeleteCarId);
 
-    Q_INVOKABLE void deleteChosenEvent(int chosen_event_id);
+    Q_INVOKABLE void deleteChosenEvent(int chosenEventId);
 
-    Q_INVOKABLE int getChosenCarId() const;
-    Q_INVOKABLE void setChosenCarId(int newChosen_car_id);
+
+    Q_INVOKABLE int getUserChosenCarId() const;
+    Q_INVOKABLE void setUserChosenCarId(int newUserChosenCarId);
 
     Q_INVOKABLE std::vector<std::shared_ptr<Car>> &getCarList();
     Q_INVOKABLE int getCarListSize() const;

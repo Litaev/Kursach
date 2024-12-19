@@ -3,42 +3,46 @@
 
 #include <vector>
 #include <QObject>
+#include <memory>
 #include "enums.h"
 #include "event.h"
-#include "date.h"
 #include "service.h"
 #include "refueling.h"
 #include "statistics.h"
+#include "Headers/Presaveable.h"
+#include "Headers/Preloadable.h"
+
+
 class User;
 
-class Car {
+class Car : public Presaveable, public Preloadable{
     friend User;
-    QString car_name;
+    QString carName;
     QString carImageFilePath = "";
-    QString car_gov_number;
-    int car_year;
-    int car_mileage = 0;
-    int car_tank_volume;
-    FUEL_TYPE car_fuel_type;
-    std::vector<std::shared_ptr<Event>> event_list;
+    QString carGovNumber;
+    int carYear = 1950;
+    int carMileage = 0;
+    int carTankVolume = 0;;
+    FUEL_TYPE carFuelType;
+    std::vector<std::shared_ptr<Event>> eventList;
     Statistics carStatistics;
 public:
-    void setCar(QString new_car_name, QString new_car_year, QString new_car_mileage, QString new_car_fuel_type, QString new_car_tank_volume);
+    void setCar(QString newCarName, QString newCarYear, QString newCarMileage, QString newCarFuelType, QString newCarTankVolume);
     QString getCarName() const;
-    void setCarName(QString new_car_name);
-    void setCarFuelType(FUEL_TYPE new_fuel_type);
+    void setCarName(QString newCarName);
+    void setCarFuelType(FUEL_TYPE newFuelType);
     FUEL_TYPE getCarFuelType() const;
     Statistics &getCarStatistics();
     QString getCarGovNumber() const;
-    void setCarGovNumber(QString new_car_gov_number);
+    void setCarGovNumber(QString newCarGovNumber);
     int getCarMileage() const;
-    void setCarMileage(unsigned int new_car_mileage);
+    void setCarMileage(unsigned int newCarMileage);
 
     void operator == (int); //Update money spent
     //void updateCarMoneySpent();
     void updateCarMileage();
 
-    auto operator <=> (const Car & car1) const = default;
+
 
     void addEvent();
     void operator-- (int); // Delete event by ID
@@ -46,8 +50,8 @@ public:
     void deleteEventList();
     void deleteEventListElement();
 
-    void addEvent(int new_event_type, QString new_event_name, QString new_event_money_value, QString new_event_date, QString new_event_mileage,
-                  QString new_event_comment, int new_event_service_type, int new_event_fuel_type, QString new_event_amount_of_litres, QString new_event_price_per_litre);
+    void addEvent(int newEventType, QString newEventName, QString newEventMoneyValue, QString newEventDate, QString newEventMileage,
+                  QString newEventComment, int newEventServiceType, int newEventFuelType, QString newEventAmountOfLitres, QString newEventPricePerLitre);
 
     void printEventList() const;
     void saveCarInDataBase();
@@ -56,12 +60,16 @@ public:
     void setCarId(int id);
     int getCarId() const;
     int getCarYear() const;
-    void setCarYear(int newCar_year);
+    void setCarYear(int newCarYear);
     int getCarTankVolume() const;
-    void setCarTankVolume(int newCar_tank_volume);
+    void setCarTankVolume(int newCarTankVolume);
 
     QString getCarImageFilePath() const;
     void setCarImageFilePath(const QString &newCarImageFilePath);
+
+    QVariantMap preSaveData() const override;
+    void preLoadData(QVariantMap &map) override;
+
 };
 
 #endif // CAR_H

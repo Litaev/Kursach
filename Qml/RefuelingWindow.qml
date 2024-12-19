@@ -9,6 +9,7 @@ Item {
     width: parent.width
     height: parent.height
 
+    property string errorMessage: ""
     property int isEventPriceGood: 0
     property int isEventLitreAmountGood: 0
     property int isEventDateGood: 0
@@ -145,7 +146,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Litre amount"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "litres") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "litres") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -163,16 +164,16 @@ Item {
                             pricePerLitreTextField.text = (parseFloat(refuelingPriceTextField.text)/parseFloat(refuelingLitreAmountTextField.text)).toFixed(2)
                         }
                     }
-
-                    if (myValidator.validateEventWindow("0", "eventLitreAmount", refuelingLitreAmountTextField.text, user.getChosenCarTankVolume()) == "1"){
+                    refuelingWindowItem.errorMessage = myValidator.validateEventWindow("eventLitresAmount", refuelingLitreAmountTextField.text);
+                    if (refuelingWindowItem.errorMessage != ""){
                         refuelingWindowItem.isEventLitreAmountGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateEventWindow("1", "eventLitreAmount", refuelingLitreAmountTextField.text, user.getChosenCarTankVolume());
+                        toolTip.text = refuelingWindowItem.errorMessage;
                         toolTip.open();
                         refuelingLitreAmountTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateEventWindow("0", "eventLitreAmount", refuelingLitreAmountTextField.text, user.getChosenCarTankVolume()) == "0"){
+                    else{
                         refuelingWindowItem.isEventLitreAmountGood = 0;
                         refuelingLitreAmountTextField.color = "#000000"
                     }
@@ -224,7 +225,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Price per litre"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "pricePerLitre") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "pricePerLitre") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -286,20 +287,21 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Mileage"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "mileage") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "mileage") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
                 onEditingFinished:{
-                    if (myValidator.validateEventWindow("0", "eventMileage", refuelingMileageTextField.text, user.getChosenCarTankVolume()) == "1"){
+                    refuelingWindowItem.errorMessage = myValidator.validateEventWindow("eventMileage", refuelingMileageTextField.text);
+                    if (refuelingWindowItem.errorMessage != ""){
                         refuelingWindowItem.isEventMileageGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateEventWindow("1", "eventMileage", refuelingMileageTextField.text, user.getChosenCarTankVolume());
+                        toolTip.text = refuelingWindowItem.errorMessage;
                         toolTip.open();
                         refuelingMileageTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateEventWindow("0", "eventMileage", refuelingMileageTextField.text, user.getChosenCarTankVolume()) == "0"){
+                    else{
                         refuelingWindowItem.isEventMileageGood = 0;
                         refuelingMileageTextField.color = "#000000"
                     }
@@ -348,7 +350,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Price"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "money") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "money") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
                 inputMethodHints: Qt.ImhDigitsOnly
@@ -363,16 +365,16 @@ Item {
                             refuelingLitreAmountTextField.text = (parseFloat(refuelingPriceTextField.text)/parseFloat(pricePerLitreTextField.text)).toFixed(2)
                         }
                     }
-
-                    if (myValidator.validateEventWindow("0", "eventPrice", refuelingPriceTextField.text, user.getChosenCarTankVolume()) == "1"){
+                    refuelingWindowItem.errorMessage = myValidator.validateEventWindow("eventPrice", refuelingPriceTextField.text);
+                    if (refuelingWindowItem.errorMessage != ""){
                         refuelingWindowItem.isEventPriceGood = 1;
                         toolTip.timeout = 5000;
                         toolTip.visible = true;
-                        toolTip.text = myValidator.validateEventWindow("1", "eventPrice", refuelingPriceTextField.text, user.getChosenCarTankVolume());
+                        toolTip.text = refuelingWindowItem.errorMessage;
                         toolTip.open();
                         refuelingPriceTextField.color = "#da2c38"
                     }
-                    else if (myValidator.validateEventWindow("0", "eventPrice", refuelingPriceTextField.text, user.getChosenCarTankVolume()) == "0"){
+                    else{
                         refuelingWindowItem.isEventPriceGood = 0;
                         refuelingPriceTextField.color = "#000000"
                     }
@@ -422,7 +424,7 @@ Item {
                 anchors.fill: parent
                 color: "#000000"
                 placeholderText: "Refueling comment"
-                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getChosenCarId(), status.chosenEventId, "comment") : ""
+                text: status.isEditRefueling ? user.getInfoAboutEvent(user.getUserChosenCarId(), status.chosenEventId, "comment") : ""
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pointSize: 16
             }
@@ -489,15 +491,16 @@ Item {
 
             }
             onTextChanged:{
-                if (myValidator.validateEventWindow("0", "eventDate", refuelingDateButton.text + "-" + refuelingTimeButton.text, user.getChosenCarTankVolume()) == "1"){
+                refuelingWindowItem.errorMessage = myValidator.validateEventWindow("eventDate", refuelingDateButton.text + "-" + refuelingTimeButton.text);
+                if (refuelingWindowItem.errorMessage != ""){
                     refuelingWindowItem.isEventDateGood = 1;
                     toolTip.timeout = 5000;
                     toolTip.visible = true;
-                    toolTip.text = myValidator.validateEventWindow("1", "eventDate", refuelingDateButton.text + "-" + refuelingTimeButton.text, user.getChosenCarTankVolume());
+                    toolTip.text = refuelingWindowItem.errorMessage;
                     toolTip.open();
 
                 }
-                else if (myValidator.validateEventWindow("0", "eventDate", refuelingDateButton.text + "-" + refuelingTimeButton.text, user.getChosenCarTankVolume()) == "0"){
+                else{
                     refuelingWindowItem.isEventDateGood = 0;
 
                 }

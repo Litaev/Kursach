@@ -11,6 +11,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QtCore/private/qandroidextras_p.h>
+#include "Headers/appDebugLogger.h"
 
 #include "Headers/validator.h"
 
@@ -18,14 +19,14 @@
 
 int main(int argc, char *argv[])
 {
-
+    AppDebugLogger appDebugLogger;
     QApplication app(argc, argv);
 
     EnhancedQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("$QmlEngine", &engine);
     User user;
-    Validator validator;
+    Validator validator(&user, &appDebugLogger);
     user.loadUserData();
     CarListElementModel carListModel(&app);
     EventListElementModel eventListModel(&app);

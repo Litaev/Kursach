@@ -1,16 +1,15 @@
 #ifndef REFUELING_H
 #define REFUELING_H
 
-#include "event.h"
+#include "Headers/event.h"
 
 class User;
 
-class Refueling : public Event {
+class Refueling : public Event, public Presaveable, public Preloadable{
     friend User;
-    int refueling_id;
-    FUEL_TYPE fuel_type;
-    float amount_of_litres;
-    float price_per_litre;
+    FUEL_TYPE fuelType;
+    float amountOfLitres;
+    float pricePerLitre;
 public:
     int getRefuelingId() const;
     FUEL_TYPE getFuelType() const override;
@@ -19,6 +18,13 @@ public:
     void setAmountOfLitres(float amountOfLitres) override;
     float getPricePerLitre() const override;
     void setPricePerLitre(float pricePerLitre) override;
+
+    QVariantMap preSaveData() const override;
+    void preLoadData(QVariantMap &map) override;
+
+
+    void setServiceType(SERVICE_NAME serviceType) override{};
+    SERVICE_NAME getServiceType() const override {return SERVICE_NAME::OTHER_SERVICE;}
 
 };
 

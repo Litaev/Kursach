@@ -61,13 +61,13 @@ void EventListElementModel::resetEventsModel(User *user){
     beginResetModel();
     eventList.clear();
     if (user->getCarListSize() > 0){
-        std::vector<std::shared_ptr<Event>> this_event_list = user->getCarList()[user->getChosenCarId()]->getEventList();
+        std::vector<std::shared_ptr<Event>> this_event_list = user->getCarList()[user->getUserChosenCarId()]->getEventList();
         for(const auto &event : this_event_list){
 
             int this_event_type = std::to_underlying(event->getEventType());
             QString this_name = event->getEventName();
-            float this_price = event->getMoneyValue();
-            int this_mileage = event->getCarMileage();
+            float this_price = event->getEventPrice();
+            int this_mileage = event->getEventMileage();
             QString this_date = Date::DateToVariant(event->getEventDate()).toString();
             int this_service_type = 0;
             if (static_cast<CONSUMPTION_NAME>(this_event_type) == CONSUMPTION_NAME::SERVICE){

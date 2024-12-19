@@ -3,51 +3,53 @@
 
 #include "enums.h"
 #include "date.h"
-
+#include "Headers/Presaveable.h"
+#include "Headers/Preloadable.h"
 class User;
 
 
-class Event {
+class Event{
     friend User;
-    int event_id;
-    CONSUMPTION_NAME event_type;
-    QString event_name;
-    float moneyValue;
-    Date event_date;
-    unsigned int car_mileage;
-    QString event_comment;
+    CONSUMPTION_NAME eventType;
+    QString eventName;
+    float eventPrice;
+    Date eventDate;
+    unsigned int eventMileage;
+    QString eventComment;
 public:
-    void setEventId(int id);
-    int getEventId() const;
-    float getMoneyValue() const;
-    void setMoneyValue(float newMoneyValue);
+
+    QString getEventName() const;
+    void setEventName(const QString &newEventName);
+    float getEventPrice() const;
+    void setEventPrice(float newEventPrice);
     Date getEventDate() const;
     void setEventDate(const QVariant& var);
     void setEventDateNow();
-    unsigned int getCarMileage() const;
-    void setCarMileage(unsigned int carMileage);
+    unsigned int getEventMileage() const;
+    void setEventMileage(unsigned int newEventMileage);
     void setEventType(CONSUMPTION_NAME consumption);
     CONSUMPTION_NAME getEventType() const;
     void setEventComment(const QString &comment);
     QString getEventComment() const;
-    void saveEventinDatabase();
-    void loadEventFromDatabase();
 
-    void setEvent(int new_event_type, QString new_event_name, QString new_event_money_value, QString new_event_date, QString new_event_mileage,
-                  QString new_event_comment);
+    void setEvent(int newEventType, QString newEventName, QString newEventMoneyValue, QString newEventDate, QString newEventMileage,
+                  QString newEventComment);
 
-    virtual void setFuelType(FUEL_TYPE carFuelType) {/*VIRTUAL*/};
-    virtual FUEL_TYPE getFuelType() const { return FUEL_TYPE::DIESEL;};
-    virtual void setAmountOfLitres(float amountOfLitres) {/*VIRTUAL*/ };
-    virtual float getAmountOfLitres() const {return 0;}
-    virtual void setPricePerLitre(float pricePerLitre) {/*VIRTUAL*/ };
-    virtual float getPricePerLitre() const {return 0;}
-    virtual void setServiceType(SERVICE_NAME serviceType) {/*VIRTUAL*/ };
-    virtual SERVICE_NAME getServiceType() const { return SERVICE_NAME::OTHER_SERVICE; };
-    virtual void setServiceTypeAsString(std::string& serviceName) {/*VIRTUAL*/ };
+    virtual void setFuelType(FUEL_TYPE carFuelType) = 0;
+    virtual FUEL_TYPE getFuelType() const = 0;
+    virtual void setAmountOfLitres(float amountOfLitres) = 0;
+    virtual float getAmountOfLitres() const = 0;
+    virtual void setPricePerLitre(float pricePerLitre) = 0;
+    virtual float getPricePerLitre() const = 0;
+    virtual void setServiceType(SERVICE_NAME serviceType) = 0;
+    virtual SERVICE_NAME getServiceType() const = 0;
 
-    QString getEventName() const;
-    void setEventName(const QString &newEvent_name);
+    virtual ~Event() = default;
+
+    virtual QVariantMap preSaveData() const = 0;
+    virtual void preLoadData(QVariantMap &map) = 0;
+
+
 };
 
 #endif // EVENT_H

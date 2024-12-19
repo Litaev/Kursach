@@ -55,9 +55,12 @@ qt_add_qml_module(apptest11
         RESOURCES icons/time_black_icon.png icons/time_white_icon.png
         RESOURCES icons/sortBigger_black_icon.png icons/sortBigger_white_icon.png icons/sortSmaller_black_icon.png icons/sortSmaller_white_icon.png
 
-        SOURCES Headers/exception.h
+        SOURCES Headers/customException.h
         SOURCES Headers/carException.h
         SOURCES Headers/eventException.h
+        SOURCES Headers/appDebugLogger.h
+        SOURCES Headers/Presaveable.h
+        SOURCES Headers/Preloadable.h
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
